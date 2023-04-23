@@ -7,6 +7,8 @@ import (
 	"net/http"
 
 	"go.opentelemetry.io/collector/component"
+	"go.opentelemetry.io/collector/pdata/plog"
+	"go.opentelemetry.io/collector/pdata/pmetric"
 	"go.opentelemetry.io/collector/pdata/ptrace"
 )
 
@@ -15,15 +17,26 @@ const (
 )
 
 type desktopExporter struct {
-	traceStore *TraceStore
-	server     *Server
+	telemetryStore *TraceStore
+	server         *Server
 }
 
 func (exporter *desktopExporter) pushTraces(ctx context.Context, traces ptrace.Traces) error {
 	spans := extractSpans(ctx, traces)
 	for _, span := range spans {
-		exporter.traceStore.Add(ctx, span)
+		exporter.telemetryStore.Add(ctx, span)
 	}
+	return nil
+}
+
+func (exporter *desktopExporter) pushMetrics(ctx context.Context, metrics pmetric.Metrics) error {
+	for _, metric := range metrics {
+		exporter.telemetryStore.Add(ctx, metric)
+	}
+	return nil
+}
+
+func (exporter *desktopExporter) pushLogs(ctx context.Context, logs plog.Logs) error {
 	return nil
 }
 
@@ -31,8 +44,8 @@ func newDesktopExporter(cfg *Config) *desktopExporter {
 	traceStore := NewTraceStore(MAX_QUEUE_LENGTH)
 	server := NewServer(traceStore, cfg.Endpoint)
 	return &desktopExporter{
-		traceStore: traceStore,
-		server:     server,
+		telemetryStore: traceStore,
+		server:         server,
 	}
 }
 
