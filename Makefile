@@ -31,3 +31,13 @@ format-js:
 .PHONY: validate-typescript
 validate-typescript:
 	cd desktopexporter; npx tsc --noEmit
+
+IMAGE_NAME=codeboten/collector-with-viewer
+OCB=ocb
+.PHONY: build-collector
+build-collector:
+# TODO: install OpenTelemetry Collector Builder
+	GOOS=linux GOARCH=amd64 $(OCB) --config ./distribution/manifest.yaml --output-path ./distribution/linux/arm64
+	GOOS=linux GOARCH=arm64 $(OCB) --config ./distribution/manifest.yaml --output-path ./distribution/linux/arm64
+	docker rmi -f ${IMAGE_NAME}:latest
+	docker buildx build -t ${IMAGE_NAME}:latest --platform=linux/arm64,linux/amd64 distribution/. --push
