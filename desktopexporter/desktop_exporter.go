@@ -22,10 +22,18 @@ type desktopExporter struct {
 }
 
 func (exporter *desktopExporter) pushMetrics(ctx context.Context, metrics pmetric.Metrics) error {
+	md := extractMetrics(metrics)
+	for _, metric := range md {
+		exporter.traceStore.AddMetric(ctx, metric)
+	}
 	return nil
 }
 
 func (exporter *desktopExporter) pushLogs(ctx context.Context, logs plog.Logs) error {
+	ld := extractLogs(logs)
+	for _, logData := range ld {
+		exporter.traceStore.AddLog(ctx, logData)
+	}
 	return nil
 }
 
