@@ -30,7 +30,7 @@ func TestAdd(t *testing.T) {
 	// This TraceID is used to validate indexing in the store's traceMap
 	for i, span := range spans {
 		span.TraceID = strconv.Itoa(i % spansPerTrace)
-		store.Add(ctx, span)
+		store.AddSpan(ctx, span)
 
 		// Verify that the node with the most recently added TraceID
 		// Is moved to the front of the queue during the Add operation
@@ -38,14 +38,14 @@ func TestAdd(t *testing.T) {
 	}
 
 	// Verify that 3 unique TraceIDs are indexed in the traceMap
-	assert.Equal(t, maxQueueLength, len(store.traceMap))
+	assert.Equal(t, maxQueueLength, len(store.telemetryMap))
 
-	for traceID, trace := range store.traceMap {
+	for traceID, trace := range store.telemetryMap {
 		// Verify that three spans are associaded with each TraceID
-		assert.Len(t, trace.Spans, spansPerTrace)
+		assert.Len(t, trace.Trace.Spans, spansPerTrace)
 
 		// Verify that each span has the correct traceID
-		for _, span := range trace.Spans {
+		for _, span := range trace.Trace.Spans {
 			assert.Equal(t, traceID, span.TraceID)
 		}
 	}
@@ -65,7 +65,7 @@ func TestAddExceedingTraceLimits(t *testing.T) {
 	// This TraceID is used to validate queue and dequeue functionality
 	for i, span := range spans {
 		span.TraceID = strconv.Itoa(i)
-		store.Add(ctx, span)
+		store.AddSpan(ctx, span)
 
 		// Verify that the node with the most recently added TraceID
 		// Is moved to the front of the queue during the Add operation
@@ -73,7 +73,7 @@ func TestAddExceedingTraceLimits(t *testing.T) {
 	}
 
 	// Verify that the maximum number of unique TraceIDs have been indexed in the traceMap
-	assert.Equal(t, maxQueueLength, len(store.traceMap))
+	assert.Equal(t, maxQueueLength, len(store.telemetryMap))
 
 	// Verify that the correct number of elements have dropped off the queue
 	assert.Equal(t, strconv.Itoa(queueOffset), store.traceQueue.Back().Value)
@@ -81,12 +81,12 @@ func TestAddExceedingTraceLimits(t *testing.T) {
 	// Verify that the traceID values dropped from the traceQueue
 	// Are no longer present as indices in the traceMap
 	for i := 0; i < queueOffset; i++ {
-		assert.NotContains(t, store.traceMap, strconv.Itoa(i))
+		assert.NotContains(t, store.telemetryMap, strconv.Itoa(i))
 	}
 
 	// Verify that all the remaining traceIDs are still present
 	for i := queueOffset; i < maxQueueLength; i++ {
-		assert.Contains(t, store.traceMap, strconv.Itoa(i))
+		assert.Contains(t, store.telemetryMap, strconv.Itoa(i))
 	}
 }
 
@@ -103,10 +103,10 @@ func TestGetRecentTraces(t *testing.T) {
 	// This TraceID is used to validate the ordering of the slice returned by *TraceStore.GetRecentTraceIDs
 	for i, span := range spans {
 		span.TraceID = strconv.Itoa(i)
-		store.Add(ctx, span)
+		store.AddSpan(ctx, span)
 	}
 
-	recentTraces := store.GetRecentTraces(numRecent)
+	recentTraces := store.GetRecentTelemetry(numRecent)
 
 	// Validate that the number of IDs returned is equal to the lesser value of:
 	// - The number of IDs requested or
@@ -120,7 +120,7 @@ func TestGetRecentTraces(t *testing.T) {
 	// Validate the order of the traces based of their ID
 	for i, trace := range recentTraces {
 		expectedTraceID := strconv.Itoa(totalTraces - (i + 1))
-		assert.Equal(t, expectedTraceID, trace.TraceID)
+		assert.Equal(t, expectedTraceID, trace.Trace.TraceID)
 	}
 }
 
@@ -136,16 +136,16 @@ func TestGetTrace(t *testing.T) {
 	// This TraceID is passed as an argument to test *TraceStore.GetTrace
 	for i, span := range spans {
 		span.TraceID = strconv.Itoa(i)
-		store.Add(ctx, span)
+		store.AddSpan(ctx, span)
 	}
 
 	// Verify that we are able to retrieve every trace in the store by its TraceID
 	for i := 0; i < totalTraces; i++ {
-		trace, _ := store.GetTrace(strconv.Itoa(i))
-		assert.Equal(t, strconv.Itoa(i), trace.TraceID)
+		trace, _ := store.GetTelemetry(strconv.Itoa(i))
+		assert.Equal(t, strconv.Itoa(i), trace.Trace.TraceID)
 	}
 
 	// Verify that looking up an invalid TraceID returns the appropriate error
-	_, err := store.GetTrace(strconv.Itoa(-1))
+	_, err := store.GetTelemetry(strconv.Itoa(-1))
 	assert.EqualError(t, err, "traceID not found")
 }

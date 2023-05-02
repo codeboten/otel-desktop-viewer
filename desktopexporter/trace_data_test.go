@@ -30,13 +30,13 @@ func TestGetTraceSummaryWithRootSpan(t *testing.T) {
 		} else {
 			span.ParentSpanID = "0"
 		}
-		store.Add(ctx, span)
+		store.AddSpan(ctx, span)
 	}
 
-	trace, err := store.GetTrace("1")
+	trace, err := store.GetTelemetry("1")
 	assert.NoError(t, err)
 
-	summary := trace.GetTraceSummary()
+	summary := trace.Trace.GetTraceSummary()
 	assert.True(t, summary.HasRootSpan)
 	assert.Equal(t, "service name", summary.RootServiceName)
 	assert.Equal(t, "rootSpan", summary.RootName)
@@ -58,13 +58,13 @@ func TestGetTraceSummaryMissingRootSpan(t *testing.T) {
 
 	for _, span := range spans {
 		span.TraceID = "1"
-		store.Add(ctx, span)
+		store.AddSpan(ctx, span)
 	}
 
-	trace, err := store.GetTrace("1")
+	trace, err := store.GetTelemetry("1")
 	assert.NoError(t, err)
 
-	summary := trace.GetTraceSummary()
+	summary := trace.Trace.GetTraceSummary()
 	assert.False(t, summary.HasRootSpan)
 	assert.Equal(t, "", summary.RootServiceName)
 	assert.Equal(t, "", summary.RootName)

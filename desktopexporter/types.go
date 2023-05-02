@@ -28,6 +28,14 @@ type TraceSummary struct {
 	TraceID   string `json:"traceID"`
 }
 
+type TelemetryData struct {
+	TelemetryID string     `json:"telemetryID"`
+	Type        string     `json:"type"`
+	Metric      MetricData `json:"metricData"`
+	Trace       TraceData  `json:"traceData"`
+	Log         LogData    `json:"logData"`
+}
+
 type TraceData struct {
 	TraceID string     `json:"traceID"`
 	Spans   []SpanData `json:"spans"`

@@ -17,7 +17,7 @@ const (
 )
 
 type desktopExporter struct {
-	traceStore *TraceStore
+	traceStore *TelemetryStore
 	server     *Server
 }
 
@@ -40,7 +40,7 @@ func (exporter *desktopExporter) pushLogs(ctx context.Context, logs plog.Logs) e
 func (exporter *desktopExporter) pushTraces(ctx context.Context, traces ptrace.Traces) error {
 	spans := extractSpans(ctx, traces)
 	for _, span := range spans {
-		exporter.traceStore.Add(ctx, span)
+		exporter.traceStore.AddSpan(ctx, span)
 	}
 	return nil
 }

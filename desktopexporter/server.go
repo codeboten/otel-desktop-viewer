@@ -16,51 +16,51 @@ import (
 )
 
 // Maximum number of traces to keep in memory
-const maxNumTraces = 10000
+const maxNumTelemetry = 10000
 
 //go:embed static/*
 var assets embed.FS
 
 type Server struct {
 	server     http.Server
-	traceStore *TraceStore
+	traceStore *TelemetryStore
 }
 
-func clearDataHandler(store *TraceStore) func(http.ResponseWriter, *http.Request) {
+func clearDataHandler(store *TelemetryStore) func(http.ResponseWriter, *http.Request) {
 	return func(writer http.ResponseWriter, request *http.Request) {
 		store.ClearTraces()
 		writer.WriteHeader(http.StatusOK)
 	}
 }
 
-func sampleDataHandler(store *TraceStore) func(http.ResponseWriter, *http.Request) {
+func sampleDataHandler(store *TelemetryStore) func(http.ResponseWriter, *http.Request) {
 	return func(writer http.ResponseWriter, request *http.Request) {
 		ctx := context.Background()
 		sampleSpans := GenerateSampleData(ctx)
 		for _, sampleSpan := range sampleSpans {
-			store.Add(ctx, sampleSpan)
+			store.AddSpan(ctx, sampleSpan)
 		}
 		writer.WriteHeader(http.StatusOK)
 	}
 }
 
-func tracesHandler(store *TraceStore) func(http.ResponseWriter, *http.Request) {
+func telemetryHandler(store *TelemetryStore) func(http.ResponseWriter, *http.Request) {
 	return func(writer http.ResponseWriter, request *http.Request) {
 		// Determine how many recent traces to display
-		numTraces := len(store.traceMap)
-		if numTraces > maxNumTraces {
-			numTraces = maxNumTraces
+		numTelemetry := len(store.telemetryMap)
+		if numTelemetry > maxNumTelemetry {
+			numTelemetry = maxNumTelemetry
 		}
 
 		// Get the TraceData for the requested number of traces
-		traces := store.GetRecentTraces(numTraces)
+		traces := store.GetRecentTelemetry(numTelemetry)
 		summaries := RecentSummaries{
 			TraceSummaries: []TraceSummary{},
 		}
 
 		// Generate a summary for each trace
 		for _, trace := range traces {
-			summary := trace.GetTraceSummary()
+			summary := trace.Trace.GetTraceSummary()
 			summaries.TraceSummaries = append(summaries.TraceSummaries, summary)
 		}
 
@@ -76,11 +76,11 @@ func tracesHandler(store *TraceStore) func(http.ResponseWriter, *http.Request) {
 	}
 }
 
-func traceIDHandler(store *TraceStore) func(http.ResponseWriter, *http.Request) {
+func traceIDHandler(store *TelemetryStore) func(http.ResponseWriter, *http.Request) {
 	return func(writer http.ResponseWriter, request *http.Request) {
 		traceID := mux.Vars(request)["id"]
 
-		traceData, err := store.GetTrace(traceID)
+		traceData, err := store.GetTelemetry(traceID)
 		if err != nil {
 			fmt.Printf("error: %s\t traceID: %s\n", ErrTraceIDNotFound, traceID)
 			writer.WriteHeader(http.StatusInternalServerError)
@@ -113,9 +113,9 @@ func indexHandler(writer http.ResponseWriter, request *http.Request) {
 	}
 }
 
-func NewServer(traceStore *TraceStore, endpoint string) *Server {
+func NewServer(traceStore *TelemetryStore, endpoint string) *Server {
 	router := mux.NewRouter()
-	router.HandleFunc("/api/traces", tracesHandler(traceStore))
+	router.HandleFunc("/api/traces", telemetryHandler(traceStore))
 	router.HandleFunc("/api/traces/{id}", traceIDHandler(traceStore))
 	router.HandleFunc("/api/sampleData", sampleDataHandler(traceStore))
 	router.HandleFunc("/api/clearData", clearDataHandler(traceStore))

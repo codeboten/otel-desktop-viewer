@@ -7,72 +7,75 @@ import (
 	"sync"
 )
 
-type TraceStore struct {
+type TelemetryStore struct {
 	maxQueueSize int
 	mut          sync.Mutex
 	traceQueue   *list.List
-	traceMap     map[string]TraceData
+	telemetryMap map[string]TelemetryData
 }
 
-func NewTraceStore(maxQueueSize int) *TraceStore {
-	return &TraceStore{
+func NewTraceStore(maxQueueSize int) *TelemetryStore {
+	return &TelemetryStore{
 		maxQueueSize: maxQueueSize,
 		mut:          sync.Mutex{},
 		traceQueue:   list.New(),
-		traceMap:     map[string]TraceData{},
+		telemetryMap: map[string]TelemetryData{},
 	}
 }
 
-func (store *TraceStore) AddMetric(_ context.Context, md MetricData) {
+func (store *TelemetryStore) AddMetric(_ context.Context, md MetricData) {
 	store.mut.Lock()
 	defer store.mut.Unlock()
 	// TODO: enqueue metric
 }
 
-func (store *TraceStore) AddLog(_ context.Context, ld LogData) {
+func (store *TelemetryStore) AddLog(_ context.Context, ld LogData) {
 	store.mut.Lock()
 	defer store.mut.Unlock()
 	// TODO: enqueue log
 }
 
-func (store *TraceStore) Add(_ context.Context, spanData SpanData) {
+func (store *TelemetryStore) AddSpan(_ context.Context, spanData SpanData) {
 	store.mut.Lock()
 	defer store.mut.Unlock()
 
 	// Enqueue, then append, as the enqueue process checks if the traceID is already in the map to keep the trace alive
-	store.enqueueTrace(spanData.TraceID)
-	traceData, traceExists := store.traceMap[spanData.TraceID]
-	if !traceExists {
-		traceData = TraceData{
-			TraceID: spanData.TraceID,
-			Spans:   []SpanData{},
+	store.enqueueTelemetry(spanData.TraceID)
+	traceData, traceExists := store.telemetryMap[spanData.TraceID]
+	if !traceExists { // TODO: check if type matches
+		traceData = TelemetryData{
+			Type: "trace",
+			Trace: TraceData{
+				TraceID: spanData.TraceID,
+				Spans:   []SpanData{},
+			},
 		}
 	}
-	traceData.Spans = append(traceData.Spans, spanData)
-	store.traceMap[spanData.TraceID] = traceData
+	traceData.Trace.Spans = append(traceData.Trace.Spans, spanData)
+	store.telemetryMap[spanData.TraceID] = traceData
 }
 
-func (store *TraceStore) GetTrace(traceID string) (TraceData, error) {
+func (store *TelemetryStore) GetTelemetry(traceID string) (TelemetryData, error) {
 	store.mut.Lock()
 	defer store.mut.Unlock()
 
-	trace, traceExists := store.traceMap[traceID]
+	trace, traceExists := store.telemetryMap[traceID]
 	if !traceExists {
-		return TraceData{}, ErrTraceIDNotFound
+		return TelemetryData{}, ErrTraceIDNotFound
 	}
 
 	return trace, nil
 }
 
-func (store *TraceStore) GetRecentTraces(traceCount int) []TraceData {
+func (store *TelemetryStore) GetRecentTelemetry(traceCount int) []TelemetryData {
 	store.mut.Lock()
 	defer store.mut.Unlock()
 
 	recentIDs := store.getRecentTraceIDs(traceCount)
-	recentTraces := make([]TraceData, 0, len(recentIDs))
+	recentTraces := make([]TelemetryData, 0, len(recentIDs))
 
 	for _, traceID := range recentIDs {
-		trace, traceExists := store.traceMap[traceID]
+		trace, traceExists := store.telemetryMap[traceID]
 		if !traceExists {
 			fmt.Printf("error: %s\t traceID: %s\n", ErrTraceIDNotFound, traceID)
 		} else {
@@ -83,17 +86,17 @@ func (store *TraceStore) GetRecentTraces(traceCount int) []TraceData {
 	return recentTraces
 }
 
-func (store *TraceStore) ClearTraces() {
+func (store *TelemetryStore) ClearTraces() {
 	store.mut.Lock()
 	defer store.mut.Unlock()
 
 	store.traceQueue = list.New()
-	store.traceMap = map[string]TraceData{}
+	store.telemetryMap = map[string]TelemetryData{}
 }
 
-func (store *TraceStore) enqueueTrace(traceID string) {
+func (store *TelemetryStore) enqueueTelemetry(traceID string) {
 	// If the traceID is already in the queue, move it to the front of the line
-	_, traceIDExists := store.traceMap[traceID]
+	_, traceIDExists := store.telemetryMap[traceID]
 	if traceIDExists {
 		element := store.findQueueElement(traceID)
 		if element == nil {
@@ -112,13 +115,13 @@ func (store *TraceStore) enqueueTrace(traceID string) {
 	}
 }
 
-func (store *TraceStore) dequeueTrace() {
+func (store *TelemetryStore) dequeueTrace() {
 	expiringTraceID := store.traceQueue.Back().Value.(string)
-	delete(store.traceMap, expiringTraceID)
+	delete(store.telemetryMap, expiringTraceID)
 	store.traceQueue.Remove(store.traceQueue.Back())
 }
 
-func (store *TraceStore) findQueueElement(traceID string) *list.Element {
+func (store *TelemetryStore) findQueueElement(traceID string) *list.Element {
 	for element := store.traceQueue.Front(); element != nil; element = element.Next() {
 		if traceID == element.Value.(string) {
 			return element
@@ -127,7 +130,7 @@ func (store *TraceStore) findQueueElement(traceID string) *list.Element {
 	return nil
 }
 
-func (store *TraceStore) getRecentTraceIDs(traceCount int) []string {
+func (store *TelemetryStore) getRecentTraceIDs(traceCount int) []string {
 	if traceCount > store.traceQueue.Len() {
 		traceCount = store.traceQueue.Len()
 	}
