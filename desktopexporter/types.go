@@ -31,9 +31,9 @@ type TraceSummary struct {
 type TelemetryData struct {
 	TelemetryID string     `json:"telemetryID"`
 	Type        string     `json:"type"`
-	Metric      MetricData `json:"metricData"`
-	Trace       TraceData  `json:"traceData"`
-	Log         LogData    `json:"logData"`
+	Metric      MetricData `json:"metric"`
+	Trace       TraceData  `json:"trace"`
+	Log         LogData    `json:"log"`
 }
 
 type TraceData struct {
