@@ -30,8 +30,9 @@ func (store *TelemetryStore) AddMetric(_ context.Context, md MetricData) {
 	id := "test-metric"
 	store.enqueueTelemetry(id)
 	store.telemetryMap[id] = TelemetryData{
-		Type:   "metric",
-		Metric: md,
+		TelemetryID: id,
+		Type:        "metric",
+		Metric:      md,
 	}
 }
 
@@ -43,8 +44,9 @@ func (store *TelemetryStore) AddLog(_ context.Context, ld LogData) {
 	id := "test-log"
 	store.enqueueTelemetry(id)
 	store.telemetryMap[id] = TelemetryData{
-		Type: "log",
-		Log:  ld,
+		TelemetryID: id,
+		Type:        "log",
+		Log:         ld,
 	}
 }
 
@@ -57,7 +59,8 @@ func (store *TelemetryStore) AddSpan(_ context.Context, spanData SpanData) {
 	traceData, traceExists := store.telemetryMap[spanData.TraceID]
 	if !traceExists { // TODO: check if type matches
 		traceData = TelemetryData{
-			Type: "trace",
+			TelemetryID: spanData.TraceID,
+			Type:        "trace",
 			Trace: TraceData{
 				TraceID: spanData.TraceID,
 				Spans:   []SpanData{},
