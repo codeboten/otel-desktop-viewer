@@ -26,7 +26,7 @@ func NewTraceStore(maxQueueSize int) *TelemetryStore {
 func (store *TelemetryStore) AddMetric(_ context.Context, md MetricData) {
 	store.mut.Lock()
 	defer store.mut.Unlock()
-	// TODO: enqueue metric
+	// TODO: figure out the right ID for metric
 	id := "test-metric"
 	store.enqueueTelemetry(id)
 	store.telemetryMap[id] = TelemetryData{
@@ -39,8 +39,7 @@ func (store *TelemetryStore) AddMetric(_ context.Context, md MetricData) {
 func (store *TelemetryStore) AddLog(_ context.Context, ld LogData) {
 	store.mut.Lock()
 	defer store.mut.Unlock()
-	// TODO: enqueue log
-
+	// TODO: figure out the right ID for logs
 	id := "test-log"
 	store.enqueueTelemetry(id)
 	store.telemetryMap[id] = TelemetryData{
