@@ -13,6 +13,8 @@ import (
 
 	"github.com/gorilla/mux"
 	"github.com/pkg/browser"
+
+	"github.com/CtrlSpice/otel-desktop-viewer/desktopexporter/internal/telemetry"
 )
 
 // Maximum number of traces to keep in memory
@@ -22,8 +24,9 @@ const maxNumTraces = 10000
 var assets embed.FS
 
 type Server struct {
-	server     http.Server
-	traceStore *TraceStore
+	server         http.Server
+	traceStore     *TraceStore
+	telemetryStore *telemetry.Store
 }
 
 func clearDataHandler(store *TraceStore) func(http.ResponseWriter, *http.Request) {
@@ -54,8 +57,8 @@ func tracesHandler(store *TraceStore) func(http.ResponseWriter, *http.Request) {
 
 		// Get the TraceData for the requested number of traces
 		traces := store.GetRecentTraces(numTraces)
-		summaries := RecentSummaries{
-			TraceSummaries: []TraceSummary{},
+		summaries := telemetry.RecentSummaries{
+			TraceSummaries: []telemetry.TraceSummary{},
 		}
 
 		// Generate a summary for each trace
@@ -82,7 +85,7 @@ func traceIDHandler(store *TraceStore) func(http.ResponseWriter, *http.Request) 
 
 		traceData, err := store.GetTrace(traceID)
 		if err != nil {
-			fmt.Printf("error: %s\t traceID: %s\n", ErrTraceIDNotFound, traceID)
+			fmt.Printf("error: %s\t traceID: %s\n", telemetry.ErrTraceIDNotFound, traceID)
 			writer.WriteHeader(http.StatusInternalServerError)
 			return
 		}
@@ -113,10 +116,11 @@ func indexHandler(writer http.ResponseWriter, request *http.Request) {
 	}
 }
 
-func NewServer(traceStore *TraceStore, endpoint string) *Server {
+func NewServer(traceStore *TraceStore, telemetryStore *telemetry.Store, endpoint string) *Server {
 	router := mux.NewRouter()
 	router.HandleFunc("/api/traces", tracesHandler(traceStore))
 	router.HandleFunc("/api/traces/{id}", traceIDHandler(traceStore))
+	// TODO: add handlers for querying telemetry store
 	router.HandleFunc("/api/sampleData", sampleDataHandler(traceStore))
 	router.HandleFunc("/api/clearData", clearDataHandler(traceStore))
 	router.HandleFunc("/traces/{id}", indexHandler)
@@ -134,7 +138,8 @@ func NewServer(traceStore *TraceStore, endpoint string) *Server {
 			Addr:    endpoint,
 			Handler: router,
 		},
-		traceStore: traceStore,
+		traceStore:     traceStore,
+		telemetryStore: telemetryStore,
 	}
 }
 

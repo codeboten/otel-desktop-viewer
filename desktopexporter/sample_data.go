@@ -8,9 +8,11 @@ import (
 
 	"go.opentelemetry.io/collector/pdata/pcommon"
 	"go.opentelemetry.io/collector/pdata/ptrace"
+
+	"github.com/CtrlSpice/otel-desktop-viewer/desktopexporter/internal/telemetry"
 )
 
-func GenerateSampleData(ctx context.Context) []SpanData {
+func GenerateSampleData(ctx context.Context) []telemetry.SpanData {
 	traceData := ptrace.NewTraces()
 
 	traceData.ResourceSpans().EnsureCapacity(3)

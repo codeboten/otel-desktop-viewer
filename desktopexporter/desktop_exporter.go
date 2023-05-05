@@ -10,6 +10,8 @@ import (
 	"go.opentelemetry.io/collector/pdata/plog"
 	"go.opentelemetry.io/collector/pdata/pmetric"
 	"go.opentelemetry.io/collector/pdata/ptrace"
+
+	"github.com/CtrlSpice/otel-desktop-viewer/desktopexporter/internal/telemetry"
 )
 
 const (
@@ -17,14 +19,16 @@ const (
 )
 
 type desktopExporter struct {
-	traceStore *TraceStore
-	server     *Server
+	traceStore     *TraceStore
+	telemetryStore *telemetry.Store
+	server         *Server
 }
 
 func (exporter *desktopExporter) pushMetrics(ctx context.Context, metrics pmetric.Metrics) error {
 	md := extractMetrics(metrics)
 	for _, metric := range md {
 		exporter.traceStore.AddMetric(ctx, metric)
+		exporter.telemetryStore.AddMetric(ctx, metric)
 	}
 	return nil
 }
@@ -33,6 +37,7 @@ func (exporter *desktopExporter) pushLogs(ctx context.Context, logs plog.Logs) e
 	ld := extractLogs(logs)
 	for _, logData := range ld {
 		exporter.traceStore.AddLog(ctx, logData)
+		exporter.telemetryStore.AddLog(ctx, logData)
 	}
 	return nil
 }
@@ -41,16 +46,19 @@ func (exporter *desktopExporter) pushTraces(ctx context.Context, traces ptrace.T
 	spans := extractSpans(ctx, traces)
 	for _, span := range spans {
 		exporter.traceStore.Add(ctx, span)
+		exporter.telemetryStore.AddSpan(ctx, span)
 	}
 	return nil
 }
 
 func newDesktopExporter(cfg *Config) *desktopExporter {
 	traceStore := NewTraceStore(MAX_QUEUE_LENGTH)
-	server := NewServer(traceStore, cfg.Endpoint)
+	telemetryStore := telemetry.NewTelemetryStore(MAX_QUEUE_LENGTH)
+	server := NewServer(traceStore, telemetryStore, cfg.Endpoint)
 	return &desktopExporter{
-		traceStore: traceStore,
-		server:     server,
+		telemetryStore: telemetryStore,
+		traceStore:     traceStore,
+		server:         server,
 	}
 }
 
