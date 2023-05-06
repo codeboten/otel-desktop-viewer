@@ -28,10 +28,10 @@ func (store *Store) AddMetric(_ context.Context, md MetricData) {
 	defer store.mut.Unlock()
 	metricID := "1111111"
 	store.enqueueTelemetry(metricID)
-	// TODO: enqueue metric
 	store.telemetryMap[metricID] = TelemetryData{
-		ID:   metricID,
-		Type: "metric",
+		ID:     metricID,
+		Type:   "metric",
+		Metric: md,
 	}
 }
 
@@ -41,10 +41,10 @@ func (store *Store) AddLog(_ context.Context, ld LogData) {
 
 	logID := "0000000"
 	store.enqueueTelemetry(logID)
-	// TODO: enqueue log
 	store.telemetryMap[logID] = TelemetryData{
 		ID:   logID,
 		Type: "log",
+		Log:  ld,
 	}
 }
 

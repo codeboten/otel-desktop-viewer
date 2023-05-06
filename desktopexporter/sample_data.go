@@ -138,43 +138,21 @@ func GenerateSampleMetricData(ctx context.Context) []telemetry.MetricData {
 	fillCurrencyScope(currencyScopeMetric.Scope())
 
 	// 3. Add CurrencyService/Convert span to currencyservice scope
-	currencyScopeMetric.Metrics().AppendEmpty()
-	// fillCurrencySpan(currencySpan)
+	currencyMetric := currencyScopeMetric.Metrics().AppendEmpty()
+	fillCurrencyMetric(currencyMetric)
 
-	// // Generate sample HTTP POST trace:
-	// // 1. Set up loadgenerator resource
-	// loadGeneratorResourceSpan := traceData.ResourceSpans().AppendEmpty()
-	// fillLoadGeneratorResource(loadGeneratorResourceSpan.Resource())
-
-	// // 2. Set up frontend resource
-	// frontEndResourceSpan := traceData.ResourceSpans().AppendEmpty()
-	// fillFrontEndResource(frontEndResourceSpan.Resource())
-
-	// // 3. Add requests and urllib3 scopes to loadgenerator resource
-	// loadGeneratorResourceSpan.ScopeSpans().EnsureCapacity(2)
-	// requestsScopeSpan := loadGeneratorResourceSpan.ScopeSpans().AppendEmpty()
-	// fillRequestsScope(requestsScopeSpan.Scope())
-
-	// urlLib3ScopeSpan := loadGeneratorResourceSpan.ScopeSpans().AppendEmpty()
-	// fillUrlLib3Scope(urlLib3ScopeSpan.Scope())
-
-	// // 4. Add http scope to frontend resource
-	// httpScopeSpan := frontEndResourceSpan.ScopeSpans().AppendEmpty()
-	// fillHttpScope(httpScopeSpan.Scope())
-
-	// // 5. Add HTTP POST span 1 to requests scope
-	// httpPostSpan1 := requestsScopeSpan.Spans().AppendEmpty()
-	// fillHttpPostSpan1(httpPostSpan1)
-
-	// // 6. Add HTTP POST span 2 to urllib3 scope
-	// httpPostSpan2 := urlLib3ScopeSpan.Spans().AppendEmpty()
-	// fillHttpPostSpan2(httpPostSpan2)
-
-	// // 7. Add HTTP POST span 3 to http scope
-	// httpPostSpan3 := httpScopeSpan.Spans().AppendEmpty()
-	// fillHttpPostSpan3(httpPostSpan3)
+	// TODO: add different kinds of metrics
 
 	return extractMetrics(md)
+}
+
+func fillCurrencyMetric(metric pmetric.Metric) {
+	metric.SetDescription("amount requested")
+	sum := metric.SetEmptySum()
+	sum.SetIsMonotonic(true)
+	sum.SetAggregationTemporality(pmetric.AggregationTemporalityDelta)
+	pt := sum.DataPoints().AppendEmpty()
+	pt.SetDoubleValue(1.9)
 }
 
 // currencyservice resource data
