@@ -5,144 +5,49 @@ import { useLoaderData } from "react-router-dom";
 
 import { Sidebar } from "../components/sidebar-view/sidebar";
 import { EmptyStateView } from "../components/empty-state-view/empty-state-view";
-import { TraceSummaries, TraceSummary } from "../types/api-types";
-import { SidebarData, TraceSummaryWithUIData } from "../types/ui-types";
-import { getDurationNs, getDurationString } from "../utils/duration";
+// import { TraceSummaries, TraceSummary } from "../types/api-types";
+import { TelemetrySummaries, Summary } from "../types/api-types";
 
 export async function mainLoader() {
-  const response = await fetch("/api/traces");
-  const traceSummaries = await response.json();
-  return traceSummaries;
+  const response = await fetch("/api/telemetry");
+  const telemetry = await response.json(); //TO DO fix type stuff
+  const summaries = telemetry.summaries;
+  return summaries;
 }
 
 export default function MainView() {
-  let { traceSummaries } = useLoaderData() as TraceSummaries;
-  let [isFullWidth, setFullWidth] = useBoolean(traceSummaries.length > 0);
+  let summaries = useLoaderData() as TelemetrySummaries;
+  let [isFullWidth, setFullWidth] = useBoolean(true); //<- TO DO change this
+  const [sidebarData, setSidebarData] = useState<TelemetrySummaries>(summaries);
 
-  // initialize the sidebar summaries at mount time
-  let [sidebarData, setSidebarData] = useState(initSidebarData(traceSummaries));
-
-  // check every second to see if we have new data
-  // and upsate sidebar summaries accordingly
+  // To Do: initialize the sidebar summaries at mount time
+  // add useEffect to check for new data
   useEffect(() => {
     async function checkForNewData() {
-      let response = await fetch("/api/traces");
+      let response = await fetch("/api/telemetry");
       if (response.ok) {
-        let { traceSummaries } = (await response.json()) as TraceSummaries;
-        let newSidebarData = updateSidebarData(sidebarData, traceSummaries);
-        setSidebarData(newSidebarData);
+        let summaries = (await response.json()) as TelemetrySummaries;
+        // let summaries = await response.json();
+        setSidebarData(summaries);
       }
     }
 
-    let interval = setInterval(checkForNewData, 1000);
+    // let interval = setInterval(checkForNewData, 5000);
 
-    return () => clearInterval(interval);
+    // return () => clearInterval(interval);
   }, []);
 
-  // Handle empty state
-  if (!traceSummaries.length) {
-    return (
-      <Flex height="100vh">
-        <Sidebar
-          isFullWidth={isFullWidth}
-          toggleSidebarWidth={setFullWidth.toggle}
-          traceSummaries={[]}
-          numNewTraces={0}
-        />
-        <EmptyStateView />
-      </Flex>
-    );
-  }
-
+  //TO DO: fix this... typescript stuff
   return (
     <Flex height="100vh">
       <Sidebar
         isFullWidth={isFullWidth}
         toggleSidebarWidth={setFullWidth.toggle}
-        traceSummaries={sidebarData.summaries}
-        numNewTraces={sidebarData.numNewTraces}
+        summaries={sidebarData}
+        numNewTraces={0}
       />
-      <Outlet />
+      {!summaries.length && <EmptyStateView />}
+      {summaries.length && <Outlet />}
     </Flex>
   );
-}
-
-function initSidebarData(traceSummaries: TraceSummary[]): SidebarData {
-  return {
-    summaries: traceSummaries.map((traceSummary) =>
-      generateTraceSummaryWithUIData(traceSummary),
-    ),
-    numNewTraces: 0,
-  };
-}
-
-function updateSidebarData(
-  sidebarData: SidebarData,
-  traceSummaries: TraceSummary[],
-): SidebarData {
-  let mergedData: SidebarData = {
-    numNewTraces: 0,
-    summaries: [...sidebarData.summaries],
-  };
-
-  // Check for new and stale traces
-  for (let summary of traceSummaries) {
-    let traceID = summary.traceID;
-    let sidebarSummaryIndex = mergedData.summaries.findIndex(
-      (s) => s.traceID === traceID,
-    );
-
-    if (sidebarSummaryIndex === -1) {
-      // If the traceID of the new summary has no match in the sidebar
-      // increment the number of new traces.
-      mergedData.numNewTraces++;
-    } else if (
-      summary.spanCount > mergedData.summaries[sidebarSummaryIndex].spanCount
-    ) {
-      // If the number of spans in an existing trace is greater than what's displayed in the sidebar
-      // generate a whole new summary with ui data
-      mergedData.summaries[sidebarSummaryIndex] =
-        generateTraceSummaryWithUIData(summary);
-    }
-  }
-
-  // Check for deleted/expired traces
-  for (let [i, summary] of mergedData.summaries.entries()) {
-    let traceID = summary.traceID;
-    let counterpartIndex = traceSummaries.findIndex(
-      (s) => s.traceID === traceID,
-    );
-    if (counterpartIndex === -1) {
-      // If a summary present in the sidebar is not present in the list of incoming traces
-      // it is expired and must be removed
-      mergedData.summaries.splice(i, 1);
-    }
-  }
-  return mergedData;
-}
-
-function generateTraceSummaryWithUIData(
-  traceSummary: TraceSummary,
-): TraceSummaryWithUIData {
-  if (traceSummary.hasRootSpan) {
-    let duration = getDurationNs(
-      traceSummary.rootStartTime,
-      traceSummary.rootEndTime,
-    );
-
-    let durationString = getDurationString(duration);
-    return {
-      hasRootSpan: true,
-      rootServiceName: traceSummary.rootServiceName,
-      rootName: traceSummary.rootName,
-      rootDurationString: durationString,
-      spanCount: traceSummary.spanCount,
-      traceID: traceSummary.traceID,
-    };
-  }
-  return {
-    hasRootSpan: false,
-    spanCount: traceSummary.spanCount,
-    traceID: traceSummary.traceID,
-  };
 }

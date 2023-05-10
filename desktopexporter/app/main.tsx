@@ -4,6 +4,7 @@ import { ChakraProvider } from "@chakra-ui/react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { extendTheme, type ThemeConfig } from "@chakra-ui/react";
 
+import TelemetryView, { telemetryLoader } from "./routes/telemetry-view";
 import MainView, { mainLoader } from "./routes/main-view";
 import TraceView, { traceLoader } from "./routes/trace-view";
 import ErrorPage from "./error-page";
@@ -25,6 +26,11 @@ const router = createBrowserRouter([
         path: "traces/:traceID",
         element: <TraceView />,
         loader: traceLoader,
+      },
+      {
+        path: "telemetry/:id",
+        element: <TelemetryView />,
+        loader: telemetryLoader,
       },
     ],
   },

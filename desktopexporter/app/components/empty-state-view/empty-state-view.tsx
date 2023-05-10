@@ -58,19 +58,19 @@ function SampleDataButton() {
   );
 }
 
-async function pollTraceCount() {
-  let response = await fetch("/api/traces");
-  if (!response.ok) {
-    throw new Error("HTTP status " + response.status);
-  } else {
-    let { traceSummaries } = (await response.json()) as TraceSummaries;
-    if (traceSummaries.length > 0) {
-     setTimeout(() => {
-       window.location.reload();
-     }, 500);
-    }
-  }
-}
+// async function pollTraceCount() {
+//   let response = await fetch("/api/traces");
+//   if (!response.ok) {
+//     throw new Error("HTTP status " + response.status);
+//   } else {
+//     let { traceSummaries } = (await response.json()) as TraceSummaries;
+//     if (traceSummaries.length > 0) {
+//      setTimeout(() => {
+//        window.location.reload();
+//      }, 500);
+//     }
+//   }
+// }
 
 export function EmptyStateView() {
   let cardBackgroundColour = useColorModeValue("gray.200", "gray.700");
@@ -78,7 +78,7 @@ export function EmptyStateView() {
     "whiteAlpha.700",
     "blackAlpha.500",
   );
-  useInterval(pollTraceCount, 500);
+  // useInterval(pollTraceCount, 500);
 
   return (
     <Flex

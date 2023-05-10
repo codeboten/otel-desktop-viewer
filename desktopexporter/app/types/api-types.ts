@@ -1,15 +1,49 @@
+// export type TraceSummary = {
+//   hasRootSpan: boolean;
+//   rootServiceName: string;
+//   rootName: string;
+//   rootStartTime: string;
+//   rootEndTime: string;
+//   spanCount: number;
+//   traceID: string;
+// };
+
 export type TraceSummary = {
-  hasRootSpan: boolean;
-  rootServiceName: string;
-  rootName: string;
-  rootStartTime: string;
-  rootEndTime: string;
-  spanCount: number;
-  traceID: string;
+  serviceName: string;
+  type: string;
+  ID: string;
 };
 
-export type TraceSummaries = {
-  traceSummaries: TraceSummary[];
+export type Summary = {
+  serviceName: string;
+  type: string;
+  ID: string;
+};
+
+// export type TraceSummaries = {
+//   traceSummaries: TraceSummary[];
+// };
+
+export type TraceSummaries = [summaries: TraceSummary[]] | [];
+
+export type TelemetrySummaries = [summaries: Summary[]] | [];
+
+export type TelemetryData = {
+  ID: string;
+  type: string;
+  // data: MetricData | TraceData | LogData;
+};
+
+export type MetricData = {
+  name: string;
+  resource: ResourceData;
+  scope: ScopeData;
+};
+
+export type LogData = {
+  body: string;
+  resource: ResourceData;
+  scope: ScopeData;
 };
 
 export type TraceData = {

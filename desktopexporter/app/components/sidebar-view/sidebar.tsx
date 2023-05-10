@@ -1,8 +1,11 @@
 import React from "react";
 import { Flex, useColorModeValue } from "@chakra-ui/react";
 
-import { TraceList } from "./trace-list";
-import { TraceSummaryWithUIData } from "../../types/ui-types";
+// import { TraceList } from "./trace-list";
+import { TelemetryList } from "./telemetry-list";
+import { Summary } from "../../types/api-types";
+// import { TraceSummary } from "../../types/api-types";
+// import { TraceSummaryWithUIData } from "../../types/ui-types";
 import { SidebarHeader } from "./sidebar-header";
 
 const sidebarFullWidth = 350;
@@ -11,14 +14,15 @@ const sidebarCollapsedWidth = 70;
 type SidebarProps = {
   isFullWidth: boolean;
   toggleSidebarWidth: () => void;
-  traceSummaries: TraceSummaryWithUIData[];
+  summaries: Summary[];
   numNewTraces: number;
 };
 
 export function Sidebar(props: SidebarProps) {
   let sidebarColour = useColorModeValue("gray.50", "gray.700");
-  let { isFullWidth, toggleSidebarWidth, traceSummaries, numNewTraces } = props;
-  let isFullWidthDisabled = traceSummaries.length === 0;
+  let { isFullWidth, toggleSidebarWidth, summaries, numNewTraces } = props;
+  // let isFullWidthDisabled = traceSummaries.length === 0;
+  let isFullWidthDisabled = false;
 
   if (isFullWidth) {
     return (
@@ -35,7 +39,8 @@ export function Sidebar(props: SidebarProps) {
           isFullWidthDisabled={false}
           numNewTraces={numNewTraces}
         />
-        <TraceList traceSummaries={traceSummaries} />
+        {/* {traceSummaries && <TraceList traceSummaries={props.traceSummaries} />} */}
+        {summaries.length > 0 && <TelemetryList summaries={props.summaries} />}
       </Flex>
     );
   }
