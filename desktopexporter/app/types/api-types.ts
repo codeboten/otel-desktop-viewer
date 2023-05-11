@@ -31,7 +31,7 @@ export type TelemetrySummaries = [summaries: Summary[]] | [];
 export type TelemetryData = {
   ID: string;
   type: string;
-  // data: MetricData | TraceData | LogData;
+  data: MetricData | TraceData | LogData;
 };
 
 export type MetricData = {
