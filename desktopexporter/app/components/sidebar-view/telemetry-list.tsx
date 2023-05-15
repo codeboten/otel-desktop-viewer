@@ -12,6 +12,7 @@ import {
 import { useSize } from "@chakra-ui/react-use-size";
 
 // import { TraceSummaryWithUIData } from "../../types/ui-types";
+import { SummaryWithUIData } from "../../types/ui-types";
 import { Summary } from "../../types/api-types";
 
 const sidebarSummaryHeight = 120;
@@ -19,7 +20,7 @@ const dividerHeight = 1;
 
 type SidebarRowData = {
   selectedTraceID: string;
-  summaries: Summary[];
+  summaries: SummaryWithUIData[];
 };
 
 type SidebarRowProps = {
@@ -39,68 +40,68 @@ function SidebarRow({ index, style, data }: SidebarRowProps) {
 
   let backgroundColour = isSelected ? selectedColor : "";
 
-  // if (traceSummary.hasRootSpan) {
-  //   // Add zero-width space after forward slashes, dashes, and dots
-  //   // to indicate line breaking opportunity
-  //   let rootNameLabel = traceSummary.rootName
-  //     .replaceAll("/", "/\u200B")
-  //     .replaceAll("-", "-\u200B")
-  //     .replaceAll(".", ".\u200B");
+  if (summary.hasRootSpan) {
+    // Add zero-width space after forward slashes, dashes, and dots
+    // to indicate line breaking opportunity
+    let rootNameLabel = summary.rootName
+      .replaceAll("/", "/\u200B")
+      .replaceAll("-", "-\u200B")
+      .replaceAll(".", ".\u200B");
 
-  //   let rootServiceNameLabel = traceSummary.rootServiceName
-  //     .replaceAll("/", "/\u200B")
-  //     .replaceAll("-", "-\u200B")
-  //     .replaceAll(".", ".\u200B");
+    let rootServiceNameLabel = summary.rootServiceName
+      .replaceAll("/", "/\u200B")
+      .replaceAll("-", "-\u200B")
+      .replaceAll(".", ".\u200B");
 
-  //   return (
-  //     <div style={style}>
-  //       <Divider
-  //         height={dividerHeight}
-  //         borderColor={dividerColour}
-  //       />
-  //       <LinkBox
-  //         display="flex"
-  //         flexDirection="column"
-  //         justifyContent="center"
-  //         bgColor={backgroundColour}
-  //         height={`${sidebarSummaryHeight}px`}
-  //         paddingX="20px"
-  //       >
-  //         <Text
-  //           fontSize="xs"
-  //           noOfLines={1}
-  //         >
-  //           {"Root Service Name: "}
-  //           <strong>{rootServiceNameLabel}</strong>
-  //         </Text>
-  //         <Text
-  //           fontSize="xs"
-  //           noOfLines={2}
-  //         >
-  //           {"Root Name: "}
-  //           <strong>{rootNameLabel}</strong>
-  //         </Text>
-  //         <Text fontSize="xs">
-  //           {"Root Duration: "}
-  //           <strong>{traceSummary.rootDurationString}</strong>
-  //         </Text>
-  //         <Text fontSize="xs">
-  //           {"Number of Spans: "}
-  //           <strong>{traceSummary.spanCount}</strong>
-  //         </Text>
-  //         <LinkOverlay
-  //           as={NavLink}
-  //           to={`traces/${traceSummary.ID}`}
-  //         >
-  //           <Text fontSize="xs">
-  //             {"Trace ID: "}
-  //             <strong>{traceSummary.ID}</strong>
-  //           </Text>
-  //         </LinkOverlay>
-  //       </LinkBox>
-  //     </div>
-  //   );
-  // }
+    return (
+      <div style={style}>
+        <Divider
+          height={dividerHeight}
+          borderColor={dividerColour}
+        />
+        <LinkBox
+          display="flex"
+          flexDirection="column"
+          justifyContent="center"
+          bgColor={backgroundColour}
+          height={`${sidebarSummaryHeight}px`}
+          paddingX="20px"
+        >
+          <Text
+            fontSize="xs"
+            noOfLines={1}
+          >
+            {"Root Service Name: "}
+            <strong>{rootServiceNameLabel}</strong>
+          </Text>
+          <Text
+            fontSize="xs"
+            noOfLines={2}
+          >
+            {"Root Name: "}
+            <strong>{rootNameLabel}</strong>
+          </Text>
+          <Text fontSize="xs">
+            {"Root Duration: "}
+            <strong>{summary.rootDurationString}</strong>
+          </Text>
+          <Text fontSize="xs">
+            {"Number of Spans: "}
+            <strong>{summary.spanCount}</strong>
+          </Text>
+          <LinkOverlay
+            as={NavLink}
+            to={`traces/${summary.ID}`}
+          >
+            <Text fontSize="xs">
+              {"Trace ID: "}
+              <strong>{summary.ID}</strong>
+            </Text>
+          </LinkOverlay>
+        </LinkBox>
+      </div>
+    );
+  }
 
   return (
     <div style={style}>
@@ -143,7 +144,7 @@ function SidebarRow({ index, style, data }: SidebarRowProps) {
 }
 
 type TelemetryListProps = {
-  summaries: Summary[];
+  summaries: SummaryWithUIData[];
 };
 
 export function TelemetryList(props: TelemetryListProps) {

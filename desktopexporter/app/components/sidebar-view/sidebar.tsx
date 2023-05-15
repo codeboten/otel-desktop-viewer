@@ -6,6 +6,7 @@ import { TelemetryList } from "./telemetry-list";
 import { Summary } from "../../types/api-types";
 // import { TraceSummary } from "../../types/api-types";
 // import { TraceSummaryWithUIData } from "../../types/ui-types";
+import { SummaryWithUIData } from "../../types/ui-types";
 import { SidebarHeader } from "./sidebar-header";
 
 const sidebarFullWidth = 350;
@@ -14,13 +15,13 @@ const sidebarCollapsedWidth = 70;
 type SidebarProps = {
   isFullWidth: boolean;
   toggleSidebarWidth: () => void;
-  summaries: Summary[];
-  numNewTraces: number;
+  summaries: SummaryWithUIData[];
+  numNewTelemetry: number;
 };
 
 export function Sidebar(props: SidebarProps) {
   let sidebarColour = useColorModeValue("gray.50", "gray.700");
-  let { isFullWidth, toggleSidebarWidth, summaries, numNewTraces } = props;
+  let { isFullWidth, toggleSidebarWidth, summaries, numNewTelemetry } = props;
   // let isFullWidthDisabled = traceSummaries.length === 0;
   let isFullWidthDisabled = false;
 
@@ -37,7 +38,7 @@ export function Sidebar(props: SidebarProps) {
           isFullWidth={isFullWidth}
           toggleSidebarWidth={toggleSidebarWidth}
           isFullWidthDisabled={false}
-          numNewTraces={numNewTraces}
+          numNewTraces={numNewTelemetry}
         />
         {/* {traceSummaries && <TraceList traceSummaries={props.traceSummaries} />} */}
         {summaries.length > 0 && <TelemetryList summaries={props.summaries} />}

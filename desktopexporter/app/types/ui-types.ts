@@ -21,22 +21,24 @@ export type SpanWithUIData =
       metadata: SpanUIData;
     };
 
-export type TraceSummaryWithUIData =
+export type SummaryWithUIData =
   | {
       hasRootSpan: true;
       rootServiceName: string;
       rootName: string;
       rootDurationString: string;
       spanCount: number;
-      traceID: string;
+      ID: string;
+      type: string;
     }
   | {
       hasRootSpan: false;
       spanCount: number;
-      traceID: string;
+      ID: string;
+      type: string;
     };
 
-    export type SidebarData = {
-      numNewTraces: number;
-      summaries: TraceSummaryWithUIData[];
-    };
+export type SidebarData = {
+  numNewTelemetry: number;
+  summaries: SummaryWithUIData[];
+};

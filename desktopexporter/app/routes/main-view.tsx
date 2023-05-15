@@ -5,49 +5,82 @@ import { useLoaderData } from "react-router-dom";
 
 import { Sidebar } from "../components/sidebar-view/sidebar";
 import { EmptyStateView } from "../components/empty-state-view/empty-state-view";
-// import { TraceSummaries, TraceSummary } from "../types/api-types";
 import { TelemetrySummaries, Summary } from "../types/api-types";
+import { SidebarData, SummaryWithUIData } from "../types/ui-types";
+import { getDurationNs, getDurationString } from "../utils/duration";
 
 export async function mainLoader() {
   const response = await fetch("/api/telemetry");
-  const telemetry = await response.json(); //TO DO fix type stuff
-  const summaries = telemetry.summaries;
-  return summaries;
+  const telemetrySummaries = await response.json();
+  // const summaries = telemetry.summaries;
+  await console.log("main loader telemetry summaries", telemetrySummaries);
+  return telemetrySummaries;
 }
 
 export default function MainView() {
-  let summaries = useLoaderData() as TelemetrySummaries;
+  let { summaries } = useLoaderData() as TelemetrySummaries;
   let [isFullWidth, setFullWidth] = useBoolean(true); //<- TO DO change this
-  const [sidebarData, setSidebarData] = useState<TelemetrySummaries>(summaries);
+  let [sidebarData, setSidebarData] = useState(initSidebarData(summaries));
 
-  // To Do: initialize the sidebar summaries at mount time
-  // add useEffect to check for new data
-  useEffect(() => {
-    async function checkForNewData() {
-      let response = await fetch("/api/telemetry");
-      if (response.ok) {
-        let summaries = (await response.json()) as TelemetrySummaries;
-        // let summaries = await response.json();
-        setSidebarData(summaries);
-      }
-    }
+  //TO DO: add useEffect to check for new data
 
-    // let interval = setInterval(checkForNewData, 5000);
+  if (!summaries.length) {
+    return (
+      <Flex height="100vh">
+        <Sidebar
+          isFullWidth={isFullWidth}
+          toggleSidebarWidth={setFullWidth.toggle}
+          summaries={[]}
+          numNewTelemetry={0}
+        />
+        <EmptyStateView />
+      </Flex>
+    );
+  }
 
-    // return () => clearInterval(interval);
-  }, []);
-
-  //TO DO: fix this... typescript stuff
   return (
     <Flex height="100vh">
       <Sidebar
         isFullWidth={isFullWidth}
         toggleSidebarWidth={setFullWidth.toggle}
-        summaries={sidebarData}
-        numNewTraces={0}
+        summaries={sidebarData.summaries}
+        numNewTelemetry={sidebarData.numNewTelemetry}
       />
-      {!summaries.length && <EmptyStateView />}
-      {summaries.length && <Outlet />}
+      <Outlet />
     </Flex>
   );
+}
+
+function initSidebarData(telemetrySummaries: Summary[]): SidebarData {
+  return {
+    summaries: telemetrySummaries.map((summary) =>
+      generateSummaryWithUIData(summary),
+    ),
+    numNewTelemetry: 0,
+  };
+}
+
+function generateSummaryWithUIData(summary: Summary): SummaryWithUIData {
+  if (summary.hasRootSpan) {
+    let duration = getDurationNs(summary.rootStartTime, summary.rootEndTime);
+
+    let durationString = getDurationString(duration);
+
+    return {
+      hasRootSpan: true,
+      rootServiceName: summary.rootServiceName,
+      rootName: summary.rootName,
+      rootDurationString: durationString,
+      spanCount: summary.spanCount,
+      ID: summary.ID,
+      type: summary.type,
+    };
+  }
+
+  return {
+    hasRootSpan: false,
+    spanCount: summary.spanCount,
+    ID: summary.ID,
+    type: summary.type,
+  };
 }
