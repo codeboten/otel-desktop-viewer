@@ -14,10 +14,17 @@ export type TelemetrySummaries = {
   summaries: Summary[];
 };
 
+// export type TelemetryData = {
+//   ID: string;
+//   type: string;
+//   spans: SpanData[];
+// };
 export type TelemetryData = {
   ID: string;
   type: string;
-  spans: SpanData[];
+  metric: MetricData;
+  log: LogData;
+  trace: TraceData;
 };
 
 export type MetricData = {
