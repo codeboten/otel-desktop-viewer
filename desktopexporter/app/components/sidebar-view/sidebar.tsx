@@ -1,11 +1,8 @@
 import React from "react";
 import { Flex, useColorModeValue } from "@chakra-ui/react";
 
-// import { TraceList } from "./trace-list";
 import { TelemetryList } from "./telemetry-list";
 import { Summary } from "../../types/api-types";
-// import { TraceSummary } from "../../types/api-types";
-// import { TraceSummaryWithUIData } from "../../types/ui-types";
 import { SummaryWithUIData } from "../../types/ui-types";
 import { SidebarHeader } from "./sidebar-header";
 
@@ -22,8 +19,7 @@ type SidebarProps = {
 export function Sidebar(props: SidebarProps) {
   let sidebarColour = useColorModeValue("gray.50", "gray.700");
   let { isFullWidth, toggleSidebarWidth, summaries, numNewTelemetry } = props;
-  // let isFullWidthDisabled = traceSummaries.length === 0;
-  let isFullWidthDisabled = false;
+  let isFullWidthDisabled = summaries.length === 0;
 
   if (isFullWidth) {
     return (
@@ -40,7 +36,6 @@ export function Sidebar(props: SidebarProps) {
           isFullWidthDisabled={false}
           numNewTraces={numNewTelemetry}
         />
-        {/* {traceSummaries && <TraceList traceSummaries={props.traceSummaries} />} */}
         {summaries.length > 0 && <TelemetryList summaries={props.summaries} />}
       </Flex>
     );

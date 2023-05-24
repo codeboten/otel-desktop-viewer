@@ -11,7 +11,6 @@ import {
 } from "@chakra-ui/react";
 import { useSize } from "@chakra-ui/react-use-size";
 
-// import { TraceSummaryWithUIData } from "../../types/ui-types";
 import { SummaryWithUIData } from "../../types/ui-types";
 import { Summary } from "../../types/api-types";
 
@@ -19,7 +18,7 @@ const sidebarSummaryHeight = 120;
 const dividerHeight = 1;
 
 type SidebarRowData = {
-  selectedTraceID: string;
+  selectedID: string;
   summaries: SummaryWithUIData[];
 };
 
@@ -32,11 +31,10 @@ type SidebarRowProps = {
 function SidebarRow({ index, style, data }: SidebarRowProps) {
   let selectedColor = useColorModeValue("pink.100", "pink.900");
   let dividerColour = useColorModeValue("blackAlpha.300", "whiteAlpha.300");
-  let { selectedTraceID, summaries } = data; //TO DO UPDATE THIS
+  let { selectedID, summaries } = data; //TO DO UPDATE THIS
   let summary = summaries[index];
 
-  let isSelected =
-    selectedTraceID && selectedTraceID === summary.ID ? true : false;
+  let isSelected = selectedID && selectedID === summary.ID ? true : false;
 
   let backgroundColour = isSelected ? selectedColor : "";
 
@@ -153,22 +151,18 @@ export function TelemetryList(props: TelemetryListProps) {
   let location = useLocation();
   let { summaries } = props;
 
-  // Default to the first trace in the list if none are selected
-  //do i still need to set the window location here?
-  function setSelected() {
-    return location.pathname.includes("/telemetry/")
-      ? location.pathname.split("/")[2]
-      : props.summaries[0].ID;
-  }
-
-  let selectedTraceID = setSelected();
+  let [selectedID, setSelectedID] = React.useState<string>(summaries[0].ID);
 
   let itemData = {
-    selectedTraceID: selectedTraceID,
+    selectedID: selectedID,
     summaries: summaries,
   };
 
   let itemHeight = sidebarSummaryHeight + dividerHeight;
+
+  React.useEffect(() => {
+    setSelectedID(location.pathname.split("/")[2]);
+  }, [location]);
 
   return (
     <Flex

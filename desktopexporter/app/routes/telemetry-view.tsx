@@ -7,8 +7,8 @@ import { TraceData } from "../types/api-types";
 import { SpanDataStatus, SpanWithUIData } from "../types/ui-types";
 // import { orderSpans } from "../utils/span-stuff";
 
-import { TraceDetailView } from "../components/telemetry-detail-view/detail-trace-view";
-// import { Header } from "../components/header-view/header";
+import { TraceDetailView } from "../components/trace-view/detail-trace-view";
+import { Header } from "../components/header-view/header";
 import { DetailView } from "../components/detail-view/detail-view";
 import { WaterfallView } from "../components/waterfall-view/waterfall-view";
 import { arrayToTree, TreeItem, RootTreeItem } from "../utils/array-to-tree";
@@ -28,16 +28,18 @@ export default function TelemetryView() {
   let [telemetryType, setTelemetryType] = React.useState<string>(
     telemetryData.type,
   );
-  let [selectedSpanID, setSelectedSpanID] = React.useState<string>("");
-  let traceData = telemetryData.trace as TraceData;
-  let selectedSpan = {} as SpanData;
 
-  if (telemetryType === "trace") {
-    let traceTimeAttributes = calculateTraceTiming(traceData.spans);
-    let spanTree: RootTreeItem[] = arrayToTree(traceData.spans);
-    let orderedSpans = orderSpans(spanTree);
-    selectedSpan = traceData.spans[0];
-  }
+  let traceData = telemetryData.trace as TraceData;
+  // let [selectedSpanID, setSelectedSpanID] = React.useState<string>("");
+  // let traceData = telemetryData.trace as TraceData;
+  // let selectedSpan = {} as SpanData;
+
+  // if (telemetryType === "trace") {
+  //   let traceTimeAttributes = calculateTraceTiming(traceData.spans);
+  //   let spanTree: RootTreeItem[] = arrayToTree(traceData.spans);
+  //   let orderedSpans = orderSpans(spanTree);
+  //   selectedSpan = traceData.spans[0];
+  // }
 
   React.useEffect(() => {
     setTelemetryType(telemetryData.type); //this is janky make it batter
@@ -58,7 +60,7 @@ export default function TelemetryView() {
       width={"100vw"}
     >
       <GridItem area={"header"}>
-        {/* <Header traceID={traceData.traceID} /> */}
+        <Header traceID={telemetryData.ID} />
       </GridItem>
       <GridItem
         area={"main"}
@@ -67,8 +69,8 @@ export default function TelemetryView() {
       <GridItem area={"detail"}>
         {/* <DetailView span={selectedSpan} /> */}
         {/* <TraceDetailView data={telemetryData} /> */}
-        {telemetryType == "trace" && <TraceDetailView span={selectedSpan} />}
-        {/* <div>{`this is a ${telemetryData.type}`}</div> */}
+        {/* {telemetryType == "trace" && <TraceDetailView span={selectedSpan} />} */}
+        <div>{`this is a ${telemetryData.type}`}</div>
       </GridItem>
     </Grid>
   );
