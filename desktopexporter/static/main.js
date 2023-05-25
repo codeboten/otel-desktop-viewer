@@ -2297,9 +2297,9 @@
           if (typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ !== "undefined" && typeof __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart === "function") {
             __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart(new Error());
           }
-          var React51 = require_react();
+          var React52 = require_react();
           var Scheduler = require_scheduler();
-          var ReactSharedInternals = React51.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
+          var ReactSharedInternals = React52.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
           var suppressWarning = false;
           function setSuppressWarning(newSuppressWarning) {
             {
@@ -2402,7 +2402,7 @@
               allNativeEvents.add(dependencies[i]);
             }
           }
-          var canUseDOM3 = !!(typeof window !== "undefined" && typeof window.document !== "undefined" && typeof window.document.createElement !== "undefined");
+          var canUseDOM2 = !!(typeof window !== "undefined" && typeof window.document !== "undefined" && typeof window.document.createElement !== "undefined");
           var hasOwnProperty = Object.prototype.hasOwnProperty;
           function typeName(value) {
             {
@@ -3820,7 +3820,7 @@
             {
               if (props.value == null) {
                 if (typeof props.children === "object" && props.children !== null) {
-                  React51.Children.forEach(props.children, function(child) {
+                  React52.Children.forEach(props.children, function(child) {
                     if (child == null) {
                       return;
                     }
@@ -5347,7 +5347,7 @@
             return listener;
           }
           var passiveBrowserEventsSupported = false;
-          if (canUseDOM3) {
+          if (canUseDOM2) {
             try {
               var options = {};
               Object.defineProperty(options, "passive", {
@@ -7539,13 +7539,13 @@
           var SyntheticWheelEvent = createSyntheticEvent(WheelEventInterface);
           var END_KEYCODES = [9, 13, 27, 32];
           var START_KEYCODE = 229;
-          var canUseCompositionEvent = canUseDOM3 && "CompositionEvent" in window;
+          var canUseCompositionEvent = canUseDOM2 && "CompositionEvent" in window;
           var documentMode = null;
-          if (canUseDOM3 && "documentMode" in document) {
+          if (canUseDOM2 && "documentMode" in document) {
             documentMode = document.documentMode;
           }
-          var canUseTextInputEvent = canUseDOM3 && "TextEvent" in window && !documentMode;
-          var useFallbackCompositionData = canUseDOM3 && (!canUseCompositionEvent || documentMode && documentMode > 8 && documentMode <= 11);
+          var canUseTextInputEvent = canUseDOM2 && "TextEvent" in window && !documentMode;
+          var useFallbackCompositionData = canUseDOM2 && (!canUseCompositionEvent || documentMode && documentMode > 8 && documentMode <= 11);
           var SPACEBAR_CODE = 32;
           var SPACEBAR_CHAR = String.fromCharCode(SPACEBAR_CODE);
           function registerEvents() {
@@ -7738,7 +7738,7 @@
             return false;
           }
           function isEventSupported(eventNameSuffix) {
-            if (!canUseDOM3) {
+            if (!canUseDOM2) {
               return false;
             }
             var eventName = "on" + eventNameSuffix;
@@ -7790,7 +7790,7 @@
             }
           }
           var isInputEventSupported = false;
-          if (canUseDOM3) {
+          if (canUseDOM2) {
             isInputEventSupported = isEventSupported("input") && (!document.documentMode || document.documentMode > 9);
           }
           function startWatchingForValueChange(target, targetInst) {
@@ -8223,7 +8223,7 @@
               setOffsets(input, offsets);
             }
           }
-          var skipSelectionChangeEvent = canUseDOM3 && "documentMode" in document && document.documentMode <= 11;
+          var skipSelectionChangeEvent = canUseDOM2 && "documentMode" in document && document.documentMode <= 11;
           function registerEvents$3() {
             registerTwoPhaseEvent("onSelect", ["focusout", "contextmenu", "dragend", "focusin", "keydown", "keyup", "mousedown", "mouseup", "selectionchange"]);
           }
@@ -8318,7 +8318,7 @@
           };
           var prefixedEventNames = {};
           var style = {};
-          if (canUseDOM3) {
+          if (canUseDOM2) {
             style = document.createElement("div").style;
             if (!("AnimationEvent" in window)) {
               delete vendorPrefixes.animationend.animation;
@@ -8821,7 +8821,7 @@
                 possibleRegistrationNames
               });
             };
-            canDiffStyleForHydrationWarning = canUseDOM3 && !document.documentMode;
+            canDiffStyleForHydrationWarning = canUseDOM2 && !document.documentMode;
             warnForPropDifference = function(propName, serverValue, clientValue) {
               if (didWarnInvalidHydration) {
                 return;
@@ -11981,7 +11981,7 @@
             }
           }
           var fakeInternalInstance = {};
-          var emptyRefsObject = new React51.Component().refs;
+          var emptyRefsObject = new React52.Component().refs;
           var didWarnAboutStateAssignmentForComponent;
           var didWarnAboutUninitializedState;
           var didWarnAboutGetSnapshotBeforeUpdateWithoutDidUpdate;
@@ -22824,7 +22824,7 @@
             rendererPackageName: "react-dom"
           });
           {
-            if (!foundDevTools && canUseDOM3 && window.top === window.self) {
+            if (!foundDevTools && canUseDOM2 && window.top === window.self) {
               if (navigator.userAgent.indexOf("Chrome") > -1 && navigator.userAgent.indexOf("Edge") === -1 || navigator.userAgent.indexOf("Firefox") > -1) {
                 var protocol = window.location.protocol;
                 if (/^(https?|file):$/.test(protocol)) {
@@ -24735,8 +24735,8 @@
             }
         }
       };
-      var isBrowser4 = typeof document !== "undefined";
-      var getServerStylisCache = isBrowser4 ? void 0 : weakMemoize__default["default"](function() {
+      var isBrowser3 = typeof document !== "undefined";
+      var getServerStylisCache = isBrowser3 ? void 0 : weakMemoize__default["default"](function() {
         return memoize__default["default"](function() {
           var cache = {};
           return function(name) {
@@ -24750,7 +24750,7 @@
         if (!key) {
           throw new Error("You have to configure `key` for your cache. Please make sure it's unique (and not equal to 'css') as it's used for linking styles to your cache.\nIf multiple caches share the same key they might \"fight\" for each other's style elements.");
         }
-        if (isBrowser4 && key === "css") {
+        if (isBrowser3 && key === "css") {
           var ssrStyles = document.querySelectorAll("style[data-emotion]:not([data-s])");
           Array.prototype.forEach.call(ssrStyles, function(node) {
             var dataEmotionAttribute = node.getAttribute("data-emotion");
@@ -24770,7 +24770,7 @@
         var inserted = {};
         var container3;
         var nodesToHydrate = [];
-        if (isBrowser4) {
+        if (isBrowser3) {
           container3 = options.container || document.head;
           Array.prototype.forEach.call(
             document.querySelectorAll('style[data-emotion^="' + key + ' "]'),
@@ -24792,7 +24792,7 @@
             }
           }), incorrectImportAlarm);
         }
-        if (isBrowser4) {
+        if (isBrowser3) {
           var currentSheet;
           var finalizingPlugins = [stylis.stringify, true ? function(element) {
             if (!element.root) {
@@ -25188,7 +25188,7 @@
     "node_modules/@emotion/utils/dist/emotion-utils.cjs.dev.js"(exports) {
       "use strict";
       Object.defineProperty(exports, "__esModule", { value: true });
-      var isBrowser4 = typeof document !== "undefined";
+      var isBrowser3 = typeof document !== "undefined";
       function getRegisteredStyles(registered, registeredStyles, classNames2) {
         var rawClassName = "";
         classNames2.split(" ").forEach(function(className) {
@@ -25202,7 +25202,7 @@
       }
       var registerStyles = function registerStyles2(cache, serialized, isStringTag) {
         var className = cache.key + "-" + serialized.name;
-        if ((isStringTag === false || isBrowser4 === false && cache.compat !== void 0) && cache.registered[className] === void 0) {
+        if ((isStringTag === false || isBrowser3 === false && cache.compat !== void 0) && cache.registered[className] === void 0) {
           cache.registered[className] = serialized.styles;
         }
       };
@@ -25214,12 +25214,12 @@
           var current = serialized;
           do {
             var maybeStyles = cache.insert(serialized === current ? "." + className : "", current, cache.sheet, true);
-            if (!isBrowser4 && maybeStyles !== void 0) {
+            if (!isBrowser3 && maybeStyles !== void 0) {
               stylesForSSR += maybeStyles;
             }
             current = current.next;
           } while (current !== void 0);
-          if (!isBrowser4 && stylesForSSR.length !== 0) {
+          if (!isBrowser3 && stylesForSSR.length !== 0) {
             return stylesForSSR;
           }
         }
@@ -25638,7 +25638,7 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
     "node_modules/@emotion/use-insertion-effect-with-fallbacks/dist/emotion-use-insertion-effect-with-fallbacks.cjs.dev.js"(exports) {
       "use strict";
       Object.defineProperty(exports, "__esModule", { value: true });
-      var React51 = require_react();
+      var React52 = require_react();
       function _interopNamespace(e) {
         if (e && e.__esModule)
           return e;
@@ -25659,14 +25659,14 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
         n["default"] = e;
         return Object.freeze(n);
       }
-      var React__namespace = /* @__PURE__ */ _interopNamespace(React51);
-      var isBrowser4 = typeof document !== "undefined";
+      var React__namespace = /* @__PURE__ */ _interopNamespace(React52);
+      var isBrowser3 = typeof document !== "undefined";
       var syncFallback = function syncFallback2(create) {
         return create();
       };
       var useInsertionEffect2 = React__namespace["useInsertionEffect"] ? React__namespace["useInsertionEffect"] : false;
-      var useInsertionEffectAlwaysWithSyncFallback = !isBrowser4 ? syncFallback : useInsertionEffect2 || syncFallback;
-      var useInsertionEffectWithLayoutFallback = useInsertionEffect2 || React51.useLayoutEffect;
+      var useInsertionEffectAlwaysWithSyncFallback = !isBrowser3 ? syncFallback : useInsertionEffect2 || syncFallback;
+      var useInsertionEffectWithLayoutFallback = useInsertionEffect2 || React52.useLayoutEffect;
       exports.useInsertionEffectAlwaysWithSyncFallback = useInsertionEffectAlwaysWithSyncFallback;
       exports.useInsertionEffectWithLayoutFallback = useInsertionEffectWithLayoutFallback;
     }
@@ -25688,7 +25688,7 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
   var require_emotion_element_b63ca7c6_cjs_dev = __commonJS({
     "node_modules/@emotion/react/dist/emotion-element-b63ca7c6.cjs.dev.js"(exports) {
       "use strict";
-      var React51 = require_react();
+      var React52 = require_react();
       var createCache = require_emotion_cache_cjs();
       var _extends5 = require_extends();
       var weakMemoize = require_emotion_weak_memoize_cjs();
@@ -25701,9 +25701,9 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
       }
       var createCache__default = /* @__PURE__ */ _interopDefault(createCache);
       var weakMemoize__default = /* @__PURE__ */ _interopDefault(weakMemoize);
-      var isBrowser4 = typeof document !== "undefined";
+      var isBrowser3 = typeof document !== "undefined";
       var hasOwnProperty = {}.hasOwnProperty;
-      var EmotionCacheContext = /* @__PURE__ */ React51.createContext(
+      var EmotionCacheContext = /* @__PURE__ */ React52.createContext(
         typeof HTMLElement !== "undefined" ? /* @__PURE__ */ createCache__default["default"]({
           key: "css"
         }) : null
@@ -25713,23 +25713,23 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
       }
       var CacheProvider = EmotionCacheContext.Provider;
       var __unsafe_useEmotionCache = function useEmotionCache() {
-        return React51.useContext(EmotionCacheContext);
+        return React52.useContext(EmotionCacheContext);
       };
       exports.withEmotionCache = function withEmotionCache(func) {
-        return /* @__PURE__ */ React51.forwardRef(function(props, ref) {
-          var cache = React51.useContext(EmotionCacheContext);
+        return /* @__PURE__ */ React52.forwardRef(function(props, ref) {
+          var cache = React52.useContext(EmotionCacheContext);
           return func(props, cache, ref);
         });
       };
-      if (!isBrowser4) {
+      if (!isBrowser3) {
         exports.withEmotionCache = function withEmotionCache(func) {
           return function(props) {
-            var cache = React51.useContext(EmotionCacheContext);
+            var cache = React52.useContext(EmotionCacheContext);
             if (cache === null) {
               cache = createCache__default["default"]({
                 key: "css"
               });
-              return /* @__PURE__ */ React51.createElement(EmotionCacheContext.Provider, {
+              return /* @__PURE__ */ React52.createElement(EmotionCacheContext.Provider, {
                 value: cache
               }, func(props, cache));
             } else {
@@ -25738,12 +25738,12 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
           };
         };
       }
-      var ThemeContext2 = /* @__PURE__ */ React51.createContext({});
+      var ThemeContext2 = /* @__PURE__ */ React52.createContext({});
       if (true) {
         ThemeContext2.displayName = "EmotionThemeContext";
       }
       var useTheme2 = function useTheme3() {
-        return React51.useContext(ThemeContext2);
+        return React52.useContext(ThemeContext2);
       };
       var getTheme2 = function getTheme3(outerTheme, theme3) {
         if (typeof theme3 === "function") {
@@ -25764,24 +25764,24 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
         });
       });
       var ThemeProvider2 = function ThemeProvider3(props) {
-        var theme3 = React51.useContext(ThemeContext2);
+        var theme3 = React52.useContext(ThemeContext2);
         if (props.theme !== theme3) {
           theme3 = createCacheWithTheme(theme3)(props.theme);
         }
-        return /* @__PURE__ */ React51.createElement(ThemeContext2.Provider, {
+        return /* @__PURE__ */ React52.createElement(ThemeContext2.Provider, {
           value: theme3
         }, props.children);
       };
       function withTheme(Component3) {
         var componentName = Component3.displayName || Component3.name || "Component";
         var render = function render2(props, ref) {
-          var theme3 = React51.useContext(ThemeContext2);
-          return /* @__PURE__ */ React51.createElement(Component3, _extends5({
+          var theme3 = React52.useContext(ThemeContext2);
+          return /* @__PURE__ */ React52.createElement(Component3, _extends5({
             theme: theme3,
             ref
           }, props));
         };
-        var WithTheme = /* @__PURE__ */ React51.forwardRef(render);
+        var WithTheme = /* @__PURE__ */ React52.forwardRef(render);
         WithTheme.displayName = "WithTheme(" + componentName + ")";
         return _isolatedHnrs_dist_emotionReact_isolatedHnrs["default"](WithTheme, Component3);
       }
@@ -25843,7 +25843,7 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
         var rules = useInsertionEffectWithFallbacks.useInsertionEffectAlwaysWithSyncFallback(function() {
           return utils.insertStyles(cache, serialized, isStringTag);
         });
-        if (!isBrowser4 && rules !== void 0) {
+        if (!isBrowser3 && rules !== void 0) {
           var _ref2;
           var serializedNames = serialized.name;
           var next = serialized.next;
@@ -25851,7 +25851,7 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
             serializedNames += " " + next.name;
             next = next.next;
           }
-          return /* @__PURE__ */ React51.createElement("style", (_ref2 = {}, _ref2["data-emotion"] = cache.key + " " + serializedNames, _ref2.dangerouslySetInnerHTML = {
+          return /* @__PURE__ */ React52.createElement("style", (_ref2 = {}, _ref2["data-emotion"] = cache.key + " " + serializedNames, _ref2.dangerouslySetInnerHTML = {
             __html: rules
           }, _ref2.nonce = cache.sheet.nonce, _ref2));
         }
@@ -25870,7 +25870,7 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
         } else if (props.className != null) {
           className = props.className + " ";
         }
-        var serialized = serialize.serializeStyles(registeredStyles, void 0, React51.useContext(ThemeContext2));
+        var serialized = serialize.serializeStyles(registeredStyles, void 0, React52.useContext(ThemeContext2));
         if (serialized.name.indexOf("-") === -1) {
           var labelFromStack = props[labelPropName];
           if (labelFromStack) {
@@ -25886,11 +25886,11 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
         }
         newProps.ref = ref;
         newProps.className = className;
-        return /* @__PURE__ */ React51.createElement(React51.Fragment, null, /* @__PURE__ */ React51.createElement(Insertion, {
+        return /* @__PURE__ */ React52.createElement(React52.Fragment, null, /* @__PURE__ */ React52.createElement(Insertion, {
           cache,
           serialized,
           isStringTag: typeof WrappedComponent === "string"
-        }), /* @__PURE__ */ React51.createElement(WrappedComponent, newProps));
+        }), /* @__PURE__ */ React52.createElement(WrappedComponent, newProps));
       });
       if (true) {
         Emotion.displayName = "EmotionCssPropInternal";
@@ -25902,7 +25902,7 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
       exports.__unsafe_useEmotionCache = __unsafe_useEmotionCache;
       exports.createEmotionProps = createEmotionProps;
       exports.hasOwnProperty = hasOwnProperty;
-      exports.isBrowser = isBrowser4;
+      exports.isBrowser = isBrowser3;
       exports.useTheme = useTheme2;
       exports.withTheme = withTheme;
     }
@@ -25913,7 +25913,7 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
     "node_modules/@emotion/react/dist/emotion-react.cjs.dev.js"(exports) {
       "use strict";
       Object.defineProperty(exports, "__esModule", { value: true });
-      var React51 = require_react();
+      var React52 = require_react();
       require_emotion_cache_cjs();
       var emotionElement = require_emotion_element_b63ca7c6_cjs_dev();
       require_extends();
@@ -26048,7 +26048,7 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
       var jsx = function jsx2(type, props) {
         var args = arguments;
         if (props == null || !emotionElement.hasOwnProperty.call(props, "css")) {
-          return React51.createElement.apply(void 0, args);
+          return React52.createElement.apply(void 0, args);
         }
         var argsLength = args.length;
         var createElementArgArray = new Array(argsLength);
@@ -26057,7 +26057,7 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
         for (var i = 2; i < argsLength; i++) {
           createElementArgArray[i] = args[i];
         }
-        return React51.createElement.apply(null, createElementArgArray);
+        return React52.createElement.apply(null, createElementArgArray);
       };
       var warnedAboutCssPropForGlobal = false;
       var Global3 = /* @__PURE__ */ emotionElement.withEmotionCache(function(props, cache) {
@@ -26066,7 +26066,7 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
           warnedAboutCssPropForGlobal = true;
         }
         var styles2 = props.styles;
-        var serialized = serialize.serializeStyles([styles2], void 0, React51.useContext(emotionElement.ThemeContext));
+        var serialized = serialize.serializeStyles([styles2], void 0, React52.useContext(emotionElement.ThemeContext));
         if (!emotionElement.isBrowser) {
           var _ref;
           var serializedNames = serialized.name;
@@ -26085,11 +26085,11 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
           if (shouldCache) {
             return null;
           }
-          return /* @__PURE__ */ React51.createElement("style", (_ref = {}, _ref["data-emotion"] = cache.key + "-global " + serializedNames, _ref.dangerouslySetInnerHTML = {
+          return /* @__PURE__ */ React52.createElement("style", (_ref = {}, _ref["data-emotion"] = cache.key + "-global " + serializedNames, _ref.dangerouslySetInnerHTML = {
             __html: rules
           }, _ref.nonce = cache.sheet.nonce, _ref));
         }
-        var sheetRef = React51.useRef();
+        var sheetRef = React52.useRef();
         useInsertionEffectWithFallbacks.useInsertionEffectWithLayoutFallback(function() {
           var key = cache.key + "-global";
           var sheet = new cache.sheet.constructor({
@@ -26217,7 +26217,7 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
         });
         if (!emotionElement.isBrowser && rules.length !== 0) {
           var _ref2;
-          return /* @__PURE__ */ React51.createElement("style", (_ref2 = {}, _ref2["data-emotion"] = cache.key + " " + serializedArr.map(function(serialized) {
+          return /* @__PURE__ */ React52.createElement("style", (_ref2 = {}, _ref2["data-emotion"] = cache.key + " " + serializedArr.map(function(serialized) {
             return serialized.name;
           }).join(" "), _ref2.dangerouslySetInnerHTML = {
             __html: rules
@@ -26252,11 +26252,11 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
         var content = {
           css: css3,
           cx: cx9,
-          theme: React51.useContext(emotionElement.ThemeContext)
+          theme: React52.useContext(emotionElement.ThemeContext)
         };
         var ele = props.children(content);
         hasRendered = true;
-        return /* @__PURE__ */ React51.createElement(React51.Fragment, null, /* @__PURE__ */ React51.createElement(Insertion, {
+        return /* @__PURE__ */ React52.createElement(React52.Fragment, null, /* @__PURE__ */ React52.createElement(Insertion, {
           cache,
           serializedArr
         }), ele);
@@ -26265,10 +26265,10 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
         ClassNames.displayName = "EmotionClassNames";
       }
       if (true) {
-        isBrowser4 = typeof document !== "undefined";
+        isBrowser3 = typeof document !== "undefined";
         isTestEnv = typeof jest !== "undefined" || typeof vi !== "undefined";
-        if (isBrowser4 && !isTestEnv) {
-          globalContext = typeof globalThis !== "undefined" ? globalThis : isBrowser4 ? window : global;
+        if (isBrowser3 && !isTestEnv) {
+          globalContext = typeof globalThis !== "undefined" ? globalThis : isBrowser3 ? window : global;
           globalKey = "__EMOTION_REACT_" + pkg.version.split(".")[0] + "__";
           if (globalContext[globalKey]) {
             console.warn("You are loading @emotion/react when it is already loaded. Running multiple instances may cause problems. This can happen if multiple versions are used, or if multiple builds of the same version are used.");
@@ -26276,7 +26276,7 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
           globalContext[globalKey] = true;
         }
       }
-      var isBrowser4;
+      var isBrowser3;
       var isTestEnv;
       var globalContext;
       var globalKey;
@@ -26351,7 +26351,7 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
       "use strict";
       Object.defineProperty(exports, "__esModule", { value: true });
       var _extends5 = require_extends();
-      var React51 = require_react();
+      var React52 = require_react();
       var isPropValid = require_emotion_is_prop_valid_cjs();
       var react = require_emotion_react_cjs();
       var utils = require_emotion_utils_cjs();
@@ -26385,14 +26385,14 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
 Because you write your CSS inside a JavaScript string you actually have to do double escaping, so for example "content: '\\00d7';" should become "content: '\\\\00d7';".
 You can read more about this here:
 https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals#ES2018_revision_of_illegal_escape_sequences`;
-      var isBrowser4 = typeof document !== "undefined";
+      var isBrowser3 = typeof document !== "undefined";
       var Insertion = function Insertion2(_ref) {
         var cache = _ref.cache, serialized = _ref.serialized, isStringTag = _ref.isStringTag;
         utils.registerStyles(cache, serialized, isStringTag);
         var rules = useInsertionEffectWithFallbacks.useInsertionEffectAlwaysWithSyncFallback(function() {
           return utils.insertStyles(cache, serialized, isStringTag);
         });
-        if (!isBrowser4 && rules !== void 0) {
+        if (!isBrowser3 && rules !== void 0) {
           var _ref2;
           var serializedNames = serialized.name;
           var next = serialized.next;
@@ -26400,7 +26400,7 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
             serializedNames += " " + next.name;
             next = next.next;
           }
-          return /* @__PURE__ */ React51.createElement("style", (_ref2 = {}, _ref2["data-emotion"] = cache.key + " " + serializedNames, _ref2.dangerouslySetInnerHTML = {
+          return /* @__PURE__ */ React52.createElement("style", (_ref2 = {}, _ref2["data-emotion"] = cache.key + " " + serializedNames, _ref2.dangerouslySetInnerHTML = {
             __html: rules
           }, _ref2.nonce = cache.sheet.nonce, _ref2));
         }
@@ -26455,7 +26455,7 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
               for (var key in props) {
                 mergedProps[key] = props[key];
               }
-              mergedProps.theme = React51.useContext(react.ThemeContext);
+              mergedProps.theme = React52.useContext(react.ThemeContext);
             }
             if (typeof props.className === "string") {
               className = utils.getRegisteredStyles(cache.registered, classInterpolations, props.className);
@@ -26478,11 +26478,11 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
             }
             newProps.className = className;
             newProps.ref = ref;
-            return /* @__PURE__ */ React51.createElement(React51.Fragment, null, /* @__PURE__ */ React51.createElement(Insertion, {
+            return /* @__PURE__ */ React52.createElement(React52.Fragment, null, /* @__PURE__ */ React52.createElement(Insertion, {
               cache,
               serialized,
               isStringTag: typeof FinalTag === "string"
-            }), /* @__PURE__ */ React51.createElement(FinalTag, newProps));
+            }), /* @__PURE__ */ React52.createElement(FinalTag, newProps));
           });
           Styled.displayName = identifierName !== void 0 ? identifierName : "Styled(" + (typeof baseTag === "string" ? baseTag : baseTag.displayName || baseTag.name || "Component") + ")";
           Styled.defaultProps = tag.defaultProps;
@@ -27716,7 +27716,7 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
   });
 
   // app/main.tsx
-  var import_react177 = __toESM(require_react());
+  var import_react179 = __toESM(require_react());
   var import_client = __toESM(require_client());
 
   // node_modules/@chakra-ui/react/dist/index.esm.js
@@ -29517,10 +29517,6 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
     return result;
   }
   var filterUndefined = (object) => objectFilter(object, (val) => val !== null && val !== void 0);
-  function canUseDOM() {
-    return !!(typeof window !== "undefined" && window.document && window.document.createElement);
-  }
-  var isBrowser = /* @__PURE__ */ canUseDOM();
   var focusableElList = [
     "input:not(:disabled):not([disabled])",
     "select:not(:disabled):not([disabled])",
@@ -34850,10 +34846,10 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
   var import_react27 = __toESM(require_react(), 1);
 
   // node_modules/framer-motion/dist/es/utils/is-browser.mjs
-  var isBrowser2 = typeof document !== "undefined";
+  var isBrowser = typeof document !== "undefined";
 
   // node_modules/framer-motion/dist/es/utils/use-isomorphic-effect.mjs
-  var useIsomorphicLayoutEffect = isBrowser2 ? import_react27.useLayoutEffect : import_react27.useEffect;
+  var useIsomorphicLayoutEffect = isBrowser ? import_react27.useLayoutEffect : import_react27.useEffect;
 
   // node_modules/framer-motion/dist/es/context/LazyContext.mjs
   var import_react28 = __toESM(require_react(), 1);
@@ -35082,7 +35078,7 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
       const context = useCreateMotionContext(props);
       const projectionId = isStatic ? void 0 : useProjectionId();
       const visualState = useVisualState(props, isStatic);
-      if (!isStatic && isBrowser2) {
+      if (!isStatic && isBrowser) {
         context.visualElement = useVisualElement(Component3, visualState, configAndProps, createVisualElement);
         const lazyStrictMode = (0, import_react36.useContext)(LazyContext).strict;
         const initialLayoutGroupConfig = (0, import_react36.useContext)(SwitchLayoutGroupContext);
@@ -36076,9 +36072,9 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
   };
 
   // node_modules/framer-motion/dist/es/events/utils.mjs
-  var supportsPointerEvents = () => isBrowser2 && window.onpointerdown === null;
-  var supportsTouchEvents = () => isBrowser2 && window.ontouchstart === null;
-  var supportsMouseEvents = () => isBrowser2 && window.onmousedown === null;
+  var supportsPointerEvents = () => isBrowser && window.onpointerdown === null;
+  var supportsTouchEvents = () => isBrowser && window.ontouchstart === null;
+  var supportsMouseEvents = () => isBrowser && window.onmousedown === null;
 
   // node_modules/framer-motion/dist/es/events/use-pointer-event.mjs
   var mouseEventNames = {
@@ -39195,7 +39191,7 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
         });
       }
       visualElement.render();
-      if (isBrowser2 && scrollY !== null) {
+      if (isBrowser && scrollY !== null) {
         window.scrollTo({ top: scrollY });
       }
       return { target: convertedTarget, transitionEnd };
@@ -39225,7 +39221,7 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
   // node_modules/framer-motion/dist/es/utils/reduced-motion/index.mjs
   function initPrefersReducedMotion() {
     hasReducedMotionListener.current = true;
-    if (!isBrowser2)
+    if (!isBrowser)
       return;
     if (window.matchMedia) {
       const motionMediaQuery = window.matchMedia("(prefers-reduced-motion)");
@@ -43013,17 +43009,6 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
   var import_react107 = __toESM(require_react());
   var import_react108 = __toESM(require_react());
   var import_react109 = __toESM(require_react());
-  var useSafeLayoutEffect3 = isBrowser ? import_react87.useLayoutEffect : import_react87.useEffect;
-  function useCallbackRef2(fn2, deps = []) {
-    const ref = (0, import_react86.useRef)(fn2);
-    useSafeLayoutEffect3(() => {
-      ref.current = fn2;
-    });
-    return (0, import_react86.useCallback)((...args) => {
-      var _a8;
-      return (_a8 = ref.current) == null ? void 0 : _a8.call(ref, ...args);
-    }, deps);
-  }
   function useBoolean(initialState2 = false) {
     const [value, setValue] = (0, import_react88.useState)(initialState2);
     const callbacks = (0, import_react88.useMemo)(() => ({
@@ -43032,21 +43017,6 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
       toggle: () => setValue((prev) => !prev)
     }), []);
     return [value, callbacks];
-  }
-  function useInterval(callback, delay2) {
-    const fn2 = useCallbackRef2(callback);
-    (0, import_react100.useEffect)(() => {
-      let intervalId = null;
-      const tick = () => fn2();
-      if (delay2 !== null) {
-        intervalId = window.setInterval(tick, delay2);
-      }
-      return () => {
-        if (intervalId) {
-          window.clearInterval(intervalId);
-        }
-      };
-    }, [delay2, fn2]);
   }
 
   // node_modules/@chakra-ui/object-utils/dist/index.esm.js
@@ -46285,7 +46255,7 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
 
   // node_modules/@chakra-ui/react-use-size/dist/index.esm.js
   var import_react123 = __toESM(require_react());
-  var useSafeLayoutEffect4 = Boolean(globalThis == null ? void 0 : globalThis.document) ? import_react123.useLayoutEffect : import_react123.useEffect;
+  var useSafeLayoutEffect3 = Boolean(globalThis == null ? void 0 : globalThis.document) ? import_react123.useLayoutEffect : import_react123.useEffect;
   function trackMutation(el, cb2) {
     var _a8;
     if (!el || !el.parentElement)
@@ -46305,7 +46275,7 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
   }) {
     const [sizes24, setSizes] = (0, import_react123.useState)([]);
     const [count, setCount] = (0, import_react123.useState)(0);
-    useSafeLayoutEffect4(() => {
+    useSafeLayoutEffect3(() => {
       const elements = getNodes();
       const cleanups = elements.map((element, index) => trackElementSize(element, (size3) => {
         setSizes((sizes25) => {
@@ -48159,8 +48129,8 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
     formEncType: void 0,
     formData: void 0
   };
-  var isBrowser3 = typeof window !== "undefined" && typeof window.document !== "undefined" && typeof window.document.createElement !== "undefined";
-  var isServer = !isBrowser3;
+  var isBrowser2 = typeof window !== "undefined" && typeof window.document !== "undefined" && typeof window.document.createElement !== "undefined";
+  var isServer = !isBrowser2;
   function createRouter(init) {
     invariant2(init.routes.length > 0, "You must provide a non-empty routes array to createRouter");
     let dataRoutes = convertRoutesToDataRoutes(init.routes);
@@ -49499,8 +49469,8 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
   function useSyncExternalStore$1(subscribe, getSnapshot, getServerSnapshot) {
     return getSnapshot();
   }
-  var canUseDOM2 = !!(typeof window !== "undefined" && typeof window.document !== "undefined" && typeof window.document.createElement !== "undefined");
-  var isServerEnvironment = !canUseDOM2;
+  var canUseDOM = !!(typeof window !== "undefined" && typeof window.document !== "undefined" && typeof window.document.createElement !== "undefined");
+  var isServerEnvironment = !canUseDOM;
   var shim = isServerEnvironment ? useSyncExternalStore$1 : useSyncExternalStore$2;
   var useSyncExternalStore2 = "useSyncExternalStore" in React27 ? ((module) => module.useSyncExternalStore)(React27) : shim;
   var DataStaticRouterContext = /* @__PURE__ */ React27.createContext(null);
@@ -50533,14 +50503,65 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
     }, [callback]);
   }
 
+  // app/routes/telemetry-view.tsx
+  var import_react140 = __toESM(require_react());
+
+  // app/components/header-view/header.tsx
+  var import_react138 = __toESM(require_react());
+  function Header(props) {
+    return /* @__PURE__ */ import_react138.default.createElement(Flex, {
+      align: "center",
+      height: "100px",
+      paddingX: "24px"
+    }, /* @__PURE__ */ import_react138.default.createElement(Text, {
+      fontSize: "lg",
+      noOfLines: 1
+    }, "Trace ID: ", /* @__PURE__ */ import_react138.default.createElement("strong", null, props.traceID)));
+  }
+
+  // app/routes/telemetry-view.tsx
+  async function telemetryLoader({ params }) {
+    let response = await fetch(`/api/telemetry/${params.id}`);
+    let telemetryData = await response.json();
+    console.log("telemloader", telemetryData);
+    return telemetryData;
+  }
+  function TelemetryView() {
+    let telemetryData = useLoaderData();
+    let [telemetryType, setTelemetryType] = import_react140.default.useState(
+      telemetryData.type
+    );
+    import_react140.default.useEffect(() => {
+      setTelemetryType(telemetryData.type);
+    }, [telemetryData]);
+    return /* @__PURE__ */ import_react140.default.createElement(Grid, {
+      templateAreas: `"header detail"
+                       "main detail"`,
+      gridTemplateColumns: "1fr 350px",
+      gridTemplateRows: "100px 1fr",
+      gap: "0",
+      height: "100vh",
+      width: "100vw"
+    }, /* @__PURE__ */ import_react140.default.createElement(GridItem, {
+      area: "header"
+    }, /* @__PURE__ */ import_react140.default.createElement(Header, {
+      traceID: telemetryData.ID
+    })), /* @__PURE__ */ import_react140.default.createElement(GridItem, {
+      area: "main",
+      marginLeft: "20px"
+    }), /* @__PURE__ */ import_react140.default.createElement(GridItem, {
+      area: "detail"
+    }, /* @__PURE__ */ import_react140.default.createElement("div", null, `this is a ${telemetryData.type}`)));
+  }
+
   // app/routes/main-view.tsx
-  var import_react148 = __toESM(require_react());
+  var import_react152 = __toESM(require_react());
 
   // app/components/sidebar-view/sidebar.tsx
-  var import_react144 = __toESM(require_react());
+  var import_react148 = __toESM(require_react());
 
-  // app/components/sidebar-view/trace-list.tsx
-  var import_react139 = __toESM(require_react());
+  // app/components/sidebar-view/telemetry-list.tsx
+  var import_react143 = __toESM(require_react());
 
   // node_modules/@babel/runtime/helpers/esm/assertThisInitialized.js
   function _assertThisInitialized(self2) {
@@ -50601,7 +50622,7 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
   var memoize_one_esm_default = memoizeOne;
 
   // node_modules/react-window/dist/index.esm.js
-  var import_react138 = __toESM(require_react());
+  var import_react142 = __toESM(require_react());
   var hasNativePerformanceNow = typeof performance === "object" && typeof performance.now === "function";
   var now = hasNativePerformanceNow ? function() {
     return performance.now();
@@ -50918,7 +50939,7 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
         var items = [];
         if (itemCount > 0) {
           for (var _index = startIndex; _index <= stopIndex; _index++) {
-            items.push((0, import_react138.createElement)(children, {
+            items.push((0, import_react142.createElement)(children, {
               data: itemData,
               key: itemKey(_index, itemData),
               index: _index,
@@ -50928,7 +50949,7 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
           }
         }
         var estimatedTotalSize = getEstimatedTotalSize2(this.props, this._instanceProps);
-        return (0, import_react138.createElement)(outerElementType || outerTagName || "div", {
+        return (0, import_react142.createElement)(outerElementType || outerTagName || "div", {
           className,
           onScroll,
           ref: this._outerRefSetter,
@@ -50941,7 +50962,7 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
             willChange: "transform",
             direction: direction2
           }, style)
-        }, (0, import_react138.createElement)(innerElementType || innerTagName || "div", {
+        }, (0, import_react142.createElement)(innerElementType || innerTagName || "div", {
           children: items,
           ref: innerRef,
           style: {
@@ -50977,7 +50998,7 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
         return [Math.max(0, startIndex - overscanBackward), Math.max(0, Math.min(itemCount - 1, stopIndex + overscanForward)), startIndex, stopIndex];
       };
       return List3;
-    }(import_react138.PureComponent), _class.defaultProps = {
+    }(import_react142.PureComponent), _class.defaultProps = {
       direction: "ltr",
       itemData: void 0,
       layout: "vertical",
@@ -51108,105 +51129,100 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
     }
   });
 
-  // app/components/sidebar-view/trace-list.tsx
+  // app/components/sidebar-view/telemetry-list.tsx
   var sidebarSummaryHeight = 120;
   var dividerHeight = 1;
   function SidebarRow({ index, style, data }) {
     let selectedColor = useColorModeValue("pink.100", "pink.900");
     let dividerColour = useColorModeValue("blackAlpha.300", "whiteAlpha.300");
-    let { selectedTraceID, traceSummaries } = data;
-    let traceSummary = traceSummaries[index];
-    let isSelected = selectedTraceID && selectedTraceID === traceSummary.traceID ? true : false;
+    let { selectedID, summaries } = data;
+    let summary = summaries[index];
+    let isSelected = selectedID && selectedID === summary.ID ? true : false;
     let backgroundColour = isSelected ? selectedColor : "";
-    if (traceSummary.hasRootSpan) {
-      let rootNameLabel = traceSummary.rootName.replaceAll("/", "/\u200B").replaceAll("-", "-\u200B").replaceAll(".", ".\u200B");
-      let rootServiceNameLabel = traceSummary.rootServiceName.replaceAll("/", "/\u200B").replaceAll("-", "-\u200B").replaceAll(".", ".\u200B");
-      return /* @__PURE__ */ import_react139.default.createElement("div", {
+    if (summary.hasRootSpan) {
+      let rootNameLabel = summary.rootName.replaceAll("/", "/\u200B").replaceAll("-", "-\u200B").replaceAll(".", ".\u200B");
+      let rootServiceNameLabel = summary.rootServiceName.replaceAll("/", "/\u200B").replaceAll("-", "-\u200B").replaceAll(".", ".\u200B");
+      return /* @__PURE__ */ import_react143.default.createElement("div", {
         style
-      }, /* @__PURE__ */ import_react139.default.createElement(Divider, {
+      }, /* @__PURE__ */ import_react143.default.createElement(Divider, {
         height: dividerHeight,
         borderColor: dividerColour
-      }), /* @__PURE__ */ import_react139.default.createElement(LinkBox, {
+      }), /* @__PURE__ */ import_react143.default.createElement(LinkBox, {
         display: "flex",
         flexDirection: "column",
         justifyContent: "center",
         bgColor: backgroundColour,
         height: `${sidebarSummaryHeight}px`,
         paddingX: "20px"
-      }, /* @__PURE__ */ import_react139.default.createElement(Text, {
+      }, /* @__PURE__ */ import_react143.default.createElement(Text, {
         fontSize: "xs",
         noOfLines: 1
-      }, "Root Service Name: ", /* @__PURE__ */ import_react139.default.createElement("strong", null, rootServiceNameLabel)), /* @__PURE__ */ import_react139.default.createElement(Text, {
+      }, "Root Service Name: ", /* @__PURE__ */ import_react143.default.createElement("strong", null, rootServiceNameLabel)), /* @__PURE__ */ import_react143.default.createElement(Text, {
         fontSize: "xs",
         noOfLines: 2
-      }, "Root Name: ", /* @__PURE__ */ import_react139.default.createElement("strong", null, rootNameLabel)), /* @__PURE__ */ import_react139.default.createElement(Text, {
+      }, "Root Name: ", /* @__PURE__ */ import_react143.default.createElement("strong", null, rootNameLabel)), /* @__PURE__ */ import_react143.default.createElement(Text, {
         fontSize: "xs"
-      }, "Root Duration: ", /* @__PURE__ */ import_react139.default.createElement("strong", null, traceSummary.rootDurationString)), /* @__PURE__ */ import_react139.default.createElement(Text, {
+      }, "Root Duration: ", /* @__PURE__ */ import_react143.default.createElement("strong", null, summary.rootDurationString)), /* @__PURE__ */ import_react143.default.createElement(Text, {
         fontSize: "xs"
-      }, "Number of Spans: ", /* @__PURE__ */ import_react139.default.createElement("strong", null, traceSummary.spanCount)), /* @__PURE__ */ import_react139.default.createElement(LinkOverlay, {
+      }, "Number of Spans: ", /* @__PURE__ */ import_react143.default.createElement("strong", null, summary.spanCount)), /* @__PURE__ */ import_react143.default.createElement(LinkOverlay, {
         as: NavLink,
-        to: `traces/${traceSummary.traceID}`
-      }, /* @__PURE__ */ import_react139.default.createElement(Text, {
+        to: `traces/${summary.ID}`
+      }, /* @__PURE__ */ import_react143.default.createElement(Text, {
         fontSize: "xs"
-      }, "Trace ID: ", /* @__PURE__ */ import_react139.default.createElement("strong", null, traceSummary.traceID)))));
+      }, "Trace ID: ", /* @__PURE__ */ import_react143.default.createElement("strong", null, summary.ID)))));
     }
-    return /* @__PURE__ */ import_react139.default.createElement("div", {
+    return /* @__PURE__ */ import_react143.default.createElement("div", {
       style
-    }, /* @__PURE__ */ import_react139.default.createElement(Divider, {
+    }, /* @__PURE__ */ import_react143.default.createElement(Divider, {
       height: dividerHeight,
       borderColor: dividerColour
-    }), /* @__PURE__ */ import_react139.default.createElement(LinkBox, {
+    }), /* @__PURE__ */ import_react143.default.createElement(LinkBox, {
       display: "flex",
       flexDirection: "column",
       justifyContent: "center",
       bgColor: backgroundColour,
       height: `${sidebarSummaryHeight}px`,
       paddingX: "20px"
-    }, /* @__PURE__ */ import_react139.default.createElement(Text, {
-      fontSize: "xs"
-    }, "Incomplete Trace: ", /* @__PURE__ */ import_react139.default.createElement("strong", null, "missing a root span")), /* @__PURE__ */ import_react139.default.createElement(Text, {
-      fontSize: "xs"
-    }, "Number of Spans: ", /* @__PURE__ */ import_react139.default.createElement("strong", null, traceSummary.spanCount)), /* @__PURE__ */ import_react139.default.createElement(LinkOverlay, {
+    }, /* @__PURE__ */ import_react143.default.createElement(LinkOverlay, {
       as: NavLink,
-      to: `traces/${traceSummary.traceID}`
-    }, /* @__PURE__ */ import_react139.default.createElement(Text, {
+      to: `telemetry/${summary.ID}`
+    }, /* @__PURE__ */ import_react143.default.createElement(Text, {
       fontSize: "xs"
-    }, "Trace ID: ", /* @__PURE__ */ import_react139.default.createElement("strong", null, traceSummary.traceID)))));
+    }, "Telemetry ID: ", /* @__PURE__ */ import_react143.default.createElement("strong", null, summary.ID)), /* @__PURE__ */ import_react143.default.createElement(Text, {
+      fontSize: "xs"
+    }, "Telemetry type: ", /* @__PURE__ */ import_react143.default.createElement("strong", null, summary.type)))));
   }
-  function TraceList(props) {
-    let ref = (0, import_react139.useRef)(null);
+  function TelemetryList(props) {
+    let ref = (0, import_react143.useRef)(null);
     let size3 = useSize(ref);
     let location = useLocation();
-    let { traceSummaries } = props;
-    let selectedTraceID = "";
-    if (location.pathname.includes("/traces/")) {
-      selectedTraceID = location.pathname.split("/")[2];
-    } else {
-      selectedTraceID = traceSummaries[0].traceID;
-      window.location.href = `/traces/${selectedTraceID}`;
-    }
+    let { summaries } = props;
+    let [selectedID, setSelectedID] = import_react143.default.useState(summaries[0].ID);
     let itemData = {
-      selectedTraceID,
-      traceSummaries
+      selectedID,
+      summaries
     };
     let itemHeight = sidebarSummaryHeight + dividerHeight;
-    return /* @__PURE__ */ import_react139.default.createElement(Flex, {
+    import_react143.default.useEffect(() => {
+      setSelectedID(location.pathname.split("/")[2]);
+    }, [location]);
+    return /* @__PURE__ */ import_react143.default.createElement(Flex, {
       ref,
       height: "100%"
-    }, /* @__PURE__ */ import_react139.default.createElement(FixedSizeList, {
+    }, /* @__PURE__ */ import_react143.default.createElement(FixedSizeList, {
       height: size3 ? size3.height : 0,
       itemData,
-      itemCount: props.traceSummaries.length,
+      itemCount: props.summaries.length,
       itemSize: itemHeight,
       width: "100%"
     }, SidebarRow));
   }
 
   // app/components/sidebar-view/sidebar-header.tsx
-  var import_react142 = __toESM(require_react());
+  var import_react146 = __toESM(require_react());
 
   // node_modules/@chakra-ui/icons/dist/index.esm.js
-  var import_react141 = __toESM(require_react());
+  var import_react145 = __toESM(require_react());
   var CopyIcon = createIcon({
     d: "M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z",
     displayName: "CopyIcon"
@@ -51225,31 +51241,31 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
   });
   var SunIcon = createIcon({
     displayName: "SunIcon",
-    path: /* @__PURE__ */ import_react141.default.createElement("g", {
+    path: /* @__PURE__ */ import_react145.default.createElement("g", {
       strokeLinejoin: "round",
       strokeLinecap: "round",
       strokeWidth: "2",
       fill: "none",
       stroke: "currentColor"
-    }, /* @__PURE__ */ import_react141.default.createElement("circle", {
+    }, /* @__PURE__ */ import_react145.default.createElement("circle", {
       cx: "12",
       cy: "12",
       r: "5"
-    }), /* @__PURE__ */ import_react141.default.createElement("path", {
+    }), /* @__PURE__ */ import_react145.default.createElement("path", {
       d: "M12 1v2"
-    }), /* @__PURE__ */ import_react141.default.createElement("path", {
+    }), /* @__PURE__ */ import_react145.default.createElement("path", {
       d: "M12 21v2"
-    }), /* @__PURE__ */ import_react141.default.createElement("path", {
+    }), /* @__PURE__ */ import_react145.default.createElement("path", {
       d: "M4.22 4.22l1.42 1.42"
-    }), /* @__PURE__ */ import_react141.default.createElement("path", {
+    }), /* @__PURE__ */ import_react145.default.createElement("path", {
       d: "M18.36 18.36l1.42 1.42"
-    }), /* @__PURE__ */ import_react141.default.createElement("path", {
+    }), /* @__PURE__ */ import_react145.default.createElement("path", {
       d: "M1 12h2"
-    }), /* @__PURE__ */ import_react141.default.createElement("path", {
+    }), /* @__PURE__ */ import_react145.default.createElement("path", {
       d: "M21 12h2"
-    }), /* @__PURE__ */ import_react141.default.createElement("path", {
+    }), /* @__PURE__ */ import_react145.default.createElement("path", {
       d: "M4.22 19.78l1.42-1.42"
-    }), /* @__PURE__ */ import_react141.default.createElement("path", {
+    }), /* @__PURE__ */ import_react145.default.createElement("path", {
       d: "M18.36 5.64l1.42-1.42"
     }))
   });
@@ -51260,7 +51276,7 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
   var SmallAddIcon = createIcon({
     displayName: "SmallAddIcon",
     viewBox: "0 0 20 20",
-    path: /* @__PURE__ */ import_react141.default.createElement("path", {
+    path: /* @__PURE__ */ import_react145.default.createElement("path", {
       fill: "currentColor",
       d: "M14 9h-3V6c0-.55-.45-1-1-1s-1 .45-1 1v3H6c-.55 0-1 .45-1 1s.45 1 1 1h3v3c0 .55.45 1 1 1s1-.45 1-1v-3h3c.55 0 1-.45 1-1s-.45-1-1-1z",
       fillRule: "evenodd"
@@ -51285,11 +51301,11 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
   });
   var ViewIcon = createIcon({
     displayName: "ViewIcon",
-    path: /* @__PURE__ */ import_react141.default.createElement("g", {
+    path: /* @__PURE__ */ import_react145.default.createElement("g", {
       fill: "currentColor"
-    }, /* @__PURE__ */ import_react141.default.createElement("path", {
+    }, /* @__PURE__ */ import_react145.default.createElement("path", {
       d: "M23.432,10.524C20.787,7.614,16.4,4.538,12,4.6,7.6,4.537,3.213,7.615.568,10.524a2.211,2.211,0,0,0,0,2.948C3.182,16.351,7.507,19.4,11.839,19.4h.308c4.347,0,8.671-3.049,11.288-5.929A2.21,2.21,0,0,0,23.432,10.524ZM7.4,12A4.6,4.6,0,1,1,12,16.6,4.6,4.6,0,0,1,7.4,12Z"
-    }), /* @__PURE__ */ import_react141.default.createElement("circle", {
+    }), /* @__PURE__ */ import_react145.default.createElement("circle", {
       cx: "12",
       cy: "12",
       r: "2"
@@ -51297,11 +51313,11 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
   });
   var ViewOffIcon = createIcon({
     displayName: "ViewOffIcon",
-    path: /* @__PURE__ */ import_react141.default.createElement("g", {
+    path: /* @__PURE__ */ import_react145.default.createElement("g", {
       fill: "currentColor"
-    }, /* @__PURE__ */ import_react141.default.createElement("path", {
+    }, /* @__PURE__ */ import_react145.default.createElement("path", {
       d: "M23.2,10.549a20.954,20.954,0,0,0-4.3-3.6l4-3.995a1,1,0,1,0-1.414-1.414l-.018.018a.737.737,0,0,1-.173.291l-19.5,19.5c-.008.007-.018.009-.026.017a1,1,0,0,0,1.631,1.088l4.146-4.146a11.26,11.26,0,0,0,4.31.939h.3c4.256,0,8.489-2.984,11.051-5.8A2.171,2.171,0,0,0,23.2,10.549ZM16.313,13.27a4.581,4.581,0,0,1-3,3.028,4.3,4.3,0,0,1-3.1-.19.253.253,0,0,1-.068-.407l5.56-5.559a.252.252,0,0,1,.407.067A4.3,4.3,0,0,1,16.313,13.27Z"
-    }), /* @__PURE__ */ import_react141.default.createElement("path", {
+    }), /* @__PURE__ */ import_react145.default.createElement("path", {
       d: "M7.615,13.4a.244.244,0,0,0,.061-.24A4.315,4.315,0,0,1,7.5,12,4.5,4.5,0,0,1,12,7.5a4.276,4.276,0,0,1,1.16.173.244.244,0,0,0,.24-.062l1.941-1.942a.254.254,0,0,0-.1-.421A10.413,10.413,0,0,0,12,4.75C7.7,4.692,3.4,7.7.813,10.549a2.15,2.15,0,0,0-.007,2.9,21.209,21.209,0,0,0,3.438,3.03.256.256,0,0,0,.326-.029Z"
     }))
   });
@@ -51312,42 +51328,42 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
   });
   var DeleteIcon = createIcon({
     displayName: "DeleteIcon",
-    path: /* @__PURE__ */ import_react141.default.createElement("g", {
+    path: /* @__PURE__ */ import_react145.default.createElement("g", {
       fill: "currentColor"
-    }, /* @__PURE__ */ import_react141.default.createElement("path", {
+    }, /* @__PURE__ */ import_react145.default.createElement("path", {
       d: "M19.452 7.5H4.547a.5.5 0 00-.5.545l1.287 14.136A2 2 0 007.326 24h9.347a2 2 0 001.992-1.819L19.95 8.045a.5.5 0 00-.129-.382.5.5 0 00-.369-.163zm-9.2 13a.75.75 0 01-1.5 0v-9a.75.75 0 011.5 0zm5 0a.75.75 0 01-1.5 0v-9a.75.75 0 011.5 0zM22 4h-4.75a.25.25 0 01-.25-.25V2.5A2.5 2.5 0 0014.5 0h-5A2.5 2.5 0 007 2.5v1.25a.25.25 0 01-.25.25H2a1 1 0 000 2h20a1 1 0 000-2zM9 3.75V2.5a.5.5 0 01.5-.5h5a.5.5 0 01.5.5v1.25a.25.25 0 01-.25.25h-5.5A.25.25 0 019 3.75z"
     }))
   });
   var RepeatIcon = createIcon({
     displayName: "RepeatIcon",
-    path: /* @__PURE__ */ import_react141.default.createElement("g", {
+    path: /* @__PURE__ */ import_react145.default.createElement("g", {
       fill: "currentColor"
-    }, /* @__PURE__ */ import_react141.default.createElement("path", {
+    }, /* @__PURE__ */ import_react145.default.createElement("path", {
       d: "M10.319,4.936a7.239,7.239,0,0,1,7.1,2.252,1.25,1.25,0,1,0,1.872-1.657A9.737,9.737,0,0,0,9.743,2.5,10.269,10.269,0,0,0,2.378,9.61a.249.249,0,0,1-.271.178l-1.033-.13A.491.491,0,0,0,.6,9.877a.5.5,0,0,0-.019.526l2.476,4.342a.5.5,0,0,0,.373.248.43.43,0,0,0,.062,0,.5.5,0,0,0,.359-.152l3.477-3.593a.5.5,0,0,0-.3-.844L5.15,10.172a.25.25,0,0,1-.2-.333A7.7,7.7,0,0,1,10.319,4.936Z"
-    }), /* @__PURE__ */ import_react141.default.createElement("path", {
+    }), /* @__PURE__ */ import_react145.default.createElement("path", {
       d: "M23.406,14.1a.5.5,0,0,0,.015-.526l-2.5-4.329A.5.5,0,0,0,20.546,9a.489.489,0,0,0-.421.151l-3.456,3.614a.5.5,0,0,0,.3.842l1.848.221a.249.249,0,0,1,.183.117.253.253,0,0,1,.023.216,7.688,7.688,0,0,1-5.369,4.9,7.243,7.243,0,0,1-7.1-2.253,1.25,1.25,0,1,0-1.872,1.656,9.74,9.74,0,0,0,9.549,3.03,10.261,10.261,0,0,0,7.369-7.12.251.251,0,0,1,.27-.179l1.058.127a.422.422,0,0,0,.06,0A.5.5,0,0,0,23.406,14.1Z"
     }))
   });
   var RepeatClockIcon = createIcon({
     displayName: "RepeatClockIcon",
-    path: /* @__PURE__ */ import_react141.default.createElement("g", {
+    path: /* @__PURE__ */ import_react145.default.createElement("g", {
       fill: "currentColor"
-    }, /* @__PURE__ */ import_react141.default.createElement("path", {
+    }, /* @__PURE__ */ import_react145.default.createElement("path", {
       d: "M12.965,6a1,1,0,0,0-1,1v5.5a1,1,0,0,0,1,1h5a1,1,0,0,0,0-2h-3.75a.25.25,0,0,1-.25-.25V7A1,1,0,0,0,12.965,6Z"
-    }), /* @__PURE__ */ import_react141.default.createElement("path", {
+    }), /* @__PURE__ */ import_react145.default.createElement("path", {
       d: "M12.567,1.258A10.822,10.822,0,0,0,2.818,8.4a.25.25,0,0,1-.271.163L.858,8.309a.514.514,0,0,0-.485.213.5.5,0,0,0-.021.53l2.679,4.7a.5.5,0,0,0,.786.107l3.77-3.746a.5.5,0,0,0-.279-.85L5.593,9.007a.25.25,0,0,1-.192-.35,8.259,8.259,0,1,1,7.866,11.59,1.25,1.25,0,0,0,.045,2.5h.047a10.751,10.751,0,1,0-.792-21.487Z"
     }))
   });
   var EditIcon = createIcon({
     displayName: "EditIcon",
-    path: /* @__PURE__ */ import_react141.default.createElement("g", {
+    path: /* @__PURE__ */ import_react145.default.createElement("g", {
       fill: "none",
       stroke: "currentColor",
       strokeLinecap: "round",
       strokeWidth: "2"
-    }, /* @__PURE__ */ import_react141.default.createElement("path", {
+    }, /* @__PURE__ */ import_react145.default.createElement("path", {
       d: "M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"
-    }), /* @__PURE__ */ import_react141.default.createElement("path", {
+    }), /* @__PURE__ */ import_react145.default.createElement("path", {
       d: "M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"
     }))
   });
@@ -51390,46 +51406,46 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
   });
   var ExternalLinkIcon = createIcon({
     displayName: "ExternalLinkIcon",
-    path: /* @__PURE__ */ import_react141.default.createElement("g", {
+    path: /* @__PURE__ */ import_react145.default.createElement("g", {
       fill: "none",
       stroke: "currentColor",
       strokeLinecap: "round",
       strokeWidth: "2"
-    }, /* @__PURE__ */ import_react141.default.createElement("path", {
+    }, /* @__PURE__ */ import_react145.default.createElement("path", {
       d: "M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"
-    }), /* @__PURE__ */ import_react141.default.createElement("path", {
+    }), /* @__PURE__ */ import_react145.default.createElement("path", {
       d: "M15 3h6v6"
-    }), /* @__PURE__ */ import_react141.default.createElement("path", {
+    }), /* @__PURE__ */ import_react145.default.createElement("path", {
       d: "M10 14L21 3"
     }))
   });
   var LinkIcon = createIcon({
     displayName: "LinkIcon",
-    path: /* @__PURE__ */ import_react141.default.createElement("g", {
+    path: /* @__PURE__ */ import_react145.default.createElement("g", {
       fill: "currentColor"
-    }, /* @__PURE__ */ import_react141.default.createElement("path", {
+    }, /* @__PURE__ */ import_react145.default.createElement("path", {
       d: "M10.458,18.374,7.721,21.11a2.853,2.853,0,0,1-3.942,0l-.892-.891a2.787,2.787,0,0,1,0-3.941l5.8-5.8a2.789,2.789,0,0,1,3.942,0l.893.892A1,1,0,0,0,14.94,9.952l-.893-.892a4.791,4.791,0,0,0-6.771,0l-5.8,5.8a4.787,4.787,0,0,0,0,6.77l.892.891a4.785,4.785,0,0,0,6.771,0l2.736-2.735a1,1,0,1,0-1.414-1.415Z"
-    }), /* @__PURE__ */ import_react141.default.createElement("path", {
+    }), /* @__PURE__ */ import_react145.default.createElement("path", {
       d: "M22.526,2.363l-.892-.892a4.8,4.8,0,0,0-6.77,0l-2.905,2.9a1,1,0,0,0,1.414,1.414l2.9-2.9a2.79,2.79,0,0,1,3.941,0l.893.893a2.786,2.786,0,0,1,0,3.942l-5.8,5.8a2.769,2.769,0,0,1-1.971.817h0a2.766,2.766,0,0,1-1.969-.816,1,1,0,1,0-1.415,1.412,4.751,4.751,0,0,0,3.384,1.4h0a4.752,4.752,0,0,0,3.385-1.4l5.8-5.8a4.786,4.786,0,0,0,0-6.771Z"
     }))
   });
   var PlusSquareIcon = createIcon({
     displayName: "PlusSquareIcon",
-    path: /* @__PURE__ */ import_react141.default.createElement("g", {
+    path: /* @__PURE__ */ import_react145.default.createElement("g", {
       fill: "none",
       stroke: "currentColor",
       strokeLinecap: "round",
       strokeWidth: "2"
-    }, /* @__PURE__ */ import_react141.default.createElement("rect", {
+    }, /* @__PURE__ */ import_react145.default.createElement("rect", {
       height: "18",
       width: "18",
       rx: "2",
       ry: "2",
       x: "3",
       y: "3"
-    }), /* @__PURE__ */ import_react141.default.createElement("path", {
+    }), /* @__PURE__ */ import_react145.default.createElement("path", {
       d: "M12 8v8"
-    }), /* @__PURE__ */ import_react141.default.createElement("path", {
+    }), /* @__PURE__ */ import_react145.default.createElement("path", {
       d: "M8 12h8"
     }))
   });
@@ -51445,31 +51461,31 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
   });
   var TimeIcon = createIcon({
     displayName: "TimeIcon",
-    path: /* @__PURE__ */ import_react141.default.createElement("g", {
+    path: /* @__PURE__ */ import_react145.default.createElement("g", {
       fill: "currentColor"
-    }, /* @__PURE__ */ import_react141.default.createElement("path", {
+    }, /* @__PURE__ */ import_react145.default.createElement("path", {
       d: "M12,0A12,12,0,1,0,24,12,12.014,12.014,0,0,0,12,0Zm0,22A10,10,0,1,1,22,12,10.011,10.011,0,0,1,12,22Z"
-    }), /* @__PURE__ */ import_react141.default.createElement("path", {
+    }), /* @__PURE__ */ import_react145.default.createElement("path", {
       d: "M17.134,15.81,12.5,11.561V6.5a1,1,0,0,0-2,0V12a1,1,0,0,0,.324.738l4.959,4.545a1.01,1.01,0,0,0,1.413-.061A1,1,0,0,0,17.134,15.81Z"
     }))
   });
   var ArrowRightIcon = createIcon({
     displayName: "ArrowRightIcon",
-    path: /* @__PURE__ */ import_react141.default.createElement("g", {
+    path: /* @__PURE__ */ import_react145.default.createElement("g", {
       fill: "currentColor"
-    }, /* @__PURE__ */ import_react141.default.createElement("path", {
+    }, /* @__PURE__ */ import_react145.default.createElement("path", {
       d: "M13.584,12a2.643,2.643,0,0,1-.775,1.875L3.268,23.416a1.768,1.768,0,0,1-2.5-2.5l8.739-8.739a.25.25,0,0,0,0-.354L.768,3.084a1.768,1.768,0,0,1,2.5-2.5l9.541,9.541A2.643,2.643,0,0,1,13.584,12Z"
-    }), /* @__PURE__ */ import_react141.default.createElement("path", {
+    }), /* @__PURE__ */ import_react145.default.createElement("path", {
       d: "M23.75,12a2.643,2.643,0,0,1-.775,1.875l-9.541,9.541a1.768,1.768,0,0,1-2.5-2.5l8.739-8.739a.25.25,0,0,0,0-.354L10.934,3.084a1.768,1.768,0,0,1,2.5-2.5l9.541,9.541A2.643,2.643,0,0,1,23.75,12Z"
     }))
   });
   var ArrowLeftIcon = createIcon({
     displayName: "ArrowLeftIcon",
-    path: /* @__PURE__ */ import_react141.default.createElement("g", {
+    path: /* @__PURE__ */ import_react145.default.createElement("g", {
       fill: "currentColor"
-    }, /* @__PURE__ */ import_react141.default.createElement("path", {
+    }, /* @__PURE__ */ import_react145.default.createElement("path", {
       d: "M10.416,12a2.643,2.643,0,0,1,.775-1.875L20.732.584a1.768,1.768,0,0,1,2.5,2.5l-8.739,8.739a.25.25,0,0,0,0,.354l8.739,8.739a1.768,1.768,0,0,1-2.5,2.5l-9.541-9.541A2.643,2.643,0,0,1,10.416,12Z"
-    }), /* @__PURE__ */ import_react141.default.createElement("path", {
+    }), /* @__PURE__ */ import_react145.default.createElement("path", {
       d: "M.25,12a2.643,2.643,0,0,1,.775-1.875L10.566.584a1.768,1.768,0,0,1,2.5,2.5L4.327,11.823a.25.25,0,0,0,0,.354l8.739,8.739a1.768,1.768,0,0,1-2.5,2.5L1.025,13.875A2.643,2.643,0,0,1,.25,12Z"
     }))
   });
@@ -51492,11 +51508,11 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
   });
   var EmailIcon = createIcon({
     displayName: "EmailIcon",
-    path: /* @__PURE__ */ import_react141.default.createElement("g", {
+    path: /* @__PURE__ */ import_react145.default.createElement("g", {
       fill: "currentColor"
-    }, /* @__PURE__ */ import_react141.default.createElement("path", {
+    }, /* @__PURE__ */ import_react145.default.createElement("path", {
       d: "M11.114,14.556a1.252,1.252,0,0,0,1.768,0L22.568,4.87a.5.5,0,0,0-.281-.849A1.966,1.966,0,0,0,22,4H2a1.966,1.966,0,0,0-.289.021.5.5,0,0,0-.281.849Z"
-    }), /* @__PURE__ */ import_react141.default.createElement("path", {
+    }), /* @__PURE__ */ import_react145.default.createElement("path", {
       d: "M23.888,5.832a.182.182,0,0,0-.2.039l-6.2,6.2a.251.251,0,0,0,0,.354l5.043,5.043a.75.75,0,1,1-1.06,1.061l-5.043-5.043a.25.25,0,0,0-.354,0l-2.129,2.129a2.75,2.75,0,0,1-3.888,0L7.926,13.488a.251.251,0,0,0-.354,0L2.529,18.531a.75.75,0,0,1-1.06-1.061l5.043-5.043a.251.251,0,0,0,0-.354l-6.2-6.2a.18.18,0,0,0-.2-.039A.182.182,0,0,0,0,6V18a2,2,0,0,0,2,2H22a2,2,0,0,0,2-2V6A.181.181,0,0,0,23.888,5.832Z"
     }))
   });
@@ -51512,33 +51528,33 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
   });
   var SpinnerIcon = createIcon({
     displayName: "SpinnerIcon",
-    path: /* @__PURE__ */ import_react141.default.createElement(import_react141.default.Fragment, null, /* @__PURE__ */ import_react141.default.createElement("defs", null, /* @__PURE__ */ import_react141.default.createElement("linearGradient", {
+    path: /* @__PURE__ */ import_react145.default.createElement(import_react145.default.Fragment, null, /* @__PURE__ */ import_react145.default.createElement("defs", null, /* @__PURE__ */ import_react145.default.createElement("linearGradient", {
       x1: "28.154%",
       y1: "63.74%",
       x2: "74.629%",
       y2: "17.783%",
       id: "a"
-    }, /* @__PURE__ */ import_react141.default.createElement("stop", {
+    }, /* @__PURE__ */ import_react145.default.createElement("stop", {
       stopColor: "currentColor",
       offset: "0%"
-    }), /* @__PURE__ */ import_react141.default.createElement("stop", {
+    }), /* @__PURE__ */ import_react145.default.createElement("stop", {
       stopColor: "#fff",
       stopOpacity: "0",
       offset: "100%"
-    }))), /* @__PURE__ */ import_react141.default.createElement("g", {
+    }))), /* @__PURE__ */ import_react145.default.createElement("g", {
       transform: "translate(2)",
       fill: "none"
-    }, /* @__PURE__ */ import_react141.default.createElement("circle", {
+    }, /* @__PURE__ */ import_react145.default.createElement("circle", {
       stroke: "url(#a)",
       strokeWidth: "4",
       cx: "10",
       cy: "12",
       r: "10"
-    }), /* @__PURE__ */ import_react141.default.createElement("path", {
+    }), /* @__PURE__ */ import_react145.default.createElement("path", {
       d: "M10 2C4.477 2 0 6.477 0 12",
       stroke: "currentColor",
       strokeWidth: "4"
-    }), /* @__PURE__ */ import_react141.default.createElement("rect", {
+    }), /* @__PURE__ */ import_react145.default.createElement("rect", {
       fill: "currentColor",
       x: "8",
       width: "4",
@@ -51553,7 +51569,7 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
   var SmallCloseIcon = createIcon({
     displayName: "SmallCloseIcon",
     viewBox: "0 0 16 16",
-    path: /* @__PURE__ */ import_react141.default.createElement("path", {
+    path: /* @__PURE__ */ import_react145.default.createElement("path", {
       d: "M9.41 8l2.29-2.29c.19-.18.3-.43.3-.71a1.003 1.003 0 0 0-1.71-.71L8 6.59l-2.29-2.3a1.003 1.003 0 0 0-1.42 1.42L6.59 8 4.3 10.29c-.19.18-.3.43-.3.71a1.003 1.003 0 0 0 1.71.71L8 9.41l2.29 2.29c.18.19.43.3.71.3a1.003 1.003 0 0 0 .71-1.71L9.41 8z",
       fillRule: "evenodd",
       fill: "currentColor"
@@ -51573,24 +51589,24 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
   });
   var InfoOutlineIcon = createIcon({
     displayName: "InfoOutlineIcon",
-    path: /* @__PURE__ */ import_react141.default.createElement("g", {
+    path: /* @__PURE__ */ import_react145.default.createElement("g", {
       fill: "currentColor",
       stroke: "currentColor",
       strokeLinecap: "square",
       strokeWidth: "2"
-    }, /* @__PURE__ */ import_react141.default.createElement("circle", {
+    }, /* @__PURE__ */ import_react145.default.createElement("circle", {
       cx: "12",
       cy: "12",
       fill: "none",
       r: "11",
       stroke: "currentColor"
-    }), /* @__PURE__ */ import_react141.default.createElement("line", {
+    }), /* @__PURE__ */ import_react145.default.createElement("line", {
       fill: "none",
       x1: "11.959",
       x2: "11.959",
       y1: "11",
       y2: "17"
-    }), /* @__PURE__ */ import_react141.default.createElement("circle", {
+    }), /* @__PURE__ */ import_react145.default.createElement("circle", {
       cx: "11.959",
       cy: "7",
       r: "1",
@@ -51610,18 +51626,18 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
   });
   var QuestionOutlineIcon = createIcon({
     displayName: "QuestionOutlineIcon",
-    path: /* @__PURE__ */ import_react141.default.createElement("g", {
+    path: /* @__PURE__ */ import_react145.default.createElement("g", {
       stroke: "currentColor",
       strokeWidth: "1.5"
-    }, /* @__PURE__ */ import_react141.default.createElement("path", {
+    }, /* @__PURE__ */ import_react145.default.createElement("path", {
       strokeLinecap: "round",
       fill: "none",
       d: "M9,9a3,3,0,1,1,4,2.829,1.5,1.5,0,0,0-1,1.415V14.25"
-    }), /* @__PURE__ */ import_react141.default.createElement("path", {
+    }), /* @__PURE__ */ import_react145.default.createElement("path", {
       fill: "none",
       strokeLinecap: "round",
       d: "M12,17.25a.375.375,0,1,0,.375.375A.375.375,0,0,0,12,17.25h0"
-    }), /* @__PURE__ */ import_react141.default.createElement("circle", {
+    }), /* @__PURE__ */ import_react145.default.createElement("circle", {
       fill: "none",
       strokeMiterlimit: "10",
       cx: "12",
@@ -51639,17 +51655,17 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
   });
   var CheckIcon2 = createIcon({
     viewBox: "0 0 14 14",
-    path: /* @__PURE__ */ import_react141.default.createElement("g", {
+    path: /* @__PURE__ */ import_react145.default.createElement("g", {
       fill: "currentColor"
-    }, /* @__PURE__ */ import_react141.default.createElement("polygon", {
+    }, /* @__PURE__ */ import_react145.default.createElement("polygon", {
       points: "5.5 11.9993304 14 3.49933039 12.5 2 5.5 8.99933039 1.5 4.9968652 0 6.49933039"
     }))
   });
   var MinusIcon = createIcon({
     displayName: "MinusIcon",
-    path: /* @__PURE__ */ import_react141.default.createElement("g", {
+    path: /* @__PURE__ */ import_react145.default.createElement("g", {
       fill: "currentColor"
-    }, /* @__PURE__ */ import_react141.default.createElement("rect", {
+    }, /* @__PURE__ */ import_react145.default.createElement("rect", {
       height: "4",
       width: "20",
       x: "2",
@@ -51673,31 +51689,31 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
   }
   function SidebarHeader(props) {
     let { toggleColorMode } = useColorMode();
-    let colourModeIcon = useColorModeValue(/* @__PURE__ */ import_react142.default.createElement(MoonIcon, null), /* @__PURE__ */ import_react142.default.createElement(SunIcon, null));
+    let colourModeIcon = useColorModeValue(/* @__PURE__ */ import_react146.default.createElement(MoonIcon, null), /* @__PURE__ */ import_react146.default.createElement(SunIcon, null));
     let { isFullWidth, isFullWidthDisabled, toggleSidebarWidth, numNewTraces } = props;
     if (isFullWidth) {
-      return /* @__PURE__ */ import_react142.default.createElement(Flex, {
+      return /* @__PURE__ */ import_react146.default.createElement(Flex, {
         direction: "column",
         height: "fit-content",
         justifyContent: "space-evenly"
-      }, /* @__PURE__ */ import_react142.default.createElement(Flex, {
+      }, /* @__PURE__ */ import_react146.default.createElement(Flex, {
         justifyContent: "flex-start",
         alignItems: "center",
         height: "50px"
-      }, /* @__PURE__ */ import_react142.default.createElement(Button, {
+      }, /* @__PURE__ */ import_react146.default.createElement(Button, {
         size: "md",
         "aria-label": "Clear Trace Data",
         variant: "ghost",
         colorScheme: "pink",
         fontWeight: "normal",
-        leftIcon: /* @__PURE__ */ import_react142.default.createElement(DeleteIcon, null),
+        leftIcon: /* @__PURE__ */ import_react146.default.createElement(DeleteIcon, null),
         marginStart: "10px",
         onClick: clearTraceData
-      }, /* @__PURE__ */ import_react142.default.createElement(Text, {
+      }, /* @__PURE__ */ import_react146.default.createElement(Text, {
         fontSize: "sm",
         fontWeight: "bold",
         color: "ButtonText"
-      }, "Clear Traces")), /* @__PURE__ */ import_react142.default.createElement(Spacer, null), /* @__PURE__ */ import_react142.default.createElement(IconButton, {
+      }, "Clear Traces")), /* @__PURE__ */ import_react146.default.createElement(Spacer, null), /* @__PURE__ */ import_react146.default.createElement(IconButton, {
         size: "md",
         "aria-label": "Toggle Colour Mode",
         variant: "ghost",
@@ -51705,48 +51721,48 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
         icon: colourModeIcon,
         marginEnd: "2px",
         onClick: toggleColorMode
-      }), /* @__PURE__ */ import_react142.default.createElement(IconButton, {
+      }), /* @__PURE__ */ import_react146.default.createElement(IconButton, {
         size: "md",
         "aria-label": "Collapse Sidebar",
         variant: "ghost",
         colorScheme: "pink",
-        icon: /* @__PURE__ */ import_react142.default.createElement(ArrowLeftIcon, null),
+        icon: /* @__PURE__ */ import_react146.default.createElement(ArrowLeftIcon, null),
         marginEnd: "10px",
         onClick: toggleSidebarWidth
-      })), /* @__PURE__ */ import_react142.default.createElement(Flex, {
+      })), /* @__PURE__ */ import_react146.default.createElement(Flex, {
         justifyContent: "flex-start",
         alignItems: "center",
         transition: "height 0.2s ease-in-out",
         height: numNewTraces > 0 ? "50px" : 0,
         overflow: "hidden"
-      }, /* @__PURE__ */ import_react142.default.createElement(Button, {
+      }, /* @__PURE__ */ import_react146.default.createElement(Button, {
         size: "md",
         "aria-label": "Refresh",
         variant: "ghost",
         colorScheme: "pink",
         fontWeight: "normal",
-        leftIcon: /* @__PURE__ */ import_react142.default.createElement(RepeatIcon, null),
+        leftIcon: /* @__PURE__ */ import_react146.default.createElement(RepeatIcon, null),
         marginX: "10px",
         justifyContent: "flex-start",
         onClick: () => {
           window.location.reload();
         }
-      }, /* @__PURE__ */ import_react142.default.createElement(Text, {
+      }, /* @__PURE__ */ import_react146.default.createElement(Text, {
         fontSize: "sm",
         fontWeight: "bold",
         color: "ButtonText"
       }, numNewTraces, " New Trace", numNewTraces === 1 ? " " : "s"))));
     }
-    return /* @__PURE__ */ import_react142.default.createElement(import_react142.default.Fragment, null, /* @__PURE__ */ import_react142.default.createElement(IconButton, {
+    return /* @__PURE__ */ import_react146.default.createElement(import_react146.default.Fragment, null, /* @__PURE__ */ import_react146.default.createElement(IconButton, {
       size: "md",
       "aria-label": "Expand Sidebar",
       colorScheme: "pink",
       variant: "ghost",
-      icon: /* @__PURE__ */ import_react142.default.createElement(ArrowRightIcon, null),
+      icon: /* @__PURE__ */ import_react146.default.createElement(ArrowRightIcon, null),
       marginTop: "10px",
       onClick: toggleSidebarWidth,
       isDisabled: isFullWidthDisabled
-    }), /* @__PURE__ */ import_react142.default.createElement(IconButton, {
+    }), /* @__PURE__ */ import_react146.default.createElement(IconButton, {
       size: "md",
       "aria-label": "Toggle Colour Mode",
       colorScheme: "pink",
@@ -51762,32 +51778,32 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
   var sidebarCollapsedWidth = 70;
   function Sidebar(props) {
     let sidebarColour = useColorModeValue("gray.50", "gray.700");
-    let { isFullWidth, toggleSidebarWidth, traceSummaries, numNewTraces } = props;
-    let isFullWidthDisabled = traceSummaries.length === 0;
+    let { isFullWidth, toggleSidebarWidth, summaries, numNewTelemetry } = props;
+    let isFullWidthDisabled = summaries.length === 0;
     if (isFullWidth) {
-      return /* @__PURE__ */ import_react144.default.createElement(Flex, {
+      return /* @__PURE__ */ import_react148.default.createElement(Flex, {
         backgroundColor: sidebarColour,
         flexShrink: "0",
         direction: "column",
         transition: "width 0.2s ease-in-out",
         width: sidebarFullWidth
-      }, /* @__PURE__ */ import_react144.default.createElement(SidebarHeader, {
+      }, /* @__PURE__ */ import_react148.default.createElement(SidebarHeader, {
         isFullWidth,
         toggleSidebarWidth,
         isFullWidthDisabled: false,
-        numNewTraces
-      }), /* @__PURE__ */ import_react144.default.createElement(TraceList, {
-        traceSummaries
+        numNewTraces: numNewTelemetry
+      }), summaries.length > 0 && /* @__PURE__ */ import_react148.default.createElement(TelemetryList, {
+        summaries: props.summaries
       }));
     }
-    return /* @__PURE__ */ import_react144.default.createElement(Flex, {
+    return /* @__PURE__ */ import_react148.default.createElement(Flex, {
       alignItems: "center",
       backgroundColor: sidebarColour,
       flexShrink: "0",
       direction: "column",
       transition: "width 0.2s ease-in-out",
       width: sidebarCollapsedWidth
-    }, /* @__PURE__ */ import_react144.default.createElement(SidebarHeader, {
+    }, /* @__PURE__ */ import_react148.default.createElement(SidebarHeader, {
       isFullWidth,
       isFullWidthDisabled,
       toggleSidebarWidth,
@@ -51796,7 +51812,7 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
   }
 
   // app/components/empty-state-view/empty-state-view.tsx
-  var import_react146 = __toESM(require_react());
+  var import_react150 = __toESM(require_react());
   async function loadSampleData() {
     let response = await fetch("/api/sampleData");
     if (!response.ok) {
@@ -51808,7 +51824,7 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
   function SampleDataButton() {
     let [isLoading, setIsLoading] = useBoolean(false);
     if (isLoading) {
-      return /* @__PURE__ */ import_react146.default.createElement(Button, {
+      return /* @__PURE__ */ import_react150.default.createElement(Button, {
         isLoading: true,
         colorScheme: "pink",
         loadingText: "Loading",
@@ -51816,7 +51832,7 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
         width: "fit-content"
       });
     }
-    return /* @__PURE__ */ import_react146.default.createElement(Button, {
+    return /* @__PURE__ */ import_react150.default.createElement(Button, {
       colorScheme: "pink",
       width: "fit-content",
       onClick: () => {
@@ -51825,33 +51841,19 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
       }
     }, "Load Sample Data");
   }
-  async function pollTraceCount() {
-    let response = await fetch("/api/traces");
-    if (!response.ok) {
-      throw new Error("HTTP status " + response.status);
-    } else {
-      let { traceSummaries } = await response.json();
-      if (traceSummaries.length > 0) {
-        setTimeout(() => {
-          window.location.reload();
-        }, 500);
-      }
-    }
-  }
   function EmptyStateView() {
     let cardBackgroundColour = useColorModeValue("gray.200", "gray.700");
     let codeBackgroundColour = useColorModeValue(
       "whiteAlpha.700",
       "blackAlpha.500"
     );
-    useInterval(pollTraceCount, 500);
-    return /* @__PURE__ */ import_react146.default.createElement(Flex, {
+    return /* @__PURE__ */ import_react150.default.createElement(Flex, {
       flexDirection: "column",
       align: "center",
       justifyItems: "center",
       width: "100%",
       overflowY: "scroll"
-    }, /* @__PURE__ */ import_react146.default.createElement(Card, {
+    }, /* @__PURE__ */ import_react150.default.createElement(Card, {
       align: "center",
       backgroundColor: cardBackgroundColour,
       marginY: "64px",
@@ -51859,81 +51861,81 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
       padding: "30px",
       variant: "filled",
       width: "60%"
-    }, /* @__PURE__ */ import_react146.default.createElement(CardHeader, {
+    }, /* @__PURE__ */ import_react150.default.createElement(CardHeader, {
       borderRadius: "lg",
       paddingY: "0"
-    }, /* @__PURE__ */ import_react146.default.createElement(Flex, {
+    }, /* @__PURE__ */ import_react150.default.createElement(Flex, {
       width: "100%"
-    }, /* @__PURE__ */ import_react146.default.createElement(Image2, {
+    }, /* @__PURE__ */ import_react150.default.createElement(Image2, {
       src: "assets/images/lulu.png",
       alt: "A pink axolotl is striking a heroic pose while gazing at a field of stars through a telescope. Her name is Lulu Axol'Otel the First, valiant adventurer and observability queen.",
       maxHeight: "400px",
       maxWidth: "400px",
       borderRadius: "lg"
-    }), /* @__PURE__ */ import_react146.default.createElement(Flex, {
+    }), /* @__PURE__ */ import_react150.default.createElement(Flex, {
       marginLeft: "24px",
       justifyContent: "flex-end",
       direction: "column"
-    }, /* @__PURE__ */ import_react146.default.createElement(Stack, {
+    }, /* @__PURE__ */ import_react150.default.createElement(Stack, {
       spacing: 3
-    }, /* @__PURE__ */ import_react146.default.createElement(Heading, {
+    }, /* @__PURE__ */ import_react150.default.createElement(Heading, {
       size: "lg"
-    }, "Welcome to the OpenTelemetry Desktop Viewer."), /* @__PURE__ */ import_react146.default.createElement(Divider, null), /* @__PURE__ */ import_react146.default.createElement(Text, null, "This CLI tool allows you to receive OpenTelemetry traces while working on your local machine, helping you visualize and explore your trace data without needing to send it on to a telemetry vendor.")), /* @__PURE__ */ import_react146.default.createElement(Stack, {
+    }, "Welcome to the OpenTelemetry Desktop Viewer."), /* @__PURE__ */ import_react150.default.createElement(Divider, null), /* @__PURE__ */ import_react150.default.createElement(Text, null, "This CLI tool allows you to receive OpenTelemetry traces while working on your local machine, helping you visualize and explore your trace data without needing to send it on to a telemetry vendor.")), /* @__PURE__ */ import_react150.default.createElement(Stack, {
       spacing: 3,
       marginTop: "24px"
-    }, /* @__PURE__ */ import_react146.default.createElement(Heading, {
+    }, /* @__PURE__ */ import_react150.default.createElement(Heading, {
       size: "md"
-    }, "Explore with Sample Data"), /* @__PURE__ */ import_react146.default.createElement(Divider, null), /* @__PURE__ */ import_react146.default.createElement(Text, null, "If you would like to explore the application without sending it anything, you can do so by loading some sample data."), /* @__PURE__ */ import_react146.default.createElement(SampleDataButton, null))))), /* @__PURE__ */ import_react146.default.createElement(CardBody, null, /* @__PURE__ */ import_react146.default.createElement(Stack, {
+    }, "Explore with Sample Data"), /* @__PURE__ */ import_react150.default.createElement(Divider, null), /* @__PURE__ */ import_react150.default.createElement(Text, null, "If you would like to explore the application without sending it anything, you can do so by loading some sample data."), /* @__PURE__ */ import_react150.default.createElement(SampleDataButton, null))))), /* @__PURE__ */ import_react150.default.createElement(CardBody, null, /* @__PURE__ */ import_react150.default.createElement(Stack, {
       spacing: 3
-    }, /* @__PURE__ */ import_react146.default.createElement(Heading, {
+    }, /* @__PURE__ */ import_react150.default.createElement(Heading, {
       size: "md"
-    }, "Configuring your OpenTelemetry SDK"), /* @__PURE__ */ import_react146.default.createElement(Divider, null), /* @__PURE__ */ import_react146.default.createElement(Text, null, "To send telemetry to OpenTelemetry Desktop Viewer from your application, you need to configure an OTLP exporter to send via grpc to", " ", /* @__PURE__ */ import_react146.default.createElement(Code, {
+    }, "Configuring your OpenTelemetry SDK"), /* @__PURE__ */ import_react150.default.createElement(Divider, null), /* @__PURE__ */ import_react150.default.createElement(Text, null, "To send telemetry to OpenTelemetry Desktop Viewer from your application, you need to configure an OTLP exporter to send via grpc to", " ", /* @__PURE__ */ import_react150.default.createElement(Code, {
       backgroundColor: codeBackgroundColour
-    }, "http://localhost:4317"), " ", "or via http to", " ", /* @__PURE__ */ import_react146.default.createElement(Code, {
+    }, "http://localhost:4317"), " ", "or via http to", " ", /* @__PURE__ */ import_react150.default.createElement(Code, {
       backgroundColor: codeBackgroundColour
-    }, "http://localhost:4318"), "."), /* @__PURE__ */ import_react146.default.createElement(Text, null, "If your OpenTelemetry SDK OTLP exporter supports", " ", /* @__PURE__ */ import_react146.default.createElement(Link, {
+    }, "http://localhost:4318"), "."), /* @__PURE__ */ import_react150.default.createElement(Text, null, "If your OpenTelemetry SDK OTLP exporter supports", " ", /* @__PURE__ */ import_react150.default.createElement(Link, {
       color: "teal.500",
       href: "https://opentelemetry.io/docs/concepts/sdk-configuration/otlp-exporter-configuration/",
       isExternal: true
-    }, "configuration via environment variables", " "), " ", "then you should be able to send to", " ", /* @__PURE__ */ import_react146.default.createElement(Code, {
+    }, "configuration via environment variables", " "), " ", "then you should be able to send to", " ", /* @__PURE__ */ import_react150.default.createElement(Code, {
       backgroundColor: codeBackgroundColour
-    }, "otel-desktop-viewer"), " ", "with the following environment variables set."), /* @__PURE__ */ import_react146.default.createElement(Heading, {
+    }, "otel-desktop-viewer"), " ", "with the following environment variables set."), /* @__PURE__ */ import_react150.default.createElement(Heading, {
       size: "sm"
-    }, "For HTTP:"), /* @__PURE__ */ import_react146.default.createElement(Flex, {
+    }, "For HTTP:"), /* @__PURE__ */ import_react150.default.createElement(Flex, {
       backgroundColor: codeBackgroundColour,
       padding: 2
-    }, /* @__PURE__ */ import_react146.default.createElement(Code, {
+    }, /* @__PURE__ */ import_react150.default.createElement(Code, {
       backgroundColor: "transparent",
       display: "block",
       whiteSpace: "pre",
       children: `export OTEL_EXPORTER_OTLP_ENDPOINT="http://localhost:4318"
 export OTEL_TRACES_EXPORTER="otlp"
 export OTEL_EXPORTER_OTLP_PROTOCOL="http/protobuf"`
-    })), /* @__PURE__ */ import_react146.default.createElement(Heading, {
+    })), /* @__PURE__ */ import_react150.default.createElement(Heading, {
       size: "sm"
-    }, "For GRPC:"), /* @__PURE__ */ import_react146.default.createElement(Flex, {
+    }, "For GRPC:"), /* @__PURE__ */ import_react150.default.createElement(Flex, {
       backgroundColor: codeBackgroundColour,
       padding: 2
-    }, /* @__PURE__ */ import_react146.default.createElement(Code, {
+    }, /* @__PURE__ */ import_react150.default.createElement(Code, {
       backgroundColor: "transparent",
       display: "block",
       whiteSpace: "pre",
       children: `export OTEL_EXPORTER_OTLP_ENDPOINT="http://localhost:4317"
 export OTEL_TRACES_EXPORTER="otlp"
 export OTEL_EXPORTER_OTLP_PROTOCOL="grpc"`
-    }))), /* @__PURE__ */ import_react146.default.createElement(Stack, {
+    }))), /* @__PURE__ */ import_react150.default.createElement(Stack, {
       spacing: 3,
       marginTop: "30px"
-    }, /* @__PURE__ */ import_react146.default.createElement(Heading, {
+    }, /* @__PURE__ */ import_react150.default.createElement(Heading, {
       size: "md"
-    }, "Example with otel-cli"), /* @__PURE__ */ import_react146.default.createElement(Divider, null), /* @__PURE__ */ import_react146.default.createElement(Text, null, "If you have", " ", /* @__PURE__ */ import_react146.default.createElement(Link, {
+    }, "Example with otel-cli"), /* @__PURE__ */ import_react150.default.createElement(Divider, null), /* @__PURE__ */ import_react150.default.createElement(Text, null, "If you have", " ", /* @__PURE__ */ import_react150.default.createElement(Link, {
       color: "teal.400",
       href: "https://github.com/equinix-labs/otel-cli",
       isExternal: true
-    }, "otel-cli"), " ", "installed, you can send some example data with the following script."), /* @__PURE__ */ import_react146.default.createElement(Flex, {
+    }, "otel-cli"), " ", "installed, you can send some example data with the following script."), /* @__PURE__ */ import_react150.default.createElement(Flex, {
       backgroundColor: codeBackgroundColour,
       padding: 2
-    }, /* @__PURE__ */ import_react146.default.createElement(Code, {
+    }, /* @__PURE__ */ import_react150.default.createElement(Code, {
       backgroundColor: "transparent",
       display: "block",
       whiteSpace: "pre",
@@ -51946,18 +51948,18 @@ export OTEL_EXPORTER_OTLP_ENDPOINT=http://localhost:4318
 # use otel-cli to generate spans!
 otel-cli exec --service my-service --name "curl google" curl https://google.com
 `
-    })))), /* @__PURE__ */ import_react146.default.createElement(CardFooter, {
+    })))), /* @__PURE__ */ import_react150.default.createElement(CardFooter, {
       alignItems: "center"
-    }, /* @__PURE__ */ import_react146.default.createElement(Text, null, "Made with", " ", /* @__PURE__ */ import_react146.default.createElement(Image2, {
+    }, /* @__PURE__ */ import_react150.default.createElement(Text, null, "Made with", " ", /* @__PURE__ */ import_react150.default.createElement(Image2, {
       src: "assets/images/axolotl.svg",
       alt: "axolotl emoji",
       display: "inline",
       width: "30px"
-    }), " ", "by", " ", /* @__PURE__ */ import_react146.default.createElement(Link, {
+    }), " ", "by", " ", /* @__PURE__ */ import_react150.default.createElement(Link, {
       color: "teal.500",
       href: "https://github.com/CtrlSpice",
       isExternal: true
-    }, "Mila Ardath"), ", with Artwork by", " ", /* @__PURE__ */ import_react146.default.createElement(Link, {
+    }, "Mila Ardath"), ", with Artwork by", " ", /* @__PURE__ */ import_react150.default.createElement(Link, {
       color: "teal.500",
       href: "https://cbatesonart.artstation.com/",
       isExternal: true
@@ -52018,127 +52020,75 @@ otel-cli exec --service my-service --name "curl google" curl https://google.com
 
   // app/routes/main-view.tsx
   async function mainLoader() {
-    const response = await fetch("/api/traces");
-    const traceSummaries = await response.json();
-    return traceSummaries;
+    const response = await fetch("/api/telemetry");
+    const telemetrySummaries = await response.json();
+    await console.log("main loader telemetry summaries", telemetrySummaries);
+    return telemetrySummaries;
   }
   function MainView() {
-    let { traceSummaries } = useLoaderData();
-    let [isFullWidth, setFullWidth] = useBoolean(traceSummaries.length > 0);
-    let [sidebarData, setSidebarData] = (0, import_react148.useState)(initSidebarData(traceSummaries));
-    (0, import_react148.useEffect)(() => {
-      async function checkForNewData() {
-        let response = await fetch("/api/traces");
-        if (response.ok) {
-          let { traceSummaries: traceSummaries2 } = await response.json();
-          let newSidebarData = updateSidebarData(sidebarData, traceSummaries2);
-          setSidebarData(newSidebarData);
-        }
-      }
-      let interval = setInterval(checkForNewData, 1e3);
-      return () => clearInterval(interval);
-    }, []);
-    if (!traceSummaries.length) {
-      return /* @__PURE__ */ import_react148.default.createElement(Flex, {
+    let { summaries } = useLoaderData();
+    let [isFullWidth, setFullWidth] = useBoolean(true);
+    let [sidebarData, setSidebarData] = (0, import_react152.useState)(initSidebarData(summaries));
+    if (!summaries.length) {
+      return /* @__PURE__ */ import_react152.default.createElement(Flex, {
         height: "100vh"
-      }, /* @__PURE__ */ import_react148.default.createElement(Sidebar, {
+      }, /* @__PURE__ */ import_react152.default.createElement(Sidebar, {
         isFullWidth,
         toggleSidebarWidth: setFullWidth.toggle,
-        traceSummaries: [],
-        numNewTraces: 0
-      }), /* @__PURE__ */ import_react148.default.createElement(EmptyStateView, null));
+        summaries: [],
+        numNewTelemetry: 0
+      }), /* @__PURE__ */ import_react152.default.createElement(EmptyStateView, null));
     }
-    return /* @__PURE__ */ import_react148.default.createElement(Flex, {
+    return /* @__PURE__ */ import_react152.default.createElement(Flex, {
       height: "100vh"
-    }, /* @__PURE__ */ import_react148.default.createElement(Sidebar, {
+    }, /* @__PURE__ */ import_react152.default.createElement(Sidebar, {
       isFullWidth,
       toggleSidebarWidth: setFullWidth.toggle,
-      traceSummaries: sidebarData.summaries,
-      numNewTraces: sidebarData.numNewTraces
-    }), /* @__PURE__ */ import_react148.default.createElement(Outlet, null));
+      summaries: sidebarData.summaries,
+      numNewTelemetry: sidebarData.numNewTelemetry
+    }), /* @__PURE__ */ import_react152.default.createElement(Outlet, null));
   }
-  function initSidebarData(traceSummaries) {
+  function initSidebarData(telemetrySummaries) {
     return {
-      summaries: traceSummaries.map(
-        (traceSummary) => generateTraceSummaryWithUIData(traceSummary)
+      summaries: telemetrySummaries.map(
+        (summary) => generateSummaryWithUIData(summary)
       ),
-      numNewTraces: 0
+      numNewTelemetry: 0
     };
   }
-  function updateSidebarData(sidebarData, traceSummaries) {
-    let mergedData = {
-      numNewTraces: 0,
-      summaries: [...sidebarData.summaries]
-    };
-    for (let summary of traceSummaries) {
-      let traceID = summary.traceID;
-      let sidebarSummaryIndex = mergedData.summaries.findIndex(
-        (s) => s.traceID === traceID
-      );
-      if (sidebarSummaryIndex === -1) {
-        mergedData.numNewTraces++;
-      } else if (summary.spanCount > mergedData.summaries[sidebarSummaryIndex].spanCount) {
-        mergedData.summaries[sidebarSummaryIndex] = generateTraceSummaryWithUIData(summary);
-      }
-    }
-    for (let [i, summary] of mergedData.summaries.entries()) {
-      let traceID = summary.traceID;
-      let counterpartIndex = traceSummaries.findIndex(
-        (s) => s.traceID === traceID
-      );
-      if (counterpartIndex === -1) {
-        mergedData.summaries.splice(i, 1);
-      }
-    }
-    return mergedData;
-  }
-  function generateTraceSummaryWithUIData(traceSummary) {
-    if (traceSummary.hasRootSpan) {
-      let duration = getDurationNs(
-        traceSummary.rootStartTime,
-        traceSummary.rootEndTime
-      );
+  function generateSummaryWithUIData(summary) {
+    if (summary.hasRootSpan) {
+      let duration = getDurationNs(summary.rootStartTime, summary.rootEndTime);
       let durationString = getDurationString(duration);
       return {
         hasRootSpan: true,
-        rootServiceName: traceSummary.rootServiceName,
-        rootName: traceSummary.rootName,
+        rootServiceName: summary.rootServiceName,
+        rootName: summary.rootName,
         rootDurationString: durationString,
-        spanCount: traceSummary.spanCount,
-        traceID: traceSummary.traceID
+        spanCount: summary.spanCount,
+        ID: summary.ID,
+        type: summary.type
       };
     }
     return {
       hasRootSpan: false,
-      spanCount: traceSummary.spanCount,
-      traceID: traceSummary.traceID
+      spanCount: summary.spanCount,
+      ID: summary.ID,
+      type: summary.type
     };
   }
 
   // app/routes/trace-view.tsx
-  var import_react174 = __toESM(require_react());
-
-  // app/components/header-view/header.tsx
-  var import_react150 = __toESM(require_react());
-  function Header(props) {
-    return /* @__PURE__ */ import_react150.default.createElement(Flex, {
-      align: "center",
-      height: "100px",
-      paddingX: "24px"
-    }, /* @__PURE__ */ import_react150.default.createElement(Text, {
-      fontSize: "lg",
-      noOfLines: 1
-    }, "Trace ID: ", /* @__PURE__ */ import_react150.default.createElement("strong", null, props.traceID)));
-  }
+  var import_react176 = __toESM(require_react());
 
   // app/components/detail-view/detail-view.tsx
-  var import_react164 = __toESM(require_react());
+  var import_react166 = __toESM(require_react());
 
   // app/components/detail-view/fields-panel.tsx
-  var import_react154 = __toESM(require_react());
+  var import_react156 = __toESM(require_react());
 
   // app/components/detail-view/span-field.tsx
-  var import_react152 = __toESM(require_react());
+  var import_react154 = __toESM(require_react());
   function SpanField(props) {
     let { fieldName, fieldValue, hidden } = props;
     let fieldNameColour = useColorModeValue("gray.600", "gray.400");
@@ -52163,20 +52113,20 @@ otel-cli exec --service my-service --name "curl google" curl https://google.com
         fieldValue = '""';
         break;
     }
-    return /* @__PURE__ */ import_react152.default.createElement(Box, {
+    return /* @__PURE__ */ import_react154.default.createElement(Box, {
       paddingTop: 2
-    }, /* @__PURE__ */ import_react152.default.createElement("dt", null, /* @__PURE__ */ import_react152.default.createElement(Flex, {
+    }, /* @__PURE__ */ import_react154.default.createElement("dt", null, /* @__PURE__ */ import_react154.default.createElement(Flex, {
       experimental_spaceX: 2
-    }, /* @__PURE__ */ import_react152.default.createElement(Tag, {
+    }, /* @__PURE__ */ import_react154.default.createElement(Tag, {
       size: "sm",
       variant: "outline",
       colorScheme: "cyan"
-    }, /* @__PURE__ */ import_react152.default.createElement(TagLabel, {
+    }, /* @__PURE__ */ import_react154.default.createElement(TagLabel, {
       fontSize: "xs"
-    }, typeOfFieldValue)), /* @__PURE__ */ import_react152.default.createElement(Text, {
+    }, typeOfFieldValue)), /* @__PURE__ */ import_react154.default.createElement(Text, {
       textColor: fieldNameColour,
       fontSize: "sm"
-    }, fieldName))), /* @__PURE__ */ import_react152.default.createElement("dd", null, /* @__PURE__ */ import_react152.default.createElement(Text, {
+    }, fieldName))), /* @__PURE__ */ import_react154.default.createElement("dd", null, /* @__PURE__ */ import_react154.default.createElement(Text, {
       fontSize: "md",
       paddingY: 2
     }, fieldValue)));
@@ -52186,10 +52136,10 @@ otel-cli exec --service my-service --name "curl google" curl https://google.com
   function FieldsPanel(props) {
     let { span } = props;
     if (!span) {
-      return /* @__PURE__ */ import_react154.default.createElement(TabPanel, null, /* @__PURE__ */ import_react154.default.createElement("p", null, "Nothing here yet."));
+      return /* @__PURE__ */ import_react156.default.createElement(TabPanel, null, /* @__PURE__ */ import_react156.default.createElement("p", null, "Nothing here yet."));
     }
     let isRoot = span.parentSpanID.length ? false : true;
-    let rootTag = isRoot ? /* @__PURE__ */ import_react154.default.createElement(Tag, {
+    let rootTag = isRoot ? /* @__PURE__ */ import_react156.default.createElement(Tag, {
       marginStart: 2,
       colorScheme: "cyan",
       variant: "subtle"
@@ -52197,104 +52147,104 @@ otel-cli exec --service my-service --name "curl google" curl https://google.com
     let durationString = getDurationString(
       getDurationNs(span.startTime, span.endTime)
     );
-    let spanAttributes = Object.entries(span.attributes).map(([key, value]) => /* @__PURE__ */ import_react154.default.createElement("li", {
+    let spanAttributes = Object.entries(span.attributes).map(([key, value]) => /* @__PURE__ */ import_react156.default.createElement("li", {
       key
-    }, /* @__PURE__ */ import_react154.default.createElement(SpanField, {
+    }, /* @__PURE__ */ import_react156.default.createElement(SpanField, {
       fieldName: key,
       fieldValue: value
     })));
     let resourceAttributes = Object.entries(span.resource.attributes).map(
-      ([key, value]) => /* @__PURE__ */ import_react154.default.createElement("li", {
+      ([key, value]) => /* @__PURE__ */ import_react156.default.createElement("li", {
         key
-      }, /* @__PURE__ */ import_react154.default.createElement(SpanField, {
+      }, /* @__PURE__ */ import_react156.default.createElement(SpanField, {
         fieldName: key,
         fieldValue: value
       }))
     );
     let scopeAttributes = Object.entries(span.scope.attributes).map(
-      ([key, value]) => /* @__PURE__ */ import_react154.default.createElement("li", {
+      ([key, value]) => /* @__PURE__ */ import_react156.default.createElement("li", {
         key
-      }, /* @__PURE__ */ import_react154.default.createElement(SpanField, {
+      }, /* @__PURE__ */ import_react156.default.createElement(SpanField, {
         fieldName: key,
         fieldValue: value
       }))
     );
-    return /* @__PURE__ */ import_react154.default.createElement(TabPanel, {
+    return /* @__PURE__ */ import_react156.default.createElement(TabPanel, {
       paddingX: "0px"
-    }, /* @__PURE__ */ import_react154.default.createElement(Accordion, {
+    }, /* @__PURE__ */ import_react156.default.createElement(Accordion, {
       defaultIndex: [0],
       allowMultiple: true
-    }, /* @__PURE__ */ import_react154.default.createElement(AccordionItem, null, /* @__PURE__ */ import_react154.default.createElement(AccordionButton, null, /* @__PURE__ */ import_react154.default.createElement(Box, {
+    }, /* @__PURE__ */ import_react156.default.createElement(AccordionItem, null, /* @__PURE__ */ import_react156.default.createElement(AccordionButton, null, /* @__PURE__ */ import_react156.default.createElement(Box, {
       flex: "1",
       textAlign: "left"
-    }, /* @__PURE__ */ import_react154.default.createElement(Heading, {
+    }, /* @__PURE__ */ import_react156.default.createElement(Heading, {
       lineHeight: "revert",
       size: "sm"
-    }, "Span Data", rootTag)), /* @__PURE__ */ import_react154.default.createElement(AccordionIcon, null)), /* @__PURE__ */ import_react154.default.createElement(AccordionPanel, null, /* @__PURE__ */ import_react154.default.createElement(SpanField, {
+    }, "Span Data", rootTag)), /* @__PURE__ */ import_react156.default.createElement(AccordionIcon, null)), /* @__PURE__ */ import_react156.default.createElement(AccordionPanel, null, /* @__PURE__ */ import_react156.default.createElement(SpanField, {
       fieldName: "name",
       fieldValue: span.name
-    }), /* @__PURE__ */ import_react154.default.createElement(SpanField, {
+    }), /* @__PURE__ */ import_react156.default.createElement(SpanField, {
       fieldName: "kind",
       fieldValue: span.kind
-    }), /* @__PURE__ */ import_react154.default.createElement(SpanField, {
+    }), /* @__PURE__ */ import_react156.default.createElement(SpanField, {
       fieldName: "start time",
       fieldValue: span.startTime
-    }), /* @__PURE__ */ import_react154.default.createElement(SpanField, {
+    }), /* @__PURE__ */ import_react156.default.createElement(SpanField, {
       fieldName: "end time",
       fieldValue: span.endTime
-    }), /* @__PURE__ */ import_react154.default.createElement(SpanField, {
+    }), /* @__PURE__ */ import_react156.default.createElement(SpanField, {
       fieldName: "duration",
       fieldValue: durationString
-    }), /* @__PURE__ */ import_react154.default.createElement(SpanField, {
+    }), /* @__PURE__ */ import_react156.default.createElement(SpanField, {
       fieldName: "status code",
       fieldValue: span.statusCode
-    }), /* @__PURE__ */ import_react154.default.createElement(SpanField, {
+    }), /* @__PURE__ */ import_react156.default.createElement(SpanField, {
       fieldName: "status message",
       fieldValue: span.statusMessage,
       hidden: span.statusCode === "Unset" || span.statusCode === "Ok"
-    }), /* @__PURE__ */ import_react154.default.createElement(SpanField, {
+    }), /* @__PURE__ */ import_react156.default.createElement(SpanField, {
       fieldName: "trace id",
       fieldValue: span.traceID
-    }), /* @__PURE__ */ import_react154.default.createElement(SpanField, {
+    }), /* @__PURE__ */ import_react156.default.createElement(SpanField, {
       fieldName: "parent span id",
       fieldValue: span.parentSpanID,
       hidden: isRoot
-    }), /* @__PURE__ */ import_react154.default.createElement(SpanField, {
+    }), /* @__PURE__ */ import_react156.default.createElement(SpanField, {
       fieldName: "span id",
       fieldValue: span.spanID
-    }), /* @__PURE__ */ import_react154.default.createElement(List, null, spanAttributes), /* @__PURE__ */ import_react154.default.createElement(SpanField, {
+    }), /* @__PURE__ */ import_react156.default.createElement(List, null, spanAttributes), /* @__PURE__ */ import_react156.default.createElement(SpanField, {
       fieldName: "dropped attributes count",
       fieldValue: span.droppedAttributesCount,
       hidden: span.droppedAttributesCount === 0
-    }), /* @__PURE__ */ import_react154.default.createElement(SpanField, {
+    }), /* @__PURE__ */ import_react156.default.createElement(SpanField, {
       fieldName: "dropped events count",
       fieldValue: span.droppedEventsCount,
       hidden: span.droppedEventsCount === 0
-    }), /* @__PURE__ */ import_react154.default.createElement(SpanField, {
+    }), /* @__PURE__ */ import_react156.default.createElement(SpanField, {
       fieldName: "dropped links count",
       fieldValue: span.droppedLinksCount,
       hidden: span.droppedLinksCount === 0
-    }))), /* @__PURE__ */ import_react154.default.createElement(AccordionItem, null, /* @__PURE__ */ import_react154.default.createElement(AccordionButton, null, /* @__PURE__ */ import_react154.default.createElement(Box, {
+    }))), /* @__PURE__ */ import_react156.default.createElement(AccordionItem, null, /* @__PURE__ */ import_react156.default.createElement(AccordionButton, null, /* @__PURE__ */ import_react156.default.createElement(Box, {
       flex: "1",
       textAlign: "left"
-    }, /* @__PURE__ */ import_react154.default.createElement(Heading, {
+    }, /* @__PURE__ */ import_react156.default.createElement(Heading, {
       size: "sm"
-    }, "Resource Data")), /* @__PURE__ */ import_react154.default.createElement(AccordionIcon, null)), /* @__PURE__ */ import_react154.default.createElement(AccordionPanel, null, /* @__PURE__ */ import_react154.default.createElement(List, null, resourceAttributes), /* @__PURE__ */ import_react154.default.createElement(SpanField, {
+    }, "Resource Data")), /* @__PURE__ */ import_react156.default.createElement(AccordionIcon, null)), /* @__PURE__ */ import_react156.default.createElement(AccordionPanel, null, /* @__PURE__ */ import_react156.default.createElement(List, null, resourceAttributes), /* @__PURE__ */ import_react156.default.createElement(SpanField, {
       fieldName: "dropped attributes count",
       fieldValue: span.resource.droppedAttributesCount,
       hidden: span.resource.droppedAttributesCount === 0
-    }))), /* @__PURE__ */ import_react154.default.createElement(AccordionItem, null, /* @__PURE__ */ import_react154.default.createElement(AccordionButton, null, /* @__PURE__ */ import_react154.default.createElement(Box, {
+    }))), /* @__PURE__ */ import_react156.default.createElement(AccordionItem, null, /* @__PURE__ */ import_react156.default.createElement(AccordionButton, null, /* @__PURE__ */ import_react156.default.createElement(Box, {
       flex: "1",
       textAlign: "left"
-    }, /* @__PURE__ */ import_react154.default.createElement(Heading, {
+    }, /* @__PURE__ */ import_react156.default.createElement(Heading, {
       size: "sm"
-    }, "Scope Data")), /* @__PURE__ */ import_react154.default.createElement(AccordionIcon, null)), /* @__PURE__ */ import_react154.default.createElement(AccordionPanel, null, /* @__PURE__ */ import_react154.default.createElement(SpanField, {
+    }, "Scope Data")), /* @__PURE__ */ import_react156.default.createElement(AccordionIcon, null)), /* @__PURE__ */ import_react156.default.createElement(AccordionPanel, null, /* @__PURE__ */ import_react156.default.createElement(SpanField, {
       fieldName: "scope name",
       fieldValue: span.scope.name
-    }), /* @__PURE__ */ import_react154.default.createElement(SpanField, {
+    }), /* @__PURE__ */ import_react156.default.createElement(SpanField, {
       fieldName: "scope version",
       fieldValue: span.scope.version
-    }), /* @__PURE__ */ import_react154.default.createElement(List, null, scopeAttributes), /* @__PURE__ */ import_react154.default.createElement(SpanField, {
+    }), /* @__PURE__ */ import_react156.default.createElement(List, null, scopeAttributes), /* @__PURE__ */ import_react156.default.createElement(SpanField, {
       fieldName: "dropped attributes count",
       fieldValue: span.scope.droppedAttributesCount,
       hidden: span.scope.droppedAttributesCount === 0
@@ -52302,28 +52252,28 @@ otel-cli exec --service my-service --name "curl google" curl https://google.com
   }
 
   // app/components/detail-view/events-panel.tsx
-  var import_react156 = __toESM(require_react());
+  var import_react158 = __toESM(require_react());
   function EventItem(props) {
     let { event, spanStartTime } = props;
     let timeSinceSpanStart = getDurationNs(spanStartTime, event.timestamp);
     let durationString = getDurationString(timeSinceSpanStart);
-    let eventAttributes = Object.entries(event.attributes).map(([key, value]) => /* @__PURE__ */ import_react156.default.createElement("li", {
+    let eventAttributes = Object.entries(event.attributes).map(([key, value]) => /* @__PURE__ */ import_react158.default.createElement("li", {
       key: key + value?.toString()
-    }, /* @__PURE__ */ import_react156.default.createElement(SpanField, {
+    }, /* @__PURE__ */ import_react158.default.createElement(SpanField, {
       fieldName: key,
       fieldValue: value
     })));
-    return /* @__PURE__ */ import_react156.default.createElement(AccordionItem, null, /* @__PURE__ */ import_react156.default.createElement(AccordionButton, null, /* @__PURE__ */ import_react156.default.createElement(Box, {
+    return /* @__PURE__ */ import_react158.default.createElement(AccordionItem, null, /* @__PURE__ */ import_react158.default.createElement(AccordionButton, null, /* @__PURE__ */ import_react158.default.createElement(Box, {
       flex: "1",
       textAlign: "left"
-    }, /* @__PURE__ */ import_react156.default.createElement(Heading, {
+    }, /* @__PURE__ */ import_react158.default.createElement(Heading, {
       size: "sm"
-    }, event.name), /* @__PURE__ */ import_react156.default.createElement(Text, {
+    }, event.name), /* @__PURE__ */ import_react158.default.createElement(Text, {
       fontSize: "xs"
-    }, durationString, " since span start")), /* @__PURE__ */ import_react156.default.createElement(AccordionIcon, null)), /* @__PURE__ */ import_react156.default.createElement(AccordionPanel, null, /* @__PURE__ */ import_react156.default.createElement(SpanField, {
+    }, durationString, " since span start")), /* @__PURE__ */ import_react158.default.createElement(AccordionIcon, null)), /* @__PURE__ */ import_react158.default.createElement(AccordionPanel, null, /* @__PURE__ */ import_react158.default.createElement(SpanField, {
       fieldName: "timestamp",
       fieldValue: event.timestamp
-    }), /* @__PURE__ */ import_react156.default.createElement(List, null, eventAttributes), /* @__PURE__ */ import_react156.default.createElement(SpanField, {
+    }), /* @__PURE__ */ import_react158.default.createElement(List, null, eventAttributes), /* @__PURE__ */ import_react158.default.createElement(SpanField, {
       fieldName: "dropped attributes count",
       fieldValue: event.droppedAttributesCount,
       hidden: !event.droppedAttributesCount
@@ -52334,30 +52284,30 @@ otel-cli exec --service my-service --name "curl google" curl https://google.com
     if (!events) {
       return null;
     }
-    let eventItemList = events.map((event) => /* @__PURE__ */ import_react156.default.createElement("li", {
+    let eventItemList = events.map((event) => /* @__PURE__ */ import_react158.default.createElement("li", {
       key: event.name + event.timestamp
-    }, /* @__PURE__ */ import_react156.default.createElement(EventItem, {
+    }, /* @__PURE__ */ import_react158.default.createElement(EventItem, {
       event,
       spanStartTime
     })));
-    return /* @__PURE__ */ import_react156.default.createElement(TabPanel, {
+    return /* @__PURE__ */ import_react158.default.createElement(TabPanel, {
       paddingX: "0px"
-    }, /* @__PURE__ */ import_react156.default.createElement(Accordion, {
+    }, /* @__PURE__ */ import_react158.default.createElement(Accordion, {
       allowMultiple: true
-    }, /* @__PURE__ */ import_react156.default.createElement(List, null, eventItemList)));
+    }, /* @__PURE__ */ import_react158.default.createElement(List, null, eventItemList)));
   }
 
   // app/components/detail-view/links-panel.tsx
-  var import_react162 = __toESM(require_react());
+  var import_react164 = __toESM(require_react());
 
   // app/components/alerts/under-construction.tsx
-  var import_react160 = __toESM(require_react());
+  var import_react162 = __toESM(require_react());
 
   // node_modules/react-icons/lib/esm/iconBase.js
-  var import_react159 = __toESM(require_react());
+  var import_react161 = __toESM(require_react());
 
   // node_modules/react-icons/lib/esm/iconContext.js
-  var import_react158 = __toESM(require_react());
+  var import_react160 = __toESM(require_react());
   var DefaultContext = {
     color: void 0,
     size: void 0,
@@ -52365,7 +52315,7 @@ otel-cli exec --service my-service --name "curl google" curl https://google.com
     style: void 0,
     attr: void 0
   };
-  var IconContext = import_react158.default.createContext && import_react158.default.createContext(DefaultContext);
+  var IconContext = import_react160.default.createContext && import_react160.default.createContext(DefaultContext);
 
   // node_modules/react-icons/lib/esm/iconBase.js
   var __assign2 = function() {
@@ -52394,14 +52344,14 @@ otel-cli exec --service my-service --name "curl google" curl https://google.com
   };
   function Tree2Element(tree) {
     return tree && tree.map(function(node, i) {
-      return import_react159.default.createElement(node.tag, __assign2({
+      return import_react161.default.createElement(node.tag, __assign2({
         key: i
       }, node.attr), Tree2Element(node.child));
     });
   }
   function GenIcon(data) {
     return function(props) {
-      return import_react159.default.createElement(IconBase, __assign2({
+      return import_react161.default.createElement(IconBase, __assign2({
         attr: __assign2({}, data.attr)
       }, props), Tree2Element(data.child));
     };
@@ -52415,7 +52365,7 @@ otel-cli exec --service my-service --name "curl google" curl https://google.com
         className = conf.className;
       if (props.className)
         className = (className ? className + " " : "") + props.className;
-      return import_react159.default.createElement("svg", __assign2({
+      return import_react161.default.createElement("svg", __assign2({
         stroke: "currentColor",
         fill: "currentColor",
         strokeWidth: "0"
@@ -52427,9 +52377,9 @@ otel-cli exec --service my-service --name "curl google" curl https://google.com
         height: computedSize,
         width: computedSize,
         xmlns: "http://www.w3.org/2000/svg"
-      }), title && import_react159.default.createElement("title", null, title), props.children);
+      }), title && import_react161.default.createElement("title", null, title), props.children);
     };
-    return IconContext !== void 0 ? import_react159.default.createElement(IconContext.Consumer, null, function(conf) {
+    return IconContext !== void 0 ? import_react161.default.createElement(IconContext.Consumer, null, function(conf) {
       return elem(conf);
     }) : elem(DefaultContext);
   }
@@ -52441,39 +52391,39 @@ otel-cli exec --service my-service --name "curl google" curl https://google.com
 
   // app/components/alerts/under-construction.tsx
   function UnderConstructionAlert() {
-    return /* @__PURE__ */ import_react160.default.createElement(Alert, {
+    return /* @__PURE__ */ import_react162.default.createElement(Alert, {
       status: "warning",
       variant: "subtle",
       flexDirection: "column",
       alignItems: "center",
       justifyContent: "center",
       textAlign: "center"
-    }, /* @__PURE__ */ import_react160.default.createElement(AlertIcon, {
+    }, /* @__PURE__ */ import_react162.default.createElement(AlertIcon, {
       as: MdConstruction,
       boxSize: "32px"
-    }), /* @__PURE__ */ import_react160.default.createElement(AlertTitle, null, "This section is under construction."), /* @__PURE__ */ import_react160.default.createElement(AlertDescription, null, "More features coming soon!"));
+    }), /* @__PURE__ */ import_react162.default.createElement(AlertTitle, null, "This section is under construction."), /* @__PURE__ */ import_react162.default.createElement(AlertDescription, null, "More features coming soon!"));
   }
 
   // app/components/detail-view/links-panel.tsx
   function LinkItem(props) {
     let { link } = props;
-    let linkAttributes = Object.entries(link.attributes).map(([key, value]) => /* @__PURE__ */ import_react162.default.createElement("li", {
+    let linkAttributes = Object.entries(link.attributes).map(([key, value]) => /* @__PURE__ */ import_react164.default.createElement("li", {
       key: key + value?.toString()
-    }, /* @__PURE__ */ import_react162.default.createElement(SpanField, {
+    }, /* @__PURE__ */ import_react164.default.createElement(SpanField, {
       fieldName: key,
       fieldValue: value
     })));
-    return /* @__PURE__ */ import_react162.default.createElement(AccordionItem, null, /* @__PURE__ */ import_react162.default.createElement(AccordionButton, null, /* @__PURE__ */ import_react162.default.createElement(Box, {
+    return /* @__PURE__ */ import_react164.default.createElement(AccordionItem, null, /* @__PURE__ */ import_react164.default.createElement(AccordionButton, null, /* @__PURE__ */ import_react164.default.createElement(Box, {
       flex: "1",
       textAlign: "left"
-    }, /* @__PURE__ */ import_react162.default.createElement(Text, {
+    }, /* @__PURE__ */ import_react164.default.createElement(Text, {
       fontSize: "sm"
-    }, "Trace ID: ", /* @__PURE__ */ import_react162.default.createElement("strong", null, link.traceID)), /* @__PURE__ */ import_react162.default.createElement(Text, {
+    }, "Trace ID: ", /* @__PURE__ */ import_react164.default.createElement("strong", null, link.traceID)), /* @__PURE__ */ import_react164.default.createElement(Text, {
       fontSize: "sm"
-    }, "Span ID: ", /* @__PURE__ */ import_react162.default.createElement("strong", null, link.spanID))), /* @__PURE__ */ import_react162.default.createElement(AccordionIcon, null)), /* @__PURE__ */ import_react162.default.createElement(AccordionPanel, null, /* @__PURE__ */ import_react162.default.createElement(SpanField, {
+    }, "Span ID: ", /* @__PURE__ */ import_react164.default.createElement("strong", null, link.spanID))), /* @__PURE__ */ import_react164.default.createElement(AccordionIcon, null)), /* @__PURE__ */ import_react164.default.createElement(AccordionPanel, null, /* @__PURE__ */ import_react164.default.createElement(SpanField, {
       fieldName: "trace state",
       fieldValue: link.traceState
-    }), /* @__PURE__ */ import_react162.default.createElement(List, null, linkAttributes), /* @__PURE__ */ import_react162.default.createElement(SpanField, {
+    }), /* @__PURE__ */ import_react164.default.createElement(List, null, linkAttributes), /* @__PURE__ */ import_react164.default.createElement(SpanField, {
       fieldName: "dropped attributes count",
       fieldValue: link.droppedAttributesCount
     })));
@@ -52483,61 +52433,61 @@ otel-cli exec --service my-service --name "curl google" curl https://google.com
     if (!links) {
       return null;
     }
-    let linkItemList = links.map((link) => /* @__PURE__ */ import_react162.default.createElement("li", {
+    let linkItemList = links.map((link) => /* @__PURE__ */ import_react164.default.createElement("li", {
       key: link.spanID
-    }, /* @__PURE__ */ import_react162.default.createElement(LinkItem, {
+    }, /* @__PURE__ */ import_react164.default.createElement(LinkItem, {
       link
     })));
-    return /* @__PURE__ */ import_react162.default.createElement(TabPanel, {
+    return /* @__PURE__ */ import_react164.default.createElement(TabPanel, {
       paddingX: "0px"
-    }, /* @__PURE__ */ import_react162.default.createElement(UnderConstructionAlert, null), /* @__PURE__ */ import_react162.default.createElement(Accordion, {
+    }, /* @__PURE__ */ import_react164.default.createElement(UnderConstructionAlert, null), /* @__PURE__ */ import_react164.default.createElement(Accordion, {
       allowMultiple: true
-    }, /* @__PURE__ */ import_react162.default.createElement(List, null, linkItemList)));
+    }, /* @__PURE__ */ import_react164.default.createElement(List, null, linkItemList)));
   }
 
   // app/components/detail-view/detail-view.tsx
   function DetailView(props) {
     let { span } = props;
     if (!span) {
-      return /* @__PURE__ */ import_react164.default.createElement("div", null);
+      return /* @__PURE__ */ import_react166.default.createElement("div", null);
     }
     let numEvents = span.events.length;
     let numLinks = span.links.length;
-    return /* @__PURE__ */ import_react164.default.createElement(Flex, {
+    return /* @__PURE__ */ import_react166.default.createElement(Flex, {
       grow: "0",
       shrink: "1",
       basis: "350px",
       height: "100vh",
       paddingTop: "30px",
       overflowY: "scroll"
-    }, /* @__PURE__ */ import_react164.default.createElement(Tabs, {
+    }, /* @__PURE__ */ import_react166.default.createElement(Tabs, {
       colorScheme: "pink",
       margin: 3,
       size: "sm",
       variant: "soft-rounded",
       width: "100vw"
-    }, /* @__PURE__ */ import_react164.default.createElement(TabList, null, /* @__PURE__ */ import_react164.default.createElement(Tab, null, "Fields"), /* @__PURE__ */ import_react164.default.createElement(Tab, {
+    }, /* @__PURE__ */ import_react166.default.createElement(TabList, null, /* @__PURE__ */ import_react166.default.createElement(Tab, null, "Fields"), /* @__PURE__ */ import_react166.default.createElement(Tab, {
       isDisabled: numEvents === 0
-    }, "Events(", numEvents, ")"), /* @__PURE__ */ import_react164.default.createElement(Tab, {
+    }, "Events(", numEvents, ")"), /* @__PURE__ */ import_react166.default.createElement(Tab, {
       isDisabled: numLinks === 0
-    }, "Links(", numLinks, ")")), /* @__PURE__ */ import_react164.default.createElement(TabPanels, null, /* @__PURE__ */ import_react164.default.createElement(FieldsPanel, {
+    }, "Links(", numLinks, ")")), /* @__PURE__ */ import_react166.default.createElement(TabPanels, null, /* @__PURE__ */ import_react166.default.createElement(FieldsPanel, {
       span
-    }), /* @__PURE__ */ import_react164.default.createElement(EventsPanel, {
+    }), /* @__PURE__ */ import_react166.default.createElement(EventsPanel, {
       events: span.events,
       spanStartTime: span.startTime
-    }), /* @__PURE__ */ import_react164.default.createElement(LinksPanel, {
+    }), /* @__PURE__ */ import_react166.default.createElement(LinksPanel, {
       links: span.links
     }))));
   }
 
   // app/components/waterfall-view/waterfall-view.tsx
-  var import_react172 = __toESM(require_react());
+  var import_react174 = __toESM(require_react());
 
   // app/components/waterfall-view/waterfall-row.tsx
-  var import_react168 = __toESM(require_react());
+  var import_react170 = __toESM(require_react());
 
   // app/components/waterfall-view/duration-bar.tsx
-  var import_react166 = __toESM(require_react());
+  var import_react168 = __toESM(require_react());
   function EventDotsList(props) {
     let { events, spanStartTimeNs, spanEndTimeNs } = props;
     let eventDotsList = events.map((eventData) => {
@@ -52547,13 +52497,13 @@ otel-cli exec --service my-service --name "curl google" curl https://google.com
       let eventOffsetPercent = Math.floor(
         (eventTimeNs - spanStartTimeNs) / spanDurationNS * 100
       );
-      return /* @__PURE__ */ import_react166.default.createElement("li", {
+      return /* @__PURE__ */ import_react168.default.createElement("li", {
         key: `${eventName}-${eventData.timestamp}`
-      }, /* @__PURE__ */ import_react166.default.createElement(Tooltip, {
+      }, /* @__PURE__ */ import_react168.default.createElement(Tooltip, {
         hasArrow: true,
         label: eventName,
         placement: "top"
-      }, /* @__PURE__ */ import_react166.default.createElement(Circle, {
+      }, /* @__PURE__ */ import_react168.default.createElement(Circle, {
         size: "18px",
         bg: "whiteAlpha.400",
         border: "solid 1px",
@@ -52564,10 +52514,10 @@ otel-cli exec --service my-service --name "curl google" curl https://google.com
         transform: "translate(-50%)"
       })));
     });
-    return /* @__PURE__ */ import_react166.default.createElement(List, null, eventDotsList);
+    return /* @__PURE__ */ import_react168.default.createElement(List, null, eventDotsList);
   }
   function DurationBar(props) {
-    const ref = (0, import_react166.useRef)(null);
+    const ref = (0, import_react168.useRef)(null);
     const size3 = useSize(ref);
     const labelWidth = 80;
     let durationBarColour = useColorModeValue("cyan.800", "cyan.700");
@@ -52591,12 +52541,12 @@ otel-cli exec --service my-service --name "curl google" curl https://google.com
       labelOffset = `${Math.floor(-labelWidth)}px`;
     }
     let label = getDurationString(spanEndTimeNs - spanStartTimeNs);
-    return /* @__PURE__ */ import_react166.default.createElement(Flex, {
+    return /* @__PURE__ */ import_react168.default.createElement(Flex, {
       border: "0",
       marginX: 2,
       marginY: "16px",
       width: "100%"
-    }, /* @__PURE__ */ import_react166.default.createElement(Box, {
+    }, /* @__PURE__ */ import_react168.default.createElement(Box, {
       bgColor: durationBarColour,
       borderRadius: "md",
       overflow: "visible",
@@ -52605,18 +52555,18 @@ otel-cli exec --service my-service --name "curl google" curl https://google.com
       width: `${barWidthPercent}%`,
       minWidth: "2px",
       ref
-    }, /* @__PURE__ */ import_react166.default.createElement(Flex, {
+    }, /* @__PURE__ */ import_react168.default.createElement(Flex, {
       position: "absolute",
       width: `${labelWidth}px`,
       left: labelOffset,
       justifyContent: "center"
-    }, /* @__PURE__ */ import_react166.default.createElement(Text, {
+    }, /* @__PURE__ */ import_react168.default.createElement(Text, {
       fontSize: "xs",
       fontWeight: "700",
       paddingLeft: 2,
       color: labelTextColour,
       whiteSpace: "nowrap"
-    }, label)), /* @__PURE__ */ import_react166.default.createElement(EventDotsList, {
+    }, label)), /* @__PURE__ */ import_react168.default.createElement(EventDotsList, {
       events: props.spanData.events,
       spanStartTimeNs,
       spanEndTimeNs
@@ -52646,52 +52596,52 @@ otel-cli exec --service my-service --name "curl google" curl https://google.com
       }
       let nameLabel = spanData.name.replaceAll("/", "/\u200B").replaceAll("-", "-\u200B").replaceAll(".", ".\u200B");
       let resourceLabel = spanData.resource.attributes["service.name"];
-      return /* @__PURE__ */ import_react168.default.createElement(Flex, {
+      return /* @__PURE__ */ import_react170.default.createElement(Flex, {
         style,
         bgColor: backgroundColour,
         paddingLeft: `${paddingLeft}px`,
         onClick: () => setSelectedSpanID(spanID)
-      }, /* @__PURE__ */ import_react168.default.createElement(Flex, {
+      }, /* @__PURE__ */ import_react170.default.createElement(Flex, {
         width: spanNameColumnWidth - paddingLeft,
         alignItems: "center",
         flexGrow: "1",
         flexShrink: "0"
-      }, /* @__PURE__ */ import_react168.default.createElement(Text, {
+      }, /* @__PURE__ */ import_react170.default.createElement(Text, {
         paddingX: 2,
         noOfLines: 2,
         fontSize: "sm"
-      }, nameLabel)), /* @__PURE__ */ import_react168.default.createElement(Flex, {
+      }, nameLabel)), /* @__PURE__ */ import_react170.default.createElement(Flex, {
         width: serviceNameColumnWidth,
         alignItems: "center",
         flexGrow: "1",
         flexShrink: "0"
-      }, /* @__PURE__ */ import_react168.default.createElement(Text, {
+      }, /* @__PURE__ */ import_react170.default.createElement(Text, {
         paddingX: 2,
         fontSize: "sm"
-      }, resourceLabel)), /* @__PURE__ */ import_react168.default.createElement(DurationBar, {
+      }, resourceLabel)), /* @__PURE__ */ import_react170.default.createElement(DurationBar, {
         spanData,
         traceTimeAttributes,
         spanStartTimestamp: spanData.startTime,
         spanEndTimestamp: spanData.endTime
       }));
     }
-    return /* @__PURE__ */ import_react168.default.createElement(Flex, {
+    return /* @__PURE__ */ import_react170.default.createElement(Flex, {
       style,
       alignItems: "center",
       bgColor: backgroundColour,
       paddingStart: 2,
       experimental_spaceX: 2
-    }, /* @__PURE__ */ import_react168.default.createElement(WarningTwoIcon, {
+    }, /* @__PURE__ */ import_react170.default.createElement(WarningTwoIcon, {
       color: "orange.500"
-    }), /* @__PURE__ */ import_react168.default.createElement(Text, {
+    }), /* @__PURE__ */ import_react170.default.createElement(Text, {
       fontSize: "sm"
     }, `Missing Span [Span ID:${spanID}]`));
   }
 
   // app/components/waterfall-view/header-row.tsx
-  var import_react170 = __toESM(require_react());
+  var import_react172 = __toESM(require_react());
   function DurationIndicator(props) {
-    let ref = (0, import_react170.useRef)(null);
+    let ref = (0, import_react172.useRef)(null);
     let size3 = useSize(ref);
     let availableWidth = size3 ? size3.width : 0;
     let numSections = 1;
@@ -52720,25 +52670,25 @@ otel-cli exec --service my-service --name "curl google" curl https://google.com
     let sectionWidth = availableWidth / numSections;
     let durationSections = Array(numSections - 1).fill(null).map((_, i) => {
       let sectionLabel = `${+(sectionDuration * i).toFixed(3)}${timeUnit}`;
-      return /* @__PURE__ */ import_react170.default.createElement(ListItem, {
+      return /* @__PURE__ */ import_react172.default.createElement(ListItem, {
         key: i,
         float: "left"
-      }, /* @__PURE__ */ import_react170.default.createElement(Text, {
+      }, /* @__PURE__ */ import_react172.default.createElement(Text, {
         fontSize: "x-small",
         width: sectionWidth
       }, sectionLabel));
     });
-    let lastDurationLabel = /* @__PURE__ */ import_react170.default.createElement(Text, {
+    let lastDurationLabel = /* @__PURE__ */ import_react172.default.createElement(Text, {
       fontSize: "x-small"
     }, `${+traceDuration.toFixed(3)}${timeUnit}`);
-    return /* @__PURE__ */ import_react170.default.createElement(Flex, {
+    return /* @__PURE__ */ import_react172.default.createElement(Flex, {
       alignItems: "center",
       height: "100%",
       "flex-direction": "row",
       flex: "1 1 auto",
       marginX: 2,
       ref
-    }, /* @__PURE__ */ import_react170.default.createElement(List, null, durationSections), /* @__PURE__ */ import_react170.default.createElement(Spacer, null), lastDurationLabel);
+    }, /* @__PURE__ */ import_react172.default.createElement(List, null, durationSections), /* @__PURE__ */ import_react172.default.createElement(Spacer, null), lastDurationLabel);
   }
   function HeaderRow(props) {
     let {
@@ -52747,28 +52697,28 @@ otel-cli exec --service my-service --name "curl google" curl https://google.com
       serviceNameColumnWidth,
       traceDuration
     } = props;
-    return /* @__PURE__ */ import_react170.default.createElement(Flex, {
+    return /* @__PURE__ */ import_react172.default.createElement(Flex, {
       height: `${headerRowHeight}px`
-    }, /* @__PURE__ */ import_react170.default.createElement(Flex, {
+    }, /* @__PURE__ */ import_react172.default.createElement(Flex, {
       width: spanNameColumnWidth,
       alignItems: "center"
-    }, /* @__PURE__ */ import_react170.default.createElement(Heading, {
+    }, /* @__PURE__ */ import_react172.default.createElement(Heading, {
       paddingX: 2,
       size: "sm"
-    }, "name")), /* @__PURE__ */ import_react170.default.createElement(Flex, {
+    }, "name")), /* @__PURE__ */ import_react172.default.createElement(Flex, {
       width: serviceNameColumnWidth,
       alignItems: "center"
-    }, /* @__PURE__ */ import_react170.default.createElement(Heading, {
+    }, /* @__PURE__ */ import_react172.default.createElement(Heading, {
       paddingX: 1,
       size: "sm"
-    }, "service.name")), /* @__PURE__ */ import_react170.default.createElement(DurationIndicator, {
+    }, "service.name")), /* @__PURE__ */ import_react172.default.createElement(DurationIndicator, {
       traceDuration
     }));
   }
 
   // app/components/waterfall-view/waterfall-view.tsx
   function WaterfallView(props) {
-    const ref = (0, import_react172.useRef)(null);
+    const ref = (0, import_react174.useRef)(null);
     const size3 = useSize(ref);
     const waterfallItemHeight = 50;
     const headerRowHeight = 30;
@@ -52782,17 +52732,17 @@ otel-cli exec --service my-service --name "curl google" curl https://google.com
       selectedSpanID: props.selectedSpanID,
       setSelectedSpanID: props.setSelectedSpanID
     };
-    return /* @__PURE__ */ import_react172.default.createElement(Flex, {
+    return /* @__PURE__ */ import_react174.default.createElement(Flex, {
       direction: "column",
       ref,
       height: "100%",
       onCopy: stripZeroWidthSpacesOnCopyCallback
-    }, /* @__PURE__ */ import_react172.default.createElement(HeaderRow, {
+    }, /* @__PURE__ */ import_react174.default.createElement(HeaderRow, {
       headerRowHeight,
       spanNameColumnWidth,
       serviceNameColumnWidth,
       traceDuration: props.traceTimeAttributes.traceDurationNS
-    }), /* @__PURE__ */ import_react172.default.createElement(FixedSizeList, {
+    }), /* @__PURE__ */ import_react174.default.createElement(FixedSizeList, {
       className: "List",
       height: size3 ? size3.height - headerRowHeight : 0,
       itemData: rowData,
@@ -52884,7 +52834,7 @@ otel-cli exec --service my-service --name "curl google" curl https://google.com
     let traceTimeAttributes = calculateTraceTiming(traceData.spans);
     let spanTree = arrayToTree(traceData.spans);
     let orderedSpans = orderSpans(spanTree);
-    let [selectedSpanID, setSelectedSpanID] = import_react174.default.useState(() => {
+    let [selectedSpanID, setSelectedSpanID] = import_react176.default.useState(() => {
       if (!orderedSpans.length || !(orderedSpans[0].status === "present" /* present */) && orderedSpans.length < 2) {
         return "";
       }
@@ -52893,7 +52843,7 @@ otel-cli exec --service my-service --name "curl google" curl https://google.com
       }
       return orderedSpans[0].metadata.spanID;
     });
-    import_react174.default.useEffect(() => {
+    import_react176.default.useEffect(() => {
       setSelectedSpanID(
         orderedSpans[0].status === "present" /* present */ ? orderedSpans[0].metadata.spanID : orderedSpans[1].metadata.spanID
       );
@@ -52901,7 +52851,7 @@ otel-cli exec --service my-service --name "curl google" curl https://google.com
     let selectedSpan = traceData.spans.find(
       (span) => span.spanID === selectedSpanID
     );
-    return /* @__PURE__ */ import_react174.default.createElement(Grid, {
+    return /* @__PURE__ */ import_react176.default.createElement(Grid, {
       templateAreas: `"header detail"
                        "main detail"`,
       gridTemplateColumns: "1fr 350px",
@@ -52909,21 +52859,21 @@ otel-cli exec --service my-service --name "curl google" curl https://google.com
       gap: "0",
       height: "100vh",
       width: "100vw"
-    }, /* @__PURE__ */ import_react174.default.createElement(GridItem, {
+    }, /* @__PURE__ */ import_react176.default.createElement(GridItem, {
       area: "header"
-    }, /* @__PURE__ */ import_react174.default.createElement(Header, {
+    }, /* @__PURE__ */ import_react176.default.createElement(Header, {
       traceID: traceData.traceID
-    })), /* @__PURE__ */ import_react174.default.createElement(GridItem, {
+    })), /* @__PURE__ */ import_react176.default.createElement(GridItem, {
       area: "main",
       marginLeft: "20px"
-    }, /* @__PURE__ */ import_react174.default.createElement(WaterfallView, {
+    }, /* @__PURE__ */ import_react176.default.createElement(WaterfallView, {
       orderedSpans,
       traceTimeAttributes,
       selectedSpanID,
       setSelectedSpanID
-    })), /* @__PURE__ */ import_react174.default.createElement(GridItem, {
+    })), /* @__PURE__ */ import_react176.default.createElement(GridItem, {
       area: "detail"
-    }, /* @__PURE__ */ import_react174.default.createElement(DetailView, {
+    }, /* @__PURE__ */ import_react176.default.createElement(DetailView, {
       span: selectedSpan
     })));
   }
@@ -52971,13 +52921,13 @@ otel-cli exec --service my-service --name "curl google" curl https://google.com
   }
 
   // app/error-page.tsx
-  var import_react176 = __toESM(require_react());
+  var import_react178 = __toESM(require_react());
   function ErrorPage() {
     const error = useRouteError();
     console.error(error);
-    return /* @__PURE__ */ import_react176.default.createElement("div", {
+    return /* @__PURE__ */ import_react178.default.createElement("div", {
       id: "error-page"
-    }, /* @__PURE__ */ import_react176.default.createElement("h1", null, "Oops!"), /* @__PURE__ */ import_react176.default.createElement("p", null, "Sorry, an unexpected error has occurred."), /* @__PURE__ */ import_react176.default.createElement("p", null, /* @__PURE__ */ import_react176.default.createElement("i", null, error.message)));
+    }, /* @__PURE__ */ import_react178.default.createElement("h1", null, "Oops!"), /* @__PURE__ */ import_react178.default.createElement("p", null, "Sorry, an unexpected error has occurred."), /* @__PURE__ */ import_react178.default.createElement("p", null, /* @__PURE__ */ import_react178.default.createElement("i", null, error.message)));
   }
 
   // app/main.tsx
@@ -52989,14 +52939,19 @@ otel-cli exec --service my-service --name "curl google" curl https://google.com
   var router = createBrowserRouter([
     {
       path: "/",
-      element: /* @__PURE__ */ import_react177.default.createElement(MainView, null),
+      element: /* @__PURE__ */ import_react179.default.createElement(MainView, null),
       loader: mainLoader,
-      errorElement: /* @__PURE__ */ import_react177.default.createElement(ErrorPage, null),
+      errorElement: /* @__PURE__ */ import_react179.default.createElement(ErrorPage, null),
       children: [
         {
           path: "traces/:traceID",
-          element: /* @__PURE__ */ import_react177.default.createElement(TraceView, null),
+          element: /* @__PURE__ */ import_react179.default.createElement(TraceView, null),
           loader: traceLoader
+        },
+        {
+          path: "telemetry/:id",
+          element: /* @__PURE__ */ import_react179.default.createElement(TelemetryView, null),
+          loader: telemetryLoader
         }
       ]
     }
@@ -53005,9 +52960,9 @@ otel-cli exec --service my-service --name "curl google" curl https://google.com
   if (!!container2) {
     const root = (0, import_client.createRoot)(container2);
     root.render(
-      /* @__PURE__ */ import_react177.default.createElement(import_react177.default.StrictMode, null, /* @__PURE__ */ import_react177.default.createElement(ChakraProvider2, {
+      /* @__PURE__ */ import_react179.default.createElement(import_react179.default.StrictMode, null, /* @__PURE__ */ import_react179.default.createElement(ChakraProvider2, {
         theme: theme2
-      }, /* @__PURE__ */ import_react177.default.createElement(RouterProvider, {
+      }, /* @__PURE__ */ import_react179.default.createElement(RouterProvider, {
         router
       })))
     );

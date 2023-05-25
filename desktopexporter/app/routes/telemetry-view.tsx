@@ -5,7 +5,6 @@ import { Grid, GridItem } from "@chakra-ui/react";
 import { SpanData, TelemetryData } from "../types/api-types";
 import { TraceData } from "../types/api-types";
 import { SpanDataStatus, SpanWithUIData } from "../types/ui-types";
-// import { orderSpans } from "../utils/span-stuff";
 
 import { TraceDetailView } from "../components/trace-view/detail-trace-view";
 import { Header } from "../components/header-view/header";
@@ -17,7 +16,6 @@ import { orderSpans } from "../utils/trace-stuff";
 
 export async function telemetryLoader({ params }: any) {
   let response = await fetch(`/api/telemetry/${params.id}`);
-  // let response = await fetch(`/api/traces/${params.id}`);
   let telemetryData = await response.json();
   console.log("telemloader", telemetryData);
   return telemetryData;
@@ -28,11 +26,6 @@ export default function TelemetryView() {
   let [telemetryType, setTelemetryType] = React.useState<string>(
     telemetryData.type,
   );
-
-  let traceData = telemetryData.trace as TraceData;
-  // let [selectedSpanID, setSelectedSpanID] = React.useState<string>("");
-  // let traceData = telemetryData.trace as TraceData;
-  // let selectedSpan = {} as SpanData;
 
   // if (telemetryType === "trace") {
   //   let traceTimeAttributes = calculateTraceTiming(traceData.spans);
